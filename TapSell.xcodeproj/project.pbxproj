@@ -21,6 +21,9 @@
 		E2C9652D1C162B0000F23209 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C9652C1C162B0000F23209 /* MapViewController.m */; };
 		E2C965331C166DDA00F23209 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C965321C166DDA00F23209 /* RegisterViewController.m */; };
 		E2C965741C17344C00F23209 /* Logo1.png in Resources */ = {isa = PBXBuildFile; fileRef = E2C965731C17344C00F23209 /* Logo1.png */; };
+		FB40AF1E1C17777B00927359 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB40AF1D1C17777B00927359 /* SearchViewController.m */; };
+		FB40AF211C17778A00927359 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB40AF201C17778A00927359 /* CategoryViewController.m */; };
+		FB40AF241C17779E00927359 /* MapShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB40AF231C17779E00927359 /* MapShowViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +70,12 @@
 		E2C965311C166DDA00F23209 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		E2C965321C166DDA00F23209 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		E2C965731C17344C00F23209 /* Logo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo1.png; sourceTree = "<group>"; };
+		FB40AF1C1C17777B00927359 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		FB40AF1D1C17777B00927359 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		FB40AF1F1C17778A00927359 /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
+		FB40AF201C17778A00927359 /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
+		FB40AF221C17779E00927359 /* MapShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapShowViewController.h; sourceTree = "<group>"; };
+		FB40AF231C17779E00927359 /* MapShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapShowViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +157,12 @@
 				E2C965311C166DDA00F23209 /* RegisterViewController.h */,
 				E2C965321C166DDA00F23209 /* RegisterViewController.m */,
 				A2CDF2D31C161CD200DABB2F /* Main.storyboard */,
+				FB40AF1C1C17777B00927359 /* SearchViewController.h */,
+				FB40AF1D1C17777B00927359 /* SearchViewController.m */,
+				FB40AF221C17779E00927359 /* MapShowViewController.h */,
+				FB40AF231C17779E00927359 /* MapShowViewController.m */,
+				FB40AF1F1C17778A00927359 /* CategoryViewController.h */,
+				FB40AF201C17778A00927359 /* CategoryViewController.m */,
 				E2C9652B1C162B0000F23209 /* MapViewController.h */,
 				E2C9652C1C162B0000F23209 /* MapViewController.m */,
 				A2CDF2D61C161CD200DABB2F /* Assets.xcassets */,
@@ -370,10 +385,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB40AF241C17779E00927359 /* MapShowViewController.m in Sources */,
 				E2C965331C166DDA00F23209 /* RegisterViewController.m in Sources */,
 				A2CDF2D21C161CD200DABB2F /* ViewController.m in Sources */,
 				A2CDF2CF1C161CD200DABB2F /* AppDelegate.m in Sources */,
 				A2CDF2CC1C161CD200DABB2F /* main.m in Sources */,
+				FB40AF211C17778A00927359 /* CategoryViewController.m in Sources */,
+				FB40AF1E1C17777B00927359 /* SearchViewController.m in Sources */,
 				E2C9652D1C162B0000F23209 /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

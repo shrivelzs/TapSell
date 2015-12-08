@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Search View Controller-->
         <scene sceneID="6N5-cw-ilA">
             <objects>
-                <viewController id="Ewx-hX-yBS" sceneMemberID="viewController">
+                <viewController id="Ewx-hX-yBS" customClass="SearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NC5-Mb-FEL"/>
                         <viewControllerLayoutGuide type="bottom" id="lAn-ZU-xue"/>
@@ -44,7 +44,7 @@
                                         <rect key="frame" x="0.0" y="28" width="280" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OvQ-XT-sll" id="GTP-on-nU8">
-                                            <rect key="frame" x="0.0" y="0.0" width="280" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <animations/>
                                         </tableViewCellContentView>
@@ -73,10 +73,10 @@
             </objects>
             <point key="canvasLocation" x="1220" y="-333"/>
         </scene>
-        <!--View Controller-->
+        <!--Category View Controller-->
         <scene sceneID="YY4-z7-i9o">
             <objects>
-                <viewController id="Dk2-jc-b6H" sceneMemberID="viewController">
+                <viewController id="Dk2-jc-b6H" customClass="CategoryViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UMl-FZ-pzJ"/>
                         <viewControllerLayoutGuide type="bottom" id="6jm-fM-alL"/>
@@ -112,10 +112,10 @@
             </objects>
             <point key="canvasLocation" x="1565" y="-333"/>
         </scene>
-        <!--View Controller-->
+        <!--Map Show View Controller-->
         <scene sceneID="FT9-Bs-hLl">
             <objects>
-                <viewController id="fDl-HD-xWH" sceneMemberID="viewController">
+                <viewController id="fDl-HD-xWH" customClass="MapShowViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eUt-zw-aKC"/>
                         <viewControllerLayoutGuide type="bottom" id="3pu-ay-ZYi"/>
