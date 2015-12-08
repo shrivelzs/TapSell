@@ -7,7 +7,7 @@
 //
 
 #import "RegisterViewController.h"
-
+#import <Parse.h>
 @interface RegisterViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *txtFname;
 @property (weak, nonatomic) IBOutlet UITextField *txtLname;
@@ -40,21 +40,52 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)btnAction_Register:(id)sender {
-    UIAlertController *alcont =[UIAlertController alertControllerWithTitle:@"Congrats!" message:@"You are successfully registered" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
-    {
-        // dismiss screen and go back to first screen
-     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    }];
     
+    PFObject * addUserData = [PFObject objectWithClassName:@"UserData"];
+    
+    //add data to parse
+    [addUserData setObject:self.txtFname.text forKey:@"UserFirstName"];
+    [addUserData setObject:self.txtLname.text forKey:@"UserLastName"];
+    [addUserData setObject:self.txtEmailID.text forKey:@"EmailID"];
+    [addUserData setObject:self.txtAddress.text forKey:@"Address"];
+    [addUserData setObject:self.txtApt.text forKey:@"AptNo"];
+    [addUserData setObject:self.txtCity.text forKey:@"City"];
+    [addUserData setObject:self.txtState.text forKey:@"State"];
+    [addUserData setObject:self.txtZipcode.text forKey:@"Zipcode"];
+    [addUserData setObject:self.txtPhone.text forKey:@"Phone"];
+    [addUserData setObject:self.txtPassword.text forKey:@"Password"];
+    
+    // save data back to parse
+    
+    [addUserData saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+        if (succeeded){
+            UIAlertController *alcont =[UIAlertController alertControllerWithTitle:@"Congrats!" message:@"You are successfully registered" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                       {
+                                           // dismiss screen and go back to first screen
+                                           [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                                       }];
+            
+            [alcont addAction:okButton];
+            [self presentViewController:alcont animated:YES completion:nil];
+            
 
-    [alcont addAction:okButton];
-    [self presentViewController:alcont animated:YES completion:nil];
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
+            NSLog(@"Object Uploaded!");
+                   }
+        else{
+            [self displayAlertView:@"Pleast try again"];
+            
+            NSString *errorString = [[error userInfo] objectForKey:@"error"];
+            NSLog(@"Error: %@", errorString);
+        }
+        
+    }];
+
+   }
 - (IBAction)btnAction_Cancel:(id)sender {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    
 
 }
 #pragma mark UITextField Delegate Methods
@@ -90,6 +121,14 @@
             return NO;
         }
     }
+    if ([textField isEqual:self.txtPassword])
+    {
+        if (self.txtPassword.text.length<6) {
+            [self displayAlertView:@"Password should be 6-15 digits"];
+            return NO;
+        }
+    }
+
 
     return YES;
 }
@@ -126,6 +165,11 @@
     {
         if (![textField.text isEqualToString:@""]) {
             self.btnRegister.enabled =true;
+            
+            NSUInteger newLength = [textField.text length] + [string length] - range.length;
+            
+            return newLength <= 15;
+
         }
     }
     
