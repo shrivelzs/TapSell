@@ -40,15 +40,6 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)btnAction_Register:(id)sender {
-        // make user name and password
-     PFUser * user = [PFUser user];
-     user.username = self.txtEmailID.text;
-     user.password = self.txtPassword.text;
-     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-     if (!error)
-     {
-     
-
     
     PFObject * addUserData = [PFObject objectWithClassName:@"User"];
     
@@ -62,7 +53,7 @@
     [addUserData setObject:self.txtState.text forKey:@"State"];
     [addUserData setObject:self.txtZipcode.text forKey:@"Zipcode"];
     [addUserData setObject:self.txtPhone.text forKey:@"Phone"];
-   
+    [addUserData setObject:self.txtPassword.text forKey:@"Password"];
     
     // save data back to parse
     [addUserData saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -72,36 +63,28 @@
             
             UIAlertController *alcont =[UIAlertController alertControllerWithTitle:@"Congrats!" message:@"You are successfully registered" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
-                                       {
+              {
                                            // dismiss screen and go back to first screen
                                            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-                                       }];
+               }];
             
             [alcont addAction:okButton];
             [self presentViewController:alcont animated:YES completion:nil];
-            
-            
+     
             NSLog(@"Object Uploaded!");
-
             
         }
-        else{
+        else
+        {
             [self displayAlertView:@"Pleast try again"];
             
-            NSString *errorString = [[error userInfo] objectForKey:@"error"];
-            NSLog(@"Error: %@", errorString);
+           // NSString *errorString = [[error userInfo] objectForKey:@"error"];
+            //NSLog(@"Error: %@", errorString);
         }
         
     }];
-     }
-     else
-     {
-         //Something bad has occurred
-         [self displayAlertView:@"Pleast try again"];
-         NSLog(@"Cannot set username and password");
-     }
-     }];
-   }
+   
+}
 - (IBAction)btnAction_Cancel:(id)sender {
     
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
@@ -236,3 +219,31 @@
 }
 */
 @end
+
+
+
+
+
+
+
+/*
+ // make user name and password
+ PFUser * user = [PFUser user];
+ user.username = self.txtEmailID.text;
+ user.password = self.txtPassword.text;
+ [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+ if (!error)
+ {
+ */
+
+
+/*  }
+ else
+ {
+ //Something bad has occurred
+ [self displayAlertView:@"Pleast try again"];
+ NSLog(@"Cannot set username and password");
+ }
+ }];
+ */
+

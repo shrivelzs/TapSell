@@ -10,9 +10,9 @@
 #import <Parse/Parse.h>
 #import "UserData.h"
 @interface ViewController ()<UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UITextField *txtEmailID;
-@property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 @property (nonatomic,strong) NSMutableArray* array_userData;
+@property (weak, nonatomic) IBOutlet UITextField *txtLoginUserName;
+@property (weak, nonatomic) IBOutlet UITextField *txtLoginPassword;
 
 @end
 
@@ -20,9 +20,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.txtEmailID becomeFirstResponder];
+    [self.txtLoginUserName becomeFirstResponder];
     _array_userData = [NSMutableArray new];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+        // Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,12 +31,17 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)btnAction_Login:(id)sender {
-    NSLog(@"Successfully logged in");
-
-    [PFUser logInWithUsernameInBackground:self.txtEmailID.text password:self.txtPassword.text block:^(PFUser *  user, NSError *  error)
+ 
+   // NSString * username = self.txtLoginUserName.text;
+   // NSString * password = self.txtLoginPassword.text;
+    
+    
+    [self retrieveDataFromParse];
+    /*
+    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *  user, NSError *  error)
      {
         if (user)
-        {
+        {           NSLog(@"Successfully logged in");
                         [self retrieveDataFromParse];
            
             //[self performSegueWithIdentifier:@"Login" sender:self];
@@ -44,20 +50,23 @@
         else
         {
             [self displayAlertView:@"Please Enter Valid Username and Password"];
-            self.txtEmailID.text = @"";
-            self.txtPassword.text =@"";
+            self.txtLoginUserName.text = @"";
+            self.txtLoginPassword.text =@"";
             NSLog(@"Cannot login");
             
         }
-    }];
+    }];*/
 }
 
 -(void)retrieveDataFromParse
 {
     //retrive userdata and show in main menu
+    NSString * username = _txtLoginUserName.text;
+    NSString * password = _txtLoginPassword.text;
     PFQuery * query =[PFQuery queryWithClassName:@"User"];
-    [query whereKey:@"EmailID" equalTo:self.txtEmailID];
-    [query whereKey:@"Password" equalTo:self.txtPassword];
+    [query whereKey:@"EmailID" equalTo:username];
+    [query whereKey:@"Password" equalTo:password];
+    
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
         {
@@ -66,13 +75,13 @@
                 // retreive data
                 NSString * firstName = [object objectForKey:@"UserFirstName"];
                 NSString * lastname = [object objectForKey:@"UserLastName"];
-                NSString * emailID = [object objectForKey:@"email"];
+                NSString * emailID = [object objectForKey:@"EmailID"];
                 NSString * address = [object objectForKey:@"Address"];
                 NSString * aptNo = [object objectForKey:@"AptNo"];
                 NSString * city = [object objectForKey:@"City"];
                 NSString * state = [object objectForKey:@"State"];
                 NSString * zipcode = [object objectForKey:@"Zipcode"];
-                NSString * phone = [object objectForKey:@"Password"];
+                NSString * phone = [object objectForKey:@"Phone"];
                 
                 
                 //put it in array
@@ -106,10 +115,10 @@
     
     if ( s.on == YES )
     {
-        NSString * username = self.txtEmailID.text;
+        NSString * username = self.txtLoginUserName.text;
         [defaults setObject:username forKey:@"username"];
         
-        NSString * password = self.txtPassword.text;
+        NSString * password = self.txtLoginPassword.text;
         [defaults setObject:password forKey:@"password"];
         [defaults synchronize];
         
@@ -139,8 +148,8 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    if ([textField isEqual:self.txtEmailID]) {
-        BOOL status = [self validateEmailWithString:self.txtEmailID.text];
+    if ([textField isEqual:self.txtLoginUserName]) {
+        BOOL status = [self validateEmailWithString:self.txtLoginUserName.text];
         if (!status)
         {
             [self displayAlertView:@"Enter Valied Email-ID"];
