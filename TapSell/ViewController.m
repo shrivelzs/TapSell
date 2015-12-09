@@ -32,30 +32,14 @@
 }
 - (IBAction)btnAction_Login:(id)sender {
  
-   // NSString * username = self.txtLoginUserName.text;
-   // NSString * password = self.txtLoginPassword.text;
     
     
     [self retrieveDataFromParse];
-    /*
-    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *  user, NSError *  error)
-     {
-        if (user)
-        {           NSLog(@"Successfully logged in");
-                        [self retrieveDataFromParse];
-           
-            //[self performSegueWithIdentifier:@"Login" sender:self];
+   
 
-        }
-        else
-        {
-            [self displayAlertView:@"Please Enter Valid Username and Password"];
-            self.txtLoginUserName.text = @"";
-            self.txtLoginPassword.text =@"";
-            NSLog(@"Cannot login");
-            
-        }
-    }];*/
+    
+    
+   
 }
 
 -(void)retrieveDataFromParse
@@ -180,3 +164,28 @@
 }
 
 @end
+
+
+
+// NSString * username = self.txtLoginUserName.text;
+// NSString * password = self.txtLoginPassword.text;
+
+/*
+ [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *  user, NSError *  error)
+ {
+ if (user)
+ {           NSLog(@"Successfully logged in");
+ [self retrieveDataFromParse];
+ 
+ //[self performSegueWithIdentifier:@"Login" sender:self];
+ 
+ }
+ else
+ {
+ [self displayAlertView:@"Please Enter Valid Username and Password"];
+ self.txtLoginUserName.text = @"";
+ self.txtLoginPassword.text =@"";
+ NSLog(@"Cannot login");
+ 
+ }
+ }];*/
