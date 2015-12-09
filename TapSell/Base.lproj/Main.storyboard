@@ -176,7 +176,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yd9-tn-nMp">
-                                <rect key="frame" x="90" y="288" width="141" height="30"/>
+                                <rect key="frame" x="90" y="315" width="141" height="30"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.33209853737337702" green="0.85579582734475435" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -184,6 +184,10 @@
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="btnAction_Login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="B7L-6O-t8a"/>
+                                    <segue destination="Ccs-pw-mgP" kind="push" id="uon-bE-fxC"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JMx-CQ-Ozg">
                                 <rect key="frame" x="90" y="389" width="141" height="30"/>
@@ -216,24 +220,45 @@
                                     <constraint firstAttribute="height" constant="99" id="OK6-BP-snd"/>
                                 </constraints>
                             </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NA4-ib-Pld">
+                                <rect key="frame" x="41" y="254" width="51" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="tRS-m4-koM"/>
+                                </constraints>
+                                <color key="onTintColor" red="0.28627450980392155" green="0.81960784313725488" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember me ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vec-Ww-d0N">
+                                <rect key="frame" x="94" y="259" width="125" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Y8P-RO-dEU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.2196078431372549" green="0.61960784313725492" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="yd9-tn-nMp" firstAttribute="top" secondItem="3cQ-gp-kq9" secondAttribute="bottom" constant="59" id="0CB-1c-i09"/>
+                            <constraint firstItem="yd9-tn-nMp" firstAttribute="top" secondItem="3cQ-gp-kq9" secondAttribute="bottom" constant="86" id="0CB-1c-i09"/>
                             <constraint firstItem="Olb-W5-Cpz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="0gP-Cx-smI"/>
+                            <constraint firstItem="vec-Ww-d0N" firstAttribute="leading" secondItem="NA4-ib-Pld" secondAttribute="trailing" constant="4" id="2HD-Id-XmY"/>
+                            <constraint firstItem="NA4-ib-Pld" firstAttribute="top" secondItem="3cQ-gp-kq9" secondAttribute="bottom" constant="25" id="2Wb-J5-K5L"/>
                             <constraint firstAttribute="trailing" secondItem="yd9-tn-nMp" secondAttribute="trailing" constant="89" id="2lf-PG-HfT"/>
+                            <constraint firstItem="NA4-ib-Pld" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="41" id="67m-n0-xVx"/>
                             <constraint firstItem="3cQ-gp-kq9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="41" id="7Uj-W7-nbK"/>
                             <constraint firstAttribute="trailing" secondItem="JMx-CQ-Ozg" secondAttribute="trailing" constant="89" id="9MP-nl-koD"/>
                             <constraint firstItem="yKh-dA-iHP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="KHi-hP-ASz"/>
                             <constraint firstAttribute="trailing" secondItem="Uhz-VY-acX" secondAttribute="trailing" constant="40" id="OdW-Yi-Cr1"/>
                             <constraint firstItem="yd9-tn-nMp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="90" id="Ojp-ez-iRX"/>
                             <constraint firstItem="3cQ-gp-kq9" firstAttribute="top" secondItem="Uhz-VY-acX" secondAttribute="bottom" constant="32" id="RP3-1Y-yFE"/>
-                            <constraint firstItem="Olb-W5-Cpz" firstAttribute="top" secondItem="yd9-tn-nMp" secondAttribute="bottom" constant="26" id="YS1-21-b95"/>
+                            <constraint firstItem="Olb-W5-Cpz" firstAttribute="top" secondItem="yd9-tn-nMp" secondAttribute="bottom" constant="-1" id="YS1-21-b95"/>
                             <constraint firstItem="Uhz-VY-acX" firstAttribute="top" secondItem="yKh-dA-iHP" secondAttribute="bottom" constant="10" id="cCP-dV-WrH"/>
                             <constraint firstAttribute="trailing" secondItem="Olb-W5-Cpz" secondAttribute="trailing" constant="20" id="dnX-pc-5Ih"/>
                             <constraint firstItem="JMx-CQ-Ozg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="90" id="fb4-7H-CjZ"/>
+                            <constraint firstItem="vec-Ww-d0N" firstAttribute="top" secondItem="3cQ-gp-kq9" secondAttribute="bottom" constant="30" id="h3V-lW-xdZ"/>
                             <constraint firstAttribute="trailing" secondItem="yKh-dA-iHP" secondAttribute="trailing" constant="54" id="hJ1-ls-lQF"/>
+                            <constraint firstAttribute="trailing" secondItem="vec-Ww-d0N" secondAttribute="trailing" constant="101" id="hbW-Bz-fg9"/>
                             <constraint firstItem="Uhz-VY-acX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="41" id="jWi-vj-3Xf"/>
                             <constraint firstItem="JMx-CQ-Ozg" firstAttribute="top" secondItem="Olb-W5-Cpz" secondAttribute="bottom" constant="24" id="ndn-6w-Bt5"/>
                             <constraint firstItem="yKh-dA-iHP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="41" id="uYf-S4-pCt"/>
@@ -630,6 +655,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ccs-pw-mgP" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="cMb-vq-wQ8"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cnY-DD-vho">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

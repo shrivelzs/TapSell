@@ -16,6 +16,7 @@
 		A2CDF2DA1C161CD200DABB2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2CDF2D81C161CD200DABB2F /* LaunchScreen.storyboard */; };
 		A2CDF2E51C161CD200DABB2F /* TapSellTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CDF2E41C161CD200DABB2F /* TapSellTests.m */; };
 		A2CDF2F01C161CD200DABB2F /* TapSellUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CDF2EF1C161CD200DABB2F /* TapSellUITests.m */; };
+		E2A6F6211C17BCD500D92CFB /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A6F6201C17BCD500D92CFB /* UserData.m */; };
 		E2C965281C162ADA00F23209 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C965271C162ADA00F23209 /* MapKit.framework */; };
 		E2C9652A1C162AE400F23209 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C965291C162AE400F23209 /* CoreLocation.framework */; };
 		E2C9652D1C162B0000F23209 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C9652C1C162B0000F23209 /* MapViewController.m */; };
@@ -63,6 +64,8 @@
 		A2CDF2EF1C161CD200DABB2F /* TapSellUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TapSellUITests.m; sourceTree = "<group>"; };
 		A2CDF2F11C161CD200DABB2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7DBB7AF83919FB890D54B65 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		E2A6F61F1C17BCD500D92CFB /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
+		E2A6F6201C17BCD500D92CFB /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
 		E2C965271C162ADA00F23209 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E2C965291C162AE400F23209 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E2C9652B1C162B0000F23209 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
@@ -169,6 +172,8 @@
 				A2CDF2D81C161CD200DABB2F /* LaunchScreen.storyboard */,
 				A2CDF2DB1C161CD200DABB2F /* Info.plist */,
 				A2CDF2CA1C161CD200DABB2F /* Supporting Files */,
+				E2A6F61F1C17BCD500D92CFB /* UserData.h */,
+				E2A6F6201C17BCD500D92CFB /* UserData.m */,
 			);
 			path = TapSell;
 			sourceTree = "<group>";
@@ -389,6 +394,7 @@
 				E2C965331C166DDA00F23209 /* RegisterViewController.m in Sources */,
 				A2CDF2D21C161CD200DABB2F /* ViewController.m in Sources */,
 				A2CDF2CF1C161CD200DABB2F /* AppDelegate.m in Sources */,
+				E2A6F6211C17BCD500D92CFB /* UserData.m in Sources */,
 				A2CDF2CC1C161CD200DABB2F /* main.m in Sources */,
 				FB40AF211C17778A00927359 /* CategoryViewController.m in Sources */,
 				FB40AF1E1C17777B00927359 /* SearchViewController.m in Sources */,

@@ -8,9 +8,11 @@
 
 #import "ViewController.h"
 #import <Parse/Parse.h>
+#import "UserData.h"
 @interface ViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *txtEmailID;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
+@property (nonatomic,strong) NSMutableArray* array_userData;
 
 @end
 
@@ -19,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.txtEmailID becomeFirstResponder];
+    _array_userData = [NSMutableArray new];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -28,14 +31,58 @@
 }
 - (IBAction)btnAction_Login:(id)sender {
     
-    [PFUser logInWithUsernameInBackground:self.txtEmailID.text password:self.txtPassword.text block:^(PFUser *  user, NSError *  error) {
-        if (user) {
-            //Open the wall
+    [PFUser logInWithUsernameInBackground:self.txtEmailID.text password:self.txtPassword.text block:^(PFUser *  user, NSError *  error)
+     {
+        if (user)
+        {
+            //retrive userdata and show in main menu
+            PFQuery * query =[PFQuery queryWithClassName:@"UserData"];
+            [query whereKey:@"EmailID" equalTo:self.txtEmailID];
+            [query whereKey:@"Password" equalTo:self.txtPassword];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {//4
+                if (!error) {
+                    for (PFObject *object in objects) {
+                        
+                        // retreive data
+                        NSString * firstName = [object objectForKey:@"UserFirstName"];
+                        NSString * lastname = [object objectForKey:@"UserLastName"];
+                        NSString * emailID = [object objectForKey:@"EmailID"];
+                        NSString * address = [object objectForKey:@"Address"];
+                        NSString * aptNo = [object objectForKey:@"AptNo"];
+                        NSString * city = [object objectForKey:@"City"];
+                        NSString * state = [object objectForKey:@"State"];
+                        NSString * zipcode = [object objectForKey:@"Zipcode"];
+                        NSString * phone = [object objectForKey:@"Password"];
+                        
+                        
+                        //put it in array
+                        UserData * userData = [[UserData alloc]init];
+                        userData.fname = firstName;
+                        userData.lname = lastname
+                        userData.emailID = emailID;
+                        userData.address = address;
+                        userData.aptNo = aptNo;
+                        userData.city = city;
+                        userData.state = state;
+                        userData.zipcode =zipcode;
+                        userData.phone = phone;
+                        
+                        [self.array_userData addObject:userData];
+                    }
+                    NSLog(@"Successfully retrieved: %@", objects);
+                } else {
+                    NSString *errorString = [[error userInfo] objectForKey:@"error"];
+                    NSLog(@"Error: %@", errorString);
+                }
+            }];
+            
             [self performSegueWithIdentifier:@"Login" sender:self];
         }
         else
         {
             [self displayAlertView:@"Please Enter Valid Username and Password"];
+            self.txtEmailID.text = @"";
+            self.txtPassword.text =@"";
             NSLog(@"Cannot login");
             
         }
