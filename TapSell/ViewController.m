@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import <Parse/Parse.h>
 @interface ViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *txtEmailID;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
@@ -26,8 +26,26 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)btnAction_Login:(id)sender {
+    
+    [PFUser logInWithUsernameInBackground:self.txtEmailID.text password:self.txtPassword.text block:^(PFUser *  user, NSError *  error) {
+        if (user) {
+            //Open the wall
+            [self performSegueWithIdentifier:@"Login" sender:self];
+        }
+        else
+        {
+            [self displayAlertView:@"Please Enter Valid Username and Password"];
+            NSLog(@"Cannot login");
+            
+        }
+    }];
+}
 
-
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+}
 
 #pragma mark UITextField Delegate Methods
 
