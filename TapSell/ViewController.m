@@ -30,13 +30,15 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)btnAction_Login:(id)sender {
-    
+    NSLog(@"Successfully logged in");
+
     [PFUser logInWithUsernameInBackground:self.txtEmailID.text password:self.txtPassword.text block:^(PFUser *  user, NSError *  error)
      {
         if (user)
         {
-            [self retrieveDataFromParse];
-            [self performSegueWithIdentifier:@"Login" sender:self];
+                        [self retrieveDataFromParse];
+           
+            //[self performSegueWithIdentifier:@"Login" sender:self];
 
         }
         else
@@ -53,7 +55,7 @@
 -(void)retrieveDataFromParse
 {
     //retrive userdata and show in main menu
-    PFQuery * query =[PFQuery queryWithClassName:@"UserData"];
+    PFQuery * query =[PFQuery queryWithClassName:@"User"];
     [query whereKey:@"EmailID" equalTo:self.txtEmailID];
     [query whereKey:@"Password" equalTo:self.txtPassword];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -64,7 +66,7 @@
                 // retreive data
                 NSString * firstName = [object objectForKey:@"UserFirstName"];
                 NSString * lastname = [object objectForKey:@"UserLastName"];
-                NSString * emailID = [object objectForKey:@"EmailID"];
+                NSString * emailID = [object objectForKey:@"email"];
                 NSString * address = [object objectForKey:@"Address"];
                 NSString * aptNo = [object objectForKey:@"AptNo"];
                 NSString * city = [object objectForKey:@"City"];
@@ -97,13 +99,28 @@
     }];
     
 }
-- (IBAction)actionSwitch:(id)sender {
+- (IBAction)rememberMeActionSwitch:(id)sender
+{
     UISwitch * s = [[UISwitch alloc]init];
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
     
-    if (s isOn) {
-        statements
+    if ( s.on == YES )
+    {
+        NSString * username = self.txtEmailID.text;
+        [defaults setObject:username forKey:@"username"];
+        
+        NSString * password = self.txtPassword.text;
+        [defaults setObject:password forKey:@"password"];
+        [defaults synchronize];
+        
+        NSLog(@"Remember me success");
     }
     else
+    {
+        [defaults removeObjectForKey:@"username"];
+        [defaults removeObjectForKey:@"password"];
+
+    }
     
 }
 
