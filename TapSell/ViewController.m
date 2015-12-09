@@ -35,48 +35,9 @@
      {
         if (user)
         {
-            //retrive userdata and show in main menu
-            PFQuery * query =[PFQuery queryWithClassName:@"UserData"];
-            [query whereKey:@"EmailID" equalTo:self.txtEmailID];
-            [query whereKey:@"Password" equalTo:self.txtPassword];
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {//4
-                if (!error) {
-                    for (PFObject *object in objects) {
-                        
-                        // retreive data
-                        NSString * firstName = [object objectForKey:@"UserFirstName"];
-                        NSString * lastname = [object objectForKey:@"UserLastName"];
-                        NSString * emailID = [object objectForKey:@"EmailID"];
-                        NSString * address = [object objectForKey:@"Address"];
-                        NSString * aptNo = [object objectForKey:@"AptNo"];
-                        NSString * city = [object objectForKey:@"City"];
-                        NSString * state = [object objectForKey:@"State"];
-                        NSString * zipcode = [object objectForKey:@"Zipcode"];
-                        NSString * phone = [object objectForKey:@"Password"];
-                        
-                        
-                        //put it in array
-                        UserData * userData = [[UserData alloc]init];
-                        userData.fname = firstName;
-                        userData.lname = lastname
-                        userData.emailID = emailID;
-                        userData.address = address;
-                        userData.aptNo = aptNo;
-                        userData.city = city;
-                        userData.state = state;
-                        userData.zipcode =zipcode;
-                        userData.phone = phone;
-                        
-                        [self.array_userData addObject:userData];
-                    }
-                    NSLog(@"Successfully retrieved: %@", objects);
-                } else {
-                    NSString *errorString = [[error userInfo] objectForKey:@"error"];
-                    NSLog(@"Error: %@", errorString);
-                }
-            }];
-            
+            [self retrieveDataFromParse];
             [self performSegueWithIdentifier:@"Login" sender:self];
+
         }
         else
         {
@@ -87,6 +48,63 @@
             
         }
     }];
+}
+
+-(void)retrieveDataFromParse
+{
+    //retrive userdata and show in main menu
+    PFQuery * query =[PFQuery queryWithClassName:@"UserData"];
+    [query whereKey:@"EmailID" equalTo:self.txtEmailID];
+    [query whereKey:@"Password" equalTo:self.txtPassword];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error)
+        {
+            for (PFObject *object in objects)
+            {
+                // retreive data
+                NSString * firstName = [object objectForKey:@"UserFirstName"];
+                NSString * lastname = [object objectForKey:@"UserLastName"];
+                NSString * emailID = [object objectForKey:@"EmailID"];
+                NSString * address = [object objectForKey:@"Address"];
+                NSString * aptNo = [object objectForKey:@"AptNo"];
+                NSString * city = [object objectForKey:@"City"];
+                NSString * state = [object objectForKey:@"State"];
+                NSString * zipcode = [object objectForKey:@"Zipcode"];
+                NSString * phone = [object objectForKey:@"Password"];
+                
+                
+                //put it in array
+                UserData * userData = [[UserData alloc]init];
+                userData.fname = firstName;
+                userData.lname = lastname;
+                userData.emailID = emailID;
+                userData.address = address;
+                userData.aptNo = aptNo;
+                userData.city = city;
+                userData.state = state;
+                userData.zipcode =zipcode;
+                userData.phone = phone;
+                
+                [self.array_userData addObject:userData];
+            }
+            NSLog(@"Successfully retrieved: %@", objects);
+        }
+        else
+        {
+            NSString *errorString = [[error userInfo] objectForKey:@"error"];
+            NSLog(@"Error: %@", errorString);
+        }
+    }];
+    
+}
+- (IBAction)actionSwitch:(id)sender {
+    UISwitch * s = [[UISwitch alloc]init];
+    
+    if (s isOn) {
+        statements
+    }
+    else
+    
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -118,7 +136,6 @@
 
 
 #pragma mark Custom Methods
-
 
 - (BOOL)validateEmailWithString:(NSString*)email
 {
