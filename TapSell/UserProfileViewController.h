@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "UserData.h"
 
 @interface UserProfileViewController : ViewController
-
+@property(nonatomic,strong)UserData * userDataObjectUP;
 @end

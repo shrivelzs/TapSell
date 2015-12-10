@@ -9,11 +9,14 @@
 #import "ViewController.h"
 #import <Parse/Parse.h>
 #import "UserData.h"
+#import "UserProfileViewController.h"
+#import "TabBarController.h"
 @interface ViewController ()<UITextFieldDelegate>
 @property (nonatomic,strong) NSMutableArray* array_userData;
+
 @property (weak, nonatomic) IBOutlet UITextField *txtLoginUserName;
 @property (weak, nonatomic) IBOutlet UITextField *txtLoginPassword;
-
+@property(nonatomic,strong)UserData * userDataObjectVC;
 @end
 
 @implementation ViewController
@@ -22,8 +25,7 @@
     [super viewDidLoad];
     [self.txtLoginUserName becomeFirstResponder];
     _array_userData = [NSMutableArray new];
-    
-        // Do any additional setup after loading the view, typically from a nib.
+           // Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,9 +82,10 @@
                 userData.zipcode =zipcode;
                 userData.phone = phone;
                 
-                [self.array_userData addObject:userData];
+                //[self.array_userData addObject:userData];
             }
             NSLog(@"Successfully retrieved: %@", objects);
+            [self performSegueWithIdentifier:@"login" sender:self];
         }
         else
         {
@@ -119,7 +122,10 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
+    if ([[segue identifier] isEqualToString:@"tab"]){
+        TabBarController *tabBar = [segue destinationViewController];
+        
+    }
 }
 
 #pragma mark UITextField Delegate Methods

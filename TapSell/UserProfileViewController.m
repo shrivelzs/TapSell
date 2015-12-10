@@ -7,8 +7,14 @@
 //
 
 #import "UserProfileViewController.h"
+#import "UserData.h"
 
 @interface UserProfileViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
+@property (weak, nonatomic) IBOutlet UILabel *lblName;
+@property (weak, nonatomic) IBOutlet UILabel *lblLocation;
+@property (weak, nonatomic) IBOutlet UILabel *lblPhone;
+@property (weak, nonatomic) IBOutlet UILabel *lblEmailID;
 
 @end
 
@@ -16,6 +22,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self imageViewDisplay];
+    [self retrieveUserProfile];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -23,7 +32,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)imageViewDisplay
+{
+    self.userProfileImageView.layer.cornerRadius = self.userProfileImageView.frame.size.width/2;
+    self.userProfileImageView.clipsToBounds = YES;
+    self.userProfileImageView.layer.masksToBounds =YES;
+    self.userProfileImageView.layer.borderWidth = 5.0f;
+    self.userProfileImageView.layer.borderColor = [UIColor colorWithRed:168.0f green:200.0f blue: 219.0f alpha:0.5f].CGColor;
 
+}
+-(void)retrieveUserProfile
+{
+    NSString * userName = [NSString stringWithFormat:@"%@  %@",self.userDataObjectUP.fname,self.userDataObjectUP.lname];
+    NSString * location = self.userDataObjectUP.city;
+    NSString * phone = self.userDataObjectUP.phone;
+    NSString * email = self.userDataObjectUP.emailID;
+    
+    _lblName.text = userName;
+    _lblLocation.text = location;
+    _lblPhone.text=phone;
+    _lblEmailID.text = email;
+  }
 /*
 #pragma mark - Navigation
 
