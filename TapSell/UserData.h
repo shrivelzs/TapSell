@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface UserData : NSObject
+@property(nonatomic,strong)NSString*objectID;
 @property(nonatomic,strong)NSString*fname;
 @property(nonatomic,strong)NSString*lname;
 @property(nonatomic,strong)NSString*emailID;
@@ -18,5 +19,5 @@
 @property(nonatomic,strong)NSString*state;
 @property(nonatomic,strong)NSString*zipcode;
 @property(nonatomic,strong)NSString*phone;
-
+@property(nonatomic,strong)id userProfileImage;
 @end

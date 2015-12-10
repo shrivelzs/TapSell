@@ -78,8 +78,8 @@
         {
             [self displayAlertView:@"Pleast try again"];
             
-           // NSString *errorString = [[error userInfo] objectForKey:@"error"];
-            //NSLog(@"Error: %@", errorString);
+            NSString *errorString = [[error userInfo] objectForKey:@"error"];
+            NSLog(@"Error: %@", errorString);
         }
         
     }];

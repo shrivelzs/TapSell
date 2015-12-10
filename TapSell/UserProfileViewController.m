@@ -7,6 +7,7 @@
 //
 
 #import "UserProfileViewController.h"
+#import "EditUserProfileViewController.h"
 #import "UserData.h"
 
 @interface UserProfileViewController ()
@@ -36,9 +37,8 @@
 {
     self.userProfileImageView.layer.cornerRadius = self.userProfileImageView.frame.size.width/2;
     self.userProfileImageView.clipsToBounds = YES;
-    self.userProfileImageView.layer.masksToBounds =YES;
-    self.userProfileImageView.layer.borderWidth = 5.0f;
-    self.userProfileImageView.layer.borderColor = [UIColor colorWithRed:168.0f green:200.0f blue: 219.0f alpha:0.5f].CGColor;
+    self.userProfileImageView.layer.masksToBounds = self.userProfileImageView.layer.borderWidth = 8.0f;
+    self.userProfileImageView.layer.borderColor = [UIColor colorWithRed:0.168f green:0.200f blue: 0.219f alpha:0.3f].CGColor;
 
 }
 -(void)retrieveUserProfile
@@ -53,6 +53,14 @@
     _lblPhone.text=phone;
     _lblEmailID.text = email;
   }
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"edit"]) {
+        EditUserProfileViewController *edit = [segue destinationViewController];
+        edit.userDataObjEUP = self.userDataObjectUP;
+    }
+    
+}
 /*
 #pragma mark - Navigation
 

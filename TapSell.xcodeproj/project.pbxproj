@@ -17,6 +17,7 @@
 		A2CDF2E51C161CD200DABB2F /* TapSellTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CDF2E41C161CD200DABB2F /* TapSellTests.m */; };
 		A2CDF2F01C161CD200DABB2F /* TapSellUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CDF2EF1C161CD200DABB2F /* TapSellUITests.m */; };
 		E228775A1C191E170079F729 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E22877591C191E170079F729 /* TabBarController.m */; };
+		E228775E1C19397F0079F729 /* EditUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E228775D1C19397F0079F729 /* EditUserProfileViewController.m */; };
 		E2A6F6211C17BCD500D92CFB /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A6F6201C17BCD500D92CFB /* UserData.m */; };
 		E2ABCDE21C18C37B00CC538F /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2ABCDE11C18C37B00CC538F /* UserProfileViewController.m */; };
 		E2C965281C162ADA00F23209 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C965271C162ADA00F23209 /* MapKit.framework */; };
@@ -68,6 +69,8 @@
 		D7DBB7AF83919FB890D54B65 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		E22877581C191E170079F729 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		E22877591C191E170079F729 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
+		E228775C1C19397F0079F729 /* EditUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditUserProfileViewController.h; sourceTree = "<group>"; };
+		E228775D1C19397F0079F729 /* EditUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditUserProfileViewController.m; sourceTree = "<group>"; };
 		E2A6F61F1C17BCD500D92CFB /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
 		E2A6F6201C17BCD500D92CFB /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
 		E2ABCDE01C18C37B00CC538F /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileViewController.h; sourceTree = "<group>"; };
@@ -165,8 +168,6 @@
 				E2C965321C166DDA00F23209 /* RegisterViewController.m */,
 				A2CDF2D01C161CD200DABB2F /* ViewController.h */,
 				A2CDF2D11C161CD200DABB2F /* ViewController.m */,
-				E2ABCDE01C18C37B00CC538F /* UserProfileViewController.h */,
-				E2ABCDE11C18C37B00CC538F /* UserProfileViewController.m */,
 				FB40AF1C1C17777B00927359 /* SearchViewController.h */,
 				FB40AF1D1C17777B00927359 /* SearchViewController.m */,
 				FB40AF221C17779E00927359 /* MapShowViewController.h */,
@@ -175,6 +176,7 @@
 				FB40AF201C17778A00927359 /* CategoryViewController.m */,
 				E2C9652B1C162B0000F23209 /* MapViewController.h */,
 				E2C9652C1C162B0000F23209 /* MapViewController.m */,
+				E228775F1C19D36E0079F729 /* UserProfile */,
 				A2CDF2D31C161CD200DABB2F /* Main.storyboard */,
 				A2CDF2D61C161CD200DABB2F /* Assets.xcassets */,
 				A2CDF2D81C161CD200DABB2F /* LaunchScreen.storyboard */,
@@ -221,6 +223,17 @@
 				E22877591C191E170079F729 /* TabBarController.m */,
 			);
 			name = TabBar;
+			sourceTree = "<group>";
+		};
+		E228775F1C19D36E0079F729 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				E2ABCDE01C18C37B00CC538F /* UserProfileViewController.h */,
+				E2ABCDE11C18C37B00CC538F /* UserProfileViewController.m */,
+				E228775C1C19397F0079F729 /* EditUserProfileViewController.h */,
+				E228775D1C19397F0079F729 /* EditUserProfileViewController.m */,
+			);
+			name = UserProfile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,6 +432,7 @@
 				FB40AF211C17778A00927359 /* CategoryViewController.m in Sources */,
 				FB40AF1E1C17777B00927359 /* SearchViewController.m in Sources */,
 				E2C9652D1C162B0000F23209 /* MapViewController.m in Sources */,
+				E228775E1C19397F0079F729 /* EditUserProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -59,6 +59,7 @@
             for (PFObject *object in objects)
             {
                 // retreive data
+                 NSString * objectID = [object objectForKey:@"ObjectID"];
                 NSString * firstName = [object objectForKey:@"UserFirstName"];
                 NSString * lastname = [object objectForKey:@"UserLastName"];
                 NSString * emailID = [object objectForKey:@"EmailID"];
@@ -72,6 +73,7 @@
                 
                 //put it in array
                 UserData * userData = [[UserData alloc]init];
+                userData.objectID = objectID;
                 userData.fname = firstName;
                 userData.lname = lastname;
                 userData.emailID = emailID;
