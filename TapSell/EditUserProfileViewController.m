@@ -10,19 +10,17 @@
 #import <Parse.h>
 
 
-@interface EditUserProfileViewController ()
+@interface EditUserProfileViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *editUserProfileImageView;
 @property (weak, nonatomic) IBOutlet UITextField *txtEditFname;
 @property (weak, nonatomic) IBOutlet UITextField *txtEditLname;
 @property (weak, nonatomic) IBOutlet UITextField *txtEdtiAddress;
 @property (weak, nonatomic) IBOutlet UITextField *txtEdtiApt;
 @property (weak, nonatomic) IBOutlet UITextField *txtEditCity;
-
 @property (weak, nonatomic) IBOutlet UITextField *txtEdtiState;
 @property (weak, nonatomic) IBOutlet UITextField *txtEditZipcode;
 @property (weak, nonatomic) IBOutlet UITextField *txtEditPhone;
 @property(nonatomic,strong)NSString*objectiID;
-
 @end
 
 @implementation EditUserProfileViewController
@@ -52,11 +50,13 @@
     self.objectiID  = self.userDataObjEUP.objectID;
 }
 - (IBAction)btnSave:(id)sender {
+    
     PFQuery * query = [PFQuery queryWithClassName:@"User"];
+    [query whereKey:@"EmailID" equalTo:self.userDataObjEUP.emailID];
     [query getObjectInBackgroundWithId:self.objectiID block:^(PFObject *  object, NSError *  error) {
         if (!error)
         {
-         object[@"UserProfileImage"]= self.editUserProfileImageView.image;
+        object[@"UserProfileImage"]= self.editUserProfileImageView.image;
         object[@"UserFirstName"]=self.txtEditFname.text;
         object[@"UserLastName"]=self.txtEditLname.text;
         object[@"Address"]=self.txtEdtiAddress.text;
@@ -67,8 +67,8 @@
         object[@"Phone"]= self.txtEditPhone.text;
         [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *  error) {
             if (succeeded) {
+                
                 [self displayAlertView:@"Data Updated"];
-             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
             }
             else
             {
@@ -84,6 +84,7 @@
 
         }
     }];
+     
 }
 
  -(void)imageViewDisplay
@@ -96,6 +97,36 @@
     
 }
 
+#pragma mark UserProfilePhoto
+- (IBAction)btnAction_UploadProfileImage:(id)sender{
+    UIImagePickerController *picker =[[UIImagePickerController alloc]init];
+    picker.delegate = self;
+    picker.allowsEditing = self;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.modalPresentationStyle = UIModalPresentationCurrentContext;
+    
+    [self presentViewController:picker animated:YES completion:nil];
+
+}
+- (IBAction)btnAction_TakePhoto:(id)sender {
+    
+    UIImagePickerController *picker =[[UIImagePickerController alloc]init];
+    picker.delegate = self;
+    picker.allowsEditing = self;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    [self presentViewController:picker animated:YES completion:nil];
+
+}
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    UIImage *chooseimage = info[UIImagePickerControllerEditedImage];
+    self.editUserProfileImageView.image = chooseimage;
+    
+    UIImageWriteToSavedPhotosAlbum(chooseimage, nil, nil, nil);
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 #pragma mark Validation

@@ -10,7 +10,6 @@
 #import <Parse/Parse.h>
 #import "UserData.h"
 #import "UserProfileViewController.h"
-#import "TabBarController.h"
 @interface ViewController ()<UITextFieldDelegate>
 @property (nonatomic,strong) NSMutableArray* array_userData;
 
@@ -24,7 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.txtLoginUserName becomeFirstResponder];
-    _array_userData = [NSMutableArray new];
+    //_array_userData = [NSMutableArray new];
+    _userDataObjectVC = [[UserData alloc]init];
            // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -34,14 +34,19 @@
 }
 - (IBAction)btnAction_Login:(id)sender {
  
-    
-    
-    [self retrieveDataFromParse];
-   
+    if ([self.txtLoginPassword.text isEqualToString:@""]||[self.txtLoginUserName.text isEqualToString:@""])
+    {
+        [self displayAlertView:@"Please enter username and password"];
 
-    
+    }
+    else
+    {
+        [self retrieveDataFromParse];
+
+    }
     
    
+ 
 }
 
 -(void)retrieveDataFromParse
@@ -56,10 +61,10 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
         {
-            for (PFObject *object in objects)
+            for (PFObject * object in objects)
             {
                 // retreive data
-                 NSString * objectID = [object objectForKey:@"ObjectID"];
+                NSString * objectID = [object objectForKey:@"objectId"];
                 NSString * firstName = [object objectForKey:@"UserFirstName"];
                 NSString * lastname = [object objectForKey:@"UserLastName"];
                 NSString * emailID = [object objectForKey:@"EmailID"];
@@ -71,34 +76,49 @@
                 NSString * phone = [object objectForKey:@"Phone"];
                 
                 
-                //put it in array
-                UserData * userData = [[UserData alloc]init];
-                userData.objectID = objectID;
-                userData.fname = firstName;
-                userData.lname = lastname;
-                userData.emailID = emailID;
-                userData.address = address;
-                userData.aptNo = aptNo;
-                userData.city = city;
-                userData.state = state;
-                userData.zipcode =zipcode;
-                userData.phone = phone;
+               
+                _userDataObjectVC.objectID = objectID;
+                _userDataObjectVC.fname = firstName;
+                _userDataObjectVC.lname = lastname;
+                _userDataObjectVC.emailID = emailID;
+                _userDataObjectVC.address = address;
+                _userDataObjectVC.aptNo = aptNo;
+                _userDataObjectVC.city = city;
+                _userDataObjectVC.state = state;
+                _userDataObjectVC.zipcode =zipcode;
+                _userDataObjectVC.phone = phone;
                 
-                //[self.array_userData addObject:userData];
+                
             }
-            NSLog(@"Successfully retrieved: %@", objects);
-            [self performSegueWithIdentifier:@"login" sender:self];
+            if (![objects count]==0) {
+                dispatch_async(dispatch_get_main_queue(),^{
+                    [self performSegueWithIdentifier:@"afterlogin" sender:self];
+                });
+                NSLog(@"Successfully retrieved: %@", objects);
+                NSLog(@"%@",_userDataObjectVC.fname);
+
+            }
+            else
+            {
+                [self displayAlertView:@"Please enter valid emailID and password"];
+            }
+            
+            
+
         }
         else
         {
+            
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
             NSLog(@"Error: %@", errorString);
+            [self displayAlertView:errorString];
         }
     }];
     
 }
 - (IBAction)rememberMeActionSwitch:(id)sender
 {
+    /*
     UISwitch * s = [[UISwitch alloc]init];
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
     
@@ -119,16 +139,22 @@
         [defaults removeObjectForKey:@"password"];
 
     }
+     */
     
 }
 
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"tab"]){
-        TabBarController *tabBar = [segue destinationViewController];
-        
+    if ([[segue identifier] isEqualToString:@"afterlogin"])
+    {
+        UINavigationController * navController = (UINavigationController *)segue.destinationViewController;
+        UserProfileViewController * user = (UserProfileViewController *)navController.topViewController;
+        user.userDataObjectUP = self.userDataObjectVC;
+        NSLog(@"%@  %@",user.userDataObjectUP.fname, self.userDataObjectVC.fname);
     }
 }
+
 
 #pragma mark UITextField Delegate Methods
 

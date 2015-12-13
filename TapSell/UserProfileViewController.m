@@ -43,21 +43,23 @@
 }
 -(void)retrieveUserProfile
 {
-    NSString * userName = [NSString stringWithFormat:@"%@  %@",self.userDataObjectUP.fname,self.userDataObjectUP.lname];
-    NSString * location = self.userDataObjectUP.city;
-    NSString * phone = self.userDataObjectUP.phone;
-    NSString * email = self.userDataObjectUP.emailID;
+      
+    _lblName.text = [NSString stringWithFormat:@"%@  %@",self.userDataObjectUP.fname,self.userDataObjectUP.lname];
+
+    _lblLocation.text = self.userDataObjectUP.city;
+    _lblPhone.text=self.userDataObjectUP.phone;
+    _lblEmailID.text = self.userDataObjectUP.emailID;
     
-    _lblName.text = userName;
-    _lblLocation.text = location;
-    _lblPhone.text=phone;
-    _lblEmailID.text = email;
-  }
+    
+}
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"edit"]) {
-        EditUserProfileViewController *edit = [segue destinationViewController];
+    if ([segue.identifier isEqualToString:@"edit"])
+    {
+        EditUserProfileViewController * edit =  [segue destinationViewController];
         edit.userDataObjEUP = self.userDataObjectUP;
+        
+        NSLog(@"%@   %@", edit.userDataObjEUP.fname, self.userDataObjectUP.fname);
     }
     
 }
