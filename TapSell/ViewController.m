@@ -64,7 +64,7 @@
             for (PFObject * object in objects)
             {
                 // retreive data
-                NSString * objectID = [object objectForKey:@"objectId"];
+                NSString * objectID = [object objectId];
                 NSString * firstName = [object objectForKey:@"UserFirstName"];
                 NSString * lastname = [object objectForKey:@"UserLastName"];
                 NSString * emailID = [object objectForKey:@"EmailID"];
@@ -88,7 +88,7 @@
                 _userDataObjectVC.zipcode =zipcode;
                 _userDataObjectVC.phone = phone;
                 
-                
+                NSLog(@"ObjectID is %@", objectID);
             }
             if (![objects count]==0) {
                 dispatch_async(dispatch_get_main_queue(),^{
