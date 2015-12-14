@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtEdtiState;
 @property (weak, nonatomic) IBOutlet UITextField *txtEditZipcode;
 @property (weak, nonatomic) IBOutlet UITextField *txtEditPhone;
-@property(nonatomic,strong)NSString*objectiID;
+@property(strong,nonatomic)NSString *objectID;
 @end
 
 @implementation EditUserProfileViewController
@@ -47,44 +47,102 @@
     self.txtEdtiState.text = self.userDataObjEUP.state;
     self.txtEditZipcode.text = self.userDataObjEUP.zipcode;
      self.txtEditPhone.text = self.userDataObjEUP.phone;
-    self.objectiID  = self.userDataObjEUP.objectID;
+    self.objectID = self.userDataObjEUP.objectID;
+    NSLog(@"%@",self.userDataObjEUP.objectID);
+    
 }
 - (IBAction)btnSave:(id)sender {
     
+    PFObject *point = [PFObject objectWithoutDataWithClassName:@"User" objectId:self.objectID];
+    NSData *imageData = UIImagePNGRepresentation(self.editUserProfileImageView.image);
+    PFFile *file = [PFFile fileWithData:imageData];
+    // Set a new value on quantity
+    [point setObject:file forKey:@"UserProfileImage"];
+    [point setObject:self.txtEditFname.text forKey:@"UserFirstName"];
+    [point setObject: self.txtEditLname.text forKey:@"UserLastName"];
+    [point setObject:self.txtEdtiAddress.text forKey:@"Address"];
+    [point setObject:self.txtEdtiApt.text forKey:@"AptNo"];
+    [point setObject: self.txtEditCity.text forKey:@"City"];
+    [point setObject: self.txtEdtiState.text forKey:@"State"];
+    [point setObject: self.txtEditZipcode.text forKey:@"Zipcode"];
+    [point setObject: self.txtEditPhone.text forKey:@"Phone"];
+    
+    [point saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (!error) {
+            UIAlertController *alertCont =[UIAlertController alertControllerWithTitle:@"Completed!!" message:@"User profile has been updated" preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+            
+            [alertCont addAction:okAction];
+            
+            [self presentViewController:alertCont animated:YES completion:nil];
+            
+        }
+        else
+            
+        {
+            NSString *errorString = [[error userInfo] objectForKey:@"error"];
+            NSLog(@"Error: %@", errorString);
+            NSLog(@"Cannot update data");
+            [self displayAlertView:errorString];
+        }
+    }];
+
+
+    
+    /*
+    
     PFQuery * query = [PFQuery queryWithClassName:@"User"];
     [query whereKey:@"EmailID" equalTo:self.userDataObjEUP.emailID];
-    [query getObjectInBackgroundWithId:self.objectiID block:^(PFObject *  object, NSError *  error) {
+     
+       [query getFirstObjectInBackgroundWithBlock:^(PFObject * object, NSError *  error) {
+        
+    
         if (!error)
         {
-        object[@"UserProfileImage"]= self.editUserProfileImageView.image;
-        object[@"UserFirstName"]=self.txtEditFname.text;
-        object[@"UserLastName"]=self.txtEditLname.text;
-        object[@"Address"]=self.txtEdtiAddress.text;
-        object[@"AptNo"]=self.txtEdtiApt.text;
-        object[@"City"]=self.txtEditCity.text;
-        object[@"State"]=self.txtEdtiState.text;
-        object[@"Zipcode"]=self.txtEditZipcode.text;
-        object[@"Phone"]= self.txtEditPhone.text;
-        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *  error) {
-            if (succeeded) {
-                
-                [self displayAlertView:@"Data Updated"];
-            }
-            else
-            {
-                [self displayAlertView:@"Cannot updata user data. Please try again"];
-                NSLog(@"Cannot updata user data");
-            }
-        }];
+            [object setObject:self.editUserProfileImageView.image forKey:@"UserProfileImage"];
+            [object setObject:self.txtEditFname.text forKey:@"UserFirstName"];
+            [object setObject: self.txtEditLname.text forKey:@"UserLastName"];
+            [object setObject:self.txtEdtiAddress.text forKey:@"Address"];
+            [object setObject:self.txtEdtiApt.text forKey:@"AptNo"];
+            [object setObject: self.txtEditCity.text forKey:@"City"];
+            [object setObject: self.txtEdtiState.text forKey:@"State"];
+            [object setObject: self.txtEditZipcode.text forKey:@"Zipcode"];
+            [object setObject: self.txtEditPhone.text forKey:@"Phone"];
+            [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (!error) {
+                    UIAlertController *alertCont =[UIAlertController alertControllerWithTitle:@"Completed!!" message:@"User profile has been updated" preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+                    
+                    [alertCont addAction:okAction];
+                    
+                    [self presentViewController:alertCont animated:YES completion:nil];
+
+                }
+                else
+                    
+                {
+                    NSString *errorString = [[error userInfo] objectForKey:@"error"];
+                    NSLog(@"Error: %@", errorString);
+                     NSLog(@"Cannot update data");
+                    [self displayAlertView:errorString];
+                }
+                           }];
+           
         }
         else
         {
-            [self displayAlertView:@"Cannot get data from server. Please try again"];
-            NSLog(@"Cannot get data from server");
-
+            
+            NSString *errorString = [[error userInfo] objectForKey:@"error"];
+            NSLog(@"Error: %@", errorString);
+            [self displayAlertView:errorString];
         }
+  
+
     }];
-     
+*/
+    
 }
 
  -(void)imageViewDisplay
