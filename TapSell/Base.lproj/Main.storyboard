@@ -171,6 +171,7 @@
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="btnAction_Login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="B7L-6O-t8a"/>
+                                    <segue destination="IF1-pm-k1o" kind="modal" identifier="afterlogin" id="Fe4-rN-oia"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JMx-CQ-Ozg">
@@ -257,7 +258,6 @@
                     <connections>
                         <outlet property="txtLoginPassword" destination="kKq-2t-e9B" id="PvH-Wk-LZz"/>
                         <outlet property="txtLoginUserName" destination="Uhz-VY-acX" id="FmH-qY-BJz"/>
-                        <segue destination="W8p-Ef-kEt" kind="modal" identifier="afterlogin" id="aX2-B8-9vg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -945,7 +945,7 @@
                             <constraint firstItem="qXZ-Ia-uWp" firstAttribute="bottom" secondItem="jNn-vM-7MB" secondAttribute="top" id="fat-7W-mxr"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="more" id="Ddc-Zk-6iA" userLabel="Map"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="icon-maps-active" id="Ddc-Zk-6iA" userLabel="Map"/>
                     <connections>
                         <outlet property="mapView" destination="qXZ-Ia-uWp" id="InQ-Ey-zkL"/>
                     </connections>
@@ -968,16 +968,18 @@
                         <segue destination="Ewx-hX-yBS" kind="relationship" relationship="viewControllers" id="bNy-lu-Z8F"/>
                         <segue destination="qF9-TW-QT7" kind="relationship" relationship="viewControllers" id="OdJ-V7-bs3"/>
                         <segue destination="FEh-Pk-2JP" kind="relationship" relationship="viewControllers" id="WAP-jN-bS1"/>
+                        <segue destination="W8p-Ef-kEt" kind="relationship" relationship="viewControllers" id="bvL-X1-Jp7"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ptq-kH-vmf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1178" y="314"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--User Profile-->
         <scene sceneID="pQQ-ma-rpM">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="W8p-Ef-kEt" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="User Profile" image="icon-people" id="85n-PM-Idh"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iqQ-UA-EG3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -996,7 +998,7 @@
         <scene sceneID="QnZ-Xg-vYm">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qF9-TW-QT7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Post List" id="Vpb-Ix-dky"/>
+                    <tabBarItem key="tabBarItem" title="Post List" image="icon-chat" id="Vpb-Ix-dky"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0M4-zW-G0b">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1014,5 +1016,8 @@
     </scenes>
     <resources>
         <image name="Logo1.png" width="391" height="84"/>
+        <image name="icon-chat" width="29" height="29"/>
+        <image name="icon-maps-active" width="29" height="29"/>
+        <image name="icon-people" width="29" height="29"/>
     </resources>
 </document>

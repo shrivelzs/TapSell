@@ -74,7 +74,7 @@
                 NSString * state = [object objectForKey:@"State"];
                 NSString * zipcode = [object objectForKey:@"Zipcode"];
                 NSString * phone = [object objectForKey:@"Phone"];
-                UIImage * userprofile = [object objectForKey:@"UserProfileImage"];
+                //UIImage * userprofile = [object objectForKey:@"UserProfileImage"];
                
                 _userDataObjectVC.objectID = objectID;
                 _userDataObjectVC.fname = firstName;
@@ -86,7 +86,7 @@
                 _userDataObjectVC.state = state;
                 _userDataObjectVC.zipcode =zipcode;
                 _userDataObjectVC.phone = phone;
-                _userDataObjectVC.userProfileImage = userprofile;
+                //_userDataObjectVC.userProfileImage = userprofile;
                 
                 NSLog(@"ObjectID is %@", objectID);
             }
@@ -148,8 +148,11 @@
 {
     if ([[segue identifier] isEqualToString:@"afterlogin"])
     {
-        UINavigationController * navController = (UINavigationController *)segue.destinationViewController;
-        UserProfileViewController * user = (UserProfileViewController *)navController.topViewController;
+        UITabBarController * tabbar = segue.destinationViewController;
+        
+        // passing data to userprofile tabbar
+        UINavigationController * navController = (UINavigationController *)[[tabbar viewControllers]objectAtIndex:3];
+        UserProfileViewController * user = (UserProfileViewController *)[[navController viewControllers]objectAtIndex:0];
         user.userDataObjectUP = self.userDataObjectVC;
         NSLog(@"%@  %@",user.userDataObjectUP.fname, self.userDataObjectVC.fname);
     }

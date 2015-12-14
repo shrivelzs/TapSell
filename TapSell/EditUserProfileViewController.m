@@ -38,7 +38,7 @@
 }
 -(void)retrieveUserDataFromUserProfile
 {
-    self.editUserProfileImageView.image = self.userDataObjEUP.userProfileImage;
+    //self.editUserProfileImageView.image = self.userDataObjEUP.userProfileImage;
     self.txtEditFname.text = self.userDataObjEUP.fname;
     self.txtEditLname.text = self.userDataObjEUP.lname;
     self.txtEdtiAddress.text = self.userDataObjEUP.address;
