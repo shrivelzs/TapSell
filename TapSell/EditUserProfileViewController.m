@@ -90,59 +90,7 @@
 
 
     
-    /*
-    
-    PFQuery * query = [PFQuery queryWithClassName:@"User"];
-    [query whereKey:@"EmailID" equalTo:self.userDataObjEUP.emailID];
-     
-       [query getFirstObjectInBackgroundWithBlock:^(PFObject * object, NSError *  error) {
-        
-    
-        if (!error)
-        {
-            [object setObject:self.editUserProfileImageView.image forKey:@"UserProfileImage"];
-            [object setObject:self.txtEditFname.text forKey:@"UserFirstName"];
-            [object setObject: self.txtEditLname.text forKey:@"UserLastName"];
-            [object setObject:self.txtEdtiAddress.text forKey:@"Address"];
-            [object setObject:self.txtEdtiApt.text forKey:@"AptNo"];
-            [object setObject: self.txtEditCity.text forKey:@"City"];
-            [object setObject: self.txtEdtiState.text forKey:@"State"];
-            [object setObject: self.txtEditZipcode.text forKey:@"Zipcode"];
-            [object setObject: self.txtEditPhone.text forKey:@"Phone"];
-            [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                if (!error) {
-                    UIAlertController *alertCont =[UIAlertController alertControllerWithTitle:@"Completed!!" message:@"User profile has been updated" preferredStyle:UIAlertControllerStyleAlert];
-                    
-                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-                    
-                    [alertCont addAction:okAction];
-                    
-                    [self presentViewController:alertCont animated:YES completion:nil];
-
-                }
-                else
-                    
-                {
-                    NSString *errorString = [[error userInfo] objectForKey:@"error"];
-                    NSLog(@"Error: %@", errorString);
-                     NSLog(@"Cannot update data");
-                    [self displayAlertView:errorString];
-                }
-                           }];
-           
-        }
-        else
-        {
-            
-            NSString *errorString = [[error userInfo] objectForKey:@"error"];
-            NSLog(@"Error: %@", errorString);
-            [self displayAlertView:errorString];
-        }
-  
-
-    }];
-*/
-    
+      
 }
 
  -(void)imageViewDisplay

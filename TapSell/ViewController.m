@@ -74,8 +74,7 @@
                 NSString * state = [object objectForKey:@"State"];
                 NSString * zipcode = [object objectForKey:@"Zipcode"];
                 NSString * phone = [object objectForKey:@"Phone"];
-                
-                
+                UIImage * userprofile = [object objectForKey:@"UserProfileImage"];
                
                 _userDataObjectVC.objectID = objectID;
                 _userDataObjectVC.fname = firstName;
@@ -87,6 +86,7 @@
                 _userDataObjectVC.state = state;
                 _userDataObjectVC.zipcode =zipcode;
                 _userDataObjectVC.phone = phone;
+                _userDataObjectVC.userProfileImage = userprofile;
                 
                 NSLog(@"ObjectID is %@", objectID);
             }

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 @interface UserData : NSObject
 @property(nonatomic,strong)NSString*objectID;
 @property(nonatomic,strong)NSString*fname;
@@ -19,5 +19,5 @@
 @property(nonatomic,strong)NSString*state;
 @property(nonatomic,strong)NSString*zipcode;
 @property(nonatomic,strong)NSString*phone;
-@property(nonatomic,strong)id userProfileImage;
+@property(nonatomic,strong)UIImage *  userProfileImage;
 @end

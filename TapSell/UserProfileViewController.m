@@ -43,7 +43,7 @@
 }
 -(void)retrieveUserProfile
 {
-      
+    _userProfileImageView.image = self.userDataObjectUP.userProfileImage;
     _lblName.text = [NSString stringWithFormat:@"%@  %@",self.userDataObjectUP.fname,self.userDataObjectUP.lname];
 
     _lblLocation.text = self.userDataObjectUP.city;
