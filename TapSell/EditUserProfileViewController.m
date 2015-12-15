@@ -68,11 +68,16 @@
     [point setObject: self.txtEditPhone.text forKey:@"Phone"];
     [point saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (!error) {
-            UIAlertController *alertCont =[UIAlertController alertControllerWithTitle:@"Completed!!" message:@"User profile has been updated" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-            [alertCont addAction:okAction];
-            [self presentViewController:alertCont animated:YES completion:nil];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            UIAlertController *alcont =[UIAlertController alertControllerWithTitle:@"Completed!" message:@"User profile has been updated" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                       {
+                                           [self.navigationController popToRootViewControllerAnimated:YES];
+                                           
+                                       }];
+            
+            [alcont addAction:okButton];
+            [self presentViewController:alcont animated:YES completion:nil];
+
         }
         else
         {

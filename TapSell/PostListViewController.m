@@ -10,6 +10,8 @@
 #import <Parse.h>
 #import "CustomCell.h"
 #import "PostViewController.h"
+#import "PostListData.h"
+#import "PostDetailsViewController.h"
 @interface PostListViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableViewPostList;
 @property(nonatomic,strong)NSMutableArray * array_PostList;
@@ -20,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadData];
-    _array_PostList = [[NSMutableArray alloc]init];
+   
     // Do any additional setup after loading the view.
 }
 
@@ -39,6 +41,7 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
         {
+             _array_PostList = [[NSMutableArray alloc]init];
             for (PFObject * object in objects)
             {
                 // retreive data
@@ -48,12 +51,13 @@
                 NSString * productDescription = [object objectForKey:@"Address"];
                 NSString * userID = [object objectForKey:@"UserID"];
                 
-                _postListDataPL.title =title;
-                _postListDataPL.location = location;
-                _postListDataPL.price = price;
-                _postListDataPL.productDescription = productDescription;
-                _postListDataPL.userID = userID;
-                [self.array_PostList addObject:self.postListDataPL];
+                PostListData * postListData = [[PostListData alloc]init];
+                postListData.title =title;
+                postListData.location = location;
+                postListData.price = price;
+                postListData.productDescription = productDescription;
+                postListData.userID = userID;
+                [self.array_PostList addObject:postListData];
             }
             if (![objects count]==0) {
             NSLog(@"Successfully retrieved: %@", objects);
@@ -92,11 +96,20 @@
     postLoistData = [self.array_PostList objectAtIndex:indexPath.row];
     cell.lblProductTitle.text =postLoistData.title;
     cell.lblProductLocation.text = postLoistData.location;
-    cell.lblProductPrice.text = postLoistData.price;
+    cell.lblProductPrice.text = [NSString stringWithFormat:@"$ %@",postLoistData.price];
     
     return cell;
 }
 
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //add code here for when you hit delete
+    }
+}
+
+
+#pragma mark Alsert method
 -(void)displayAlertView:(NSString *)message
 {
     UIAlertController *alertCont =[UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
@@ -105,11 +118,20 @@
     [self presentViewController:alertCont animated:YES completion:nil];
     
 }
+
+#pragma mark Segue method
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"addPost"]) {
         PostViewController * addPost = [segue destinationViewController];
         addPost.userDataObjAP = self.userDataObjPL;
+    }
+    if ([segue.identifier isEqualToString:@"postDetails"]) {
+        PostDetailsViewController * postDetail = [segue destinationViewController];
+        
+        NSIndexPath * selectedIndexPath = [self.tableViewPostList indexPathForSelectedRow];
+        PostListData * postdata = [self.array_PostList objectAtIndex:selectedIndexPath.row];
+        postDetail.postListDataObjPD = postdata;
     }
 }
 

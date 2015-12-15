@@ -9,7 +9,7 @@
 #import "UserProfileViewController.h"
 #import "EditUserProfileViewController.h"
 #import "UserData.h"
-
+#import <Parse.h>
 @interface UserProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
@@ -43,6 +43,59 @@
 }
 -(void)retrieveUserProfile
 {
+    /*
+    PFQuery * query =[PFQuery queryWithClassName:@"User"];
+    [query whereKey:@"EmailID" equalTo:self.userDataObjectUP.emailID];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error)
+        {
+            for (PFObject * object in objects)
+            {
+                // retreive data
+                NSString * objectID = [object objectId];
+                NSString * firstName = [object objectForKey:@"UserFirstName"];
+                NSString * lastname = [object objectForKey:@"UserLastName"];
+                NSString * emailID = [object objectForKey:@"EmailID"];
+                NSString * address = [object objectForKey:@"Address"];
+                NSString * aptNo = [object objectForKey:@"AptNo"];
+                NSString * city = [object objectForKey:@"City"];
+                NSString * state = [object objectForKey:@"State"];
+                NSString * zipcode = [object objectForKey:@"Zipcode"];
+                NSString * phone = [object objectForKey:@"Phone"];
+                //UIImage * userprofile = [object objectForKey:@"UserProfileImage"];
+                
+                
+                _userDataObjectUP.objectID = objectID;
+                _userDataObjectUP.fname = firstName;
+                _userDataObjectUP.lname = lastname;
+                _userDataObjectUP.emailID = emailID;
+                _userDataObjectUP.address = address;
+                _userDataObjectUP.aptNo = aptNo;
+                _userDataObjectUP.city = city;
+                _userDataObjectUP.state = state;
+                _userDataObjectUP.zipcode =zipcode;
+                _userDataObjectUP.phone = phone;
+                //_userDataObjectUP.userProfileImage = userprofile;
+                
+            }
+            if (![objects count]==0) {
+                [self performSegueWithIdentifier:@"afterlogin" sender:self];
+                NSLog(@"Successfully retrieved: %@", objects);
+                           }
+            else
+            {
+                [self displayAlertView:@"Data not found"];
+            }
+        }
+        else
+        {
+            NSString *errorString = [[error userInfo] objectForKey:@"error"];
+            NSLog(@"Error: %@", errorString);
+            [self displayAlertView:errorString];
+        }
+    }];*/
+
    // _userProfileImageView.image = self.userDataObjectUP.userProfileImage;
     _lblName.text = [NSString stringWithFormat:@"%@  %@",self.userDataObjectUP.fname,self.userDataObjectUP.lname];
 
@@ -63,6 +116,15 @@
     }
     
 }
+-(void)displayAlertView:(NSString *)message
+
+{
+    UIAlertController *alertCont =[UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alertCont addAction:okAction];
+    [self presentViewController:alertCont animated:YES completion:nil];
+}
+
 /*
 #pragma mark - Navigation
 

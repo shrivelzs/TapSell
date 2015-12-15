@@ -25,6 +25,7 @@
 		E2C9652D1C162B0000F23209 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C9652C1C162B0000F23209 /* MapViewController.m */; };
 		E2C965331C166DDA00F23209 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C965321C166DDA00F23209 /* RegisterViewController.m */; };
 		E2C965741C17344C00F23209 /* Logo1.png in Resources */ = {isa = PBXBuildFile; fileRef = E2C965731C17344C00F23209 /* Logo1.png */; };
+		E2E420801C2079910017B416 /* PostDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E4207F1C2079910017B416 /* PostDetailsViewController.m */; };
 		E2E8D5951C1FA41200CD2ED2 /* PostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E8D5941C1FA41200CD2ED2 /* PostListViewController.m */; };
 		E2E8D59E1C1FAB6600CD2ED2 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E8D59D1C1FAB6600CD2ED2 /* CustomCell.m */; };
 		E2E8D5A11C1FB4AA00CD2ED2 /* PostListData.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E8D5A01C1FB4AA00CD2ED2 /* PostListData.m */; };
@@ -85,6 +86,8 @@
 		E2C965311C166DDA00F23209 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		E2C965321C166DDA00F23209 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		E2C965731C17344C00F23209 /* Logo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo1.png; sourceTree = "<group>"; };
+		E2E4207E1C2079910017B416 /* PostDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDetailsViewController.h; sourceTree = "<group>"; };
+		E2E4207F1C2079910017B416 /* PostDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostDetailsViewController.m; sourceTree = "<group>"; };
 		E2E8D5931C1FA41200CD2ED2 /* PostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostListViewController.h; sourceTree = "<group>"; };
 		E2E8D5941C1FA41200CD2ED2 /* PostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostListViewController.m; sourceTree = "<group>"; };
 		E2E8D59C1C1FAB6600CD2ED2 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
@@ -242,6 +245,8 @@
 				E2E8D5941C1FA41200CD2ED2 /* PostListViewController.m */,
 				E23621031C1F9F2F001DDCD0 /* PostViewController.h */,
 				E23621041C1F9F2F001DDCD0 /* PostViewController.m */,
+				E2E4207E1C2079910017B416 /* PostDetailsViewController.h */,
+				E2E4207F1C2079910017B416 /* PostDetailsViewController.m */,
 			);
 			name = Post;
 			sourceTree = "<group>";
@@ -445,6 +450,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB40AF241C17779E00927359 /* MapShowViewController.m in Sources */,
+				E2E420801C2079910017B416 /* PostDetailsViewController.m in Sources */,
 				E2C965331C166DDA00F23209 /* RegisterViewController.m in Sources */,
 				A2CDF2D21C161CD200DABB2F /* ViewController.m in Sources */,
 				A2CDF2CF1C161CD200DABB2F /* AppDelegate.m in Sources */,
