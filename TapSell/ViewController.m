@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "UserData.h"
 #import "UserProfileViewController.h"
+#import "PostListViewController.h"
 @interface ViewController ()<UITextFieldDelegate>
 @property (nonatomic,strong) NSMutableArray* array_userData;
 
@@ -91,24 +92,17 @@
                 NSLog(@"ObjectID is %@", objectID);
             }
             if (![objects count]==0) {
-                dispatch_async(dispatch_get_main_queue(),^{
-                    [self performSegueWithIdentifier:@"afterlogin" sender:self];
-                });
+                                   [self performSegueWithIdentifier:@"afterlogin" sender:self];
                 NSLog(@"Successfully retrieved: %@", objects);
                 NSLog(@"%@",_userDataObjectVC.fname);
-
             }
             else
             {
                 [self displayAlertView:@"Please enter valid emailID and password"];
             }
-            
-            
-
         }
         else
         {
-            
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
             NSLog(@"Error: %@", errorString);
             [self displayAlertView:errorString];
@@ -118,7 +112,7 @@
 }
 - (IBAction)rememberMeActionSwitch:(id)sender
 {
-    /*
+    
     UISwitch * s = [[UISwitch alloc]init];
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
     
@@ -130,17 +124,16 @@
         NSString * password = self.txtLoginPassword.text;
         [defaults setObject:password forKey:@"password"];
         [defaults synchronize];
-        
-        NSLog(@"Remember me success");
+        NSLog(@"Remember me on");
     }
     else
     {
         [defaults removeObjectForKey:@"username"];
         [defaults removeObjectForKey:@"password"];
+        NSLog(@"Remember me on");
+
 
     }
-     */
-    
 }
 
 
@@ -151,8 +144,14 @@
         UITabBarController * tabbar = segue.destinationViewController;
         
         // passing data to userprofile tabbar
-        UINavigationController * navController = (UINavigationController *)[[tabbar viewControllers]objectAtIndex:3];
-        UserProfileViewController * user = (UserProfileViewController *)[[navController viewControllers]objectAtIndex:0];
+        UINavigationController * navControllerPL = (UINavigationController *)[[tabbar viewControllers]objectAtIndex:1];
+         PostListViewController * postList = (PostListViewController *)[[navControllerPL viewControllers]objectAtIndex:0];
+        postList.userDataObjPL = self.userDataObjectVC;
+
+        
+        // passing data to userprofile tabbar
+        UINavigationController * navControllerUP = (UINavigationController *)[[tabbar viewControllers]objectAtIndex:3];
+        UserProfileViewController * user = (UserProfileViewController *)[[navControllerUP viewControllers]objectAtIndex:0];
         user.userDataObjectUP = self.userDataObjectVC;
         NSLog(@"%@  %@",user.userDataObjectUP.fname, self.userDataObjectVC.fname);
     }

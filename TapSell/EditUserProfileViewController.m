@@ -46,18 +46,18 @@
     self.txtEditCity.text = self.userDataObjEUP.city;
     self.txtEdtiState.text = self.userDataObjEUP.state;
     self.txtEditZipcode.text = self.userDataObjEUP.zipcode;
-     self.txtEditPhone.text = self.userDataObjEUP.phone;
+    self.txtEditPhone.text = self.userDataObjEUP.phone;
     self.objectID = self.userDataObjEUP.objectID;
     NSLog(@"%@",self.userDataObjEUP.objectID);
-    
 }
 - (IBAction)btnSave:(id)sender {
     
     PFObject *point = [PFObject objectWithoutDataWithClassName:@"User" objectId:self.objectID];
-    NSData *imageData = UIImagePNGRepresentation(self.editUserProfileImageView.image);
-    PFFile *file = [PFFile fileWithData:imageData];
+   // NSData *imageData = UIImagePNGRepresentation(self.editUserProfileImageView.image);
+    //PFFile *file = [PFFile fileWithData:imageData];
+    
     // Set a new value on quantity
-    [point setObject:file forKey:@"UserProfileImage"];
+    //[point setObject:file forKey:@"UserProfileImage"];
     [point setObject:self.txtEditFname.text forKey:@"UserFirstName"];
     [point setObject: self.txtEditLname.text forKey:@"UserLastName"];
     [point setObject:self.txtEdtiAddress.text forKey:@"Address"];
@@ -66,20 +66,15 @@
     [point setObject: self.txtEdtiState.text forKey:@"State"];
     [point setObject: self.txtEditZipcode.text forKey:@"Zipcode"];
     [point setObject: self.txtEditPhone.text forKey:@"Phone"];
-    
     [point saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (!error) {
             UIAlertController *alertCont =[UIAlertController alertControllerWithTitle:@"Completed!!" message:@"User profile has been updated" preferredStyle:UIAlertControllerStyleAlert];
-            
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-            
             [alertCont addAction:okAction];
-            
             [self presentViewController:alertCont animated:YES completion:nil];
-            
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }
         else
-            
         {
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
             NSLog(@"Error: %@", errorString);
@@ -88,9 +83,6 @@
         }
     }];
 
-
-    
-      
 }
 
  -(void)imageViewDisplay
@@ -128,12 +120,9 @@
 {
     UIImage *chooseimage = info[UIImagePickerControllerEditedImage];
     self.editUserProfileImageView.image = chooseimage;
-    
     UIImageWriteToSavedPhotosAlbum(chooseimage, nil, nil, nil);
-    
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 #pragma mark Validation
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField
@@ -148,7 +137,6 @@
     }
     return YES;
 }
-
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
@@ -183,27 +171,10 @@
 -(void)displayAlertView:(NSString *)message
 
 {
-    
     UIAlertController *alertCont =[UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
-    
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-    
     [alertCont addAction:okAction];
-    
     [self presentViewController:alertCont animated:YES completion:nil];
-    
-    
-    
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
