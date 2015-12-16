@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblLocation;
 @property (weak, nonatomic) IBOutlet UILabel *lblPhone;
 @property (weak, nonatomic) IBOutlet UILabel *lblEmailID;
-@property(strong,nonatomic)UserData * userDataObjUP;
 @end
 
 @implementation UserProfileViewController
@@ -43,68 +42,12 @@
 
 }
 -(void)retrieveUserProfile
-{
-    
-    PFQuery * query =[PFQuery queryWithClassName:@"User"];
-    [query whereKey:@"EmailID" equalTo:self.userDataObjectUP.emailID];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error)
-        {
-            for (PFObject * object in objects)
-            {
-                // retreive data
-                NSString * objectID = [object objectId];
-                NSString * firstName = [object objectForKey:@"UserFirstName"];
-                NSString * lastname = [object objectForKey:@"UserLastName"];
-                NSString * emailID = [object objectForKey:@"EmailID"];
-                NSString * address = [object objectForKey:@"Address"];
-                NSString * aptNo = [object objectForKey:@"AptNo"];
-                NSString * city = [object objectForKey:@"City"];
-                NSString * state = [object objectForKey:@"State"];
-                NSString * zipcode = [object objectForKey:@"Zipcode"];
-                NSString * phone = [object objectForKey:@"Phone"];
-                PFFile *pictureFile = [object objectForKey:@"UserProfileImage"];
-                [pictureFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-                    if (!error){
-                        _userDataObjUP.userProfileImage = data;
-                    }}];
+{    [self.userProfileImageView setImage:[UIImage imageWithData:self.userDataObjectUP.userProfileImage]];
+    _lblName.text = [NSString stringWithFormat:@"%@  %@",self.userDataObjectUP.fname,self.userDataObjectUP.lname];
 
-                
-                
-                _userDataObjUP.objectID = objectID;
-                _userDataObjUP.fname = firstName;
-                _userDataObjUP.lname = lastname;
-                _userDataObjUP.emailID = emailID;
-                _userDataObjUP.address = address;
-                _userDataObjUP.aptNo = aptNo;
-                _userDataObjUP.city = city;
-                _userDataObjUP.state = state;
-                _userDataObjUP.zipcode =zipcode;
-                _userDataObjUP.phone = phone;
-            }
-            if (![objects count]==0) {
-                [self performSegueWithIdentifier:@"afterlogin" sender:self];
-                NSLog(@"Successfully retrieved: %@", objects);
-                           }
-            else
-            {
-                [self displayAlertView:@"Data not found"];
-            }
-        }
-        else
-        {
-            NSString *errorString = [[error userInfo] objectForKey:@"error"];
-            NSLog(@"Error: %@", errorString);
-            [self displayAlertView:errorString];
-        }
-    }];
-
-    [self.userProfileImageView setImage:[UIImage imageWithData:self.userDataObjUP.userProfileImage]];
-    _lblName.text = [NSString stringWithFormat:@"%@  %@",self.userDataObjUP.fname,self.userDataObjUP.lname];
-
-    _lblLocation.text = self.userDataObjUP.city;
-    _lblPhone.text=self.userDataObjUP.phone;
-    _lblEmailID.text = self.userDataObjUP.emailID;
+    _lblLocation.text = self.userDataObjectUP.city;
+    _lblPhone.text=self.userDataObjectUP.phone;
+    _lblEmailID.text = self.userDataObjectUP.emailID;
     
     
 }
@@ -113,7 +56,7 @@
     if ([segue.identifier isEqualToString:@"edit"])
     {
         EditUserProfileViewController * edit =  [segue destinationViewController];
-        edit.userDataObjEUP = self.userDataObjUP;
+        edit.userDataObjEUP = self.userDataObjectUP;
         
         NSLog(@"%@   %@", edit.userDataObjEUP.fname, self.userDataObjectUP.fname);
     }

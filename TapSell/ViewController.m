@@ -23,22 +23,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.txtLoginUserName becomeFirstResponder];
-        
-
-    
     _userDataObjectVC = [[UserData alloc]init];
-    // Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 - (IBAction)btnAction_Login:(id)sender {
  
-    if ([self.txtLoginPassword.text isEqualToString:@""]||[self.txtLoginUserName.text isEqualToString:@""])
-    {
-        [self displayAlertView:@"Please enter username and password"];
+    if ([_txtLoginUserName.text isEqualToString:@" "]||[_txtLoginPassword.text isEqualToString:@""]) {
+        
+        NSLog(@"Please enter username and password");
+        UIAlertController * alcont = [UIAlertController alertControllerWithTitle:@"Alert" message:@"Pelase enter username and password" preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction * ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+        [alcont addAction:ok];
+        [self presentViewController:alcont animated:YES completion:nil];
     }
     else
     {
@@ -55,77 +54,84 @@
     [query whereKey:@"EmailID" equalTo:username];
     [query whereKey:@"Password" equalTo:password];
     [query findObjectsInBackgroundWithBlock:^( NSArray * objects, NSError *error) {
-        if (objects)
+        if (!error)
         {
-          
+                NSLog(@"ObjectID is %lu", (unsigned long)objects.count);
+            if ([objects count]==0) {
+                NSLog(@"Enter Valied Email ID. Your Emailid is not registered. Please register");
+                UIAlertController * alcont = [UIAlertController alertControllerWithTitle:@"Alert" message:@"Enter Valied Email ID. Your Emailid is not registered. Please register" preferredStyle:UIAlertControllerStyleActionSheet];
+                UIAlertAction * ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+                [alcont addAction:ok];
+                [self presentViewController:alcont animated:YES completion:nil];
+                NSLog(@"NO object in array");
+                }
+            else
+                
+            {
                 for (PFObject * object in objects)
                 {
                 // retreive data
                 NSString * objectID = [object objectId];
-//                NSString * firstName = [object objectForKey:@"UserFirstName"];
-//                NSString * lastname = [object objectForKey:@"UserLastName"];
+                NSString * firstName = [object objectForKey:@"UserFirstName"];
+                NSString * lastname = [object objectForKey:@"UserLastName"];
                 NSString * emailID = [object objectForKey:@"EmailID"];
-//                NSString * address = [object objectForKey:@"Address"];
-//                NSString * aptNo = [object objectForKey:@"AptNo"];
-//                NSString * city = [object objectForKey:@"City"];
-//                NSString * state = [object objectForKey:@"State"];
-//                NSString * zipcode = [object objectForKey:@"Zipcode"];
-//                NSString * phone = [object objectForKey:@"Phone"];
+                NSString * address = [object objectForKey:@"Address"];
+                NSString * aptNo = [object objectForKey:@"AptNo"];
+                NSString * city = [object objectForKey:@"City"];
+                NSString * state = [object objectForKey:@"State"];
+                NSString * zipcode = [object objectForKey:@"Zipcode"];
+                NSString * phone = [object objectForKey:@"Phone"];
                 PFFile *pictureFile = [object objectForKey:@"UserProfileImage"];
                     [pictureFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                         if (!error){
                             _userDataObjectVC.userProfileImage = data;
                         }}];
                 _userDataObjectVC.objectID = objectID;
-//                _userDataObjectVC.fname = firstName;
-//                _userDataObjectVC.lname = lastname;
+                _userDataObjectVC.fname = firstName;
+                _userDataObjectVC.lname = lastname;
                 _userDataObjectVC.emailID = emailID;
-//                _userDataObjectVC.address = address;
-//                _userDataObjectVC.aptNo = aptNo;
-//                _userDataObjectVC.city = city;
-//                _userDataObjectVC.state = state;
-//                _userDataObjectVC.zipcode =zipcode;
-//                _userDataObjectVC.phone = phone;
+                _userDataObjectVC.address = address;
+                _userDataObjectVC.aptNo = aptNo;
+                _userDataObjectVC.city = city;
+                _userDataObjectVC.state = state;
+                _userDataObjectVC.zipcode =zipcode;
+                _userDataObjectVC.phone = phone;
                 
                 NSLog(@"%@", self.userDataObjectVC.userProfileImage);
                 NSLog(@"ObjectID is %@", objectID);
                 }
-                [self performSegueWithIdentifier:@"afterlogin" sender:self];
-                NSLog(@"Successfully retrieved: %@", objects);
-                NSLog(@"%@",_userDataObjectVC.fname);
-
-        }
+            [self performSegueWithIdentifier:@"afterlogin" sender:self];
+            }
+            
+            }
         else
         {
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
             NSLog(@"Error: %@", errorString);
-            [self displayAlertView:errorString];
         }
     }];
-    
+
 }
 - (IBAction)rememberMeActionSwitch:(id)sender
 {
-    
-    UISwitch * s = [[UISwitch alloc]init];
-    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    
-    if ( s.on == YES )
-    {
-        NSString * username = self.txtLoginUserName.text;
-        [defaults setObject:username forKey:@"username"];
-        
-        NSString * password = self.txtLoginPassword.text;
-        [defaults setObject:password forKey:@"password"];
-        [defaults synchronize];
-        NSLog(@"Remember me on");
-    }
-    else
-    {
-        [defaults removeObjectForKey:@"username"];
-        [defaults removeObjectForKey:@"password"];
-        NSLog(@"Remember me on");
-    }
+//    
+//    UISwitch * s = [[UISwitch alloc]init];
+//    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+//
+//    if(s.on == YES)
+//    {
+//         NSString* username = _txtLoginUserName.text;
+//        [defaults setObject:username forKey:@"username"];
+//        
+//        NSString *password = _txtLoginPassword.text;
+//        [defaults setObject:password forKey:@"password"];
+//        [defaults synchronize];
+//    }
+//    else
+//    {   [defaults removeObjectForKey:@"username"];
+//        [defaults removeObjectForKey:@"password"];
+//        NSLog(@"Remember me off");
+//    }
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -153,19 +159,19 @@
     }
 }
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    [_txtLoginPassword resignFirstResponder];
+   [_txtLoginPassword resignFirstResponder];
     [_txtLoginUserName resignFirstResponder];
 }
 
-#pragma mark Custom Methods
-
--(void)displayAlertView:(NSString *)message
-{
-   UIAlertController *alertCont =[UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-    [alertCont addAction:okAction];
-    [self.navigationController presentViewController:alertCont animated:YES completion:nil];
-}
+//#pragma mark Custom Methods
+//
+//-(void)displayAlertView:(NSString *)message
+//{
+//   UIAlertController *alertCont =[UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+//    [alertCont addAction:okAction];
+//    [self.navigationController presentViewController:alertCont animated:YES completion:nil];
+//}
 
 @end
 
