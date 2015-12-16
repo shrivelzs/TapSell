@@ -11,9 +11,8 @@
 #import "UserData.h"
 #import "UserProfileViewController.h"
 #import "PostListViewController.h"
+#import "RegisterViewController.h"
 @interface ViewController ()<UITextFieldDelegate>
-@property (nonatomic,strong) NSMutableArray* array_userData;
-
 @property (weak, nonatomic) IBOutlet UITextField *txtLoginUserName;
 @property (weak, nonatomic) IBOutlet UITextField *txtLoginPassword;
 @property(nonatomic,strong)UserData * userDataObjectVC;
@@ -24,9 +23,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.txtLoginUserName becomeFirstResponder];
-    //_array_userData = [NSMutableArray new];
+        
+
+    
     _userDataObjectVC = [[UserData alloc]init];
-           // Do any additional setup after loading the view, typically from a nib.
+    // Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,17 +38,14 @@
  
     if ([self.txtLoginPassword.text isEqualToString:@""]||[self.txtLoginUserName.text isEqualToString:@""])
     {
+        
         [self displayAlertView:@"Please enter username and password"];
 
     }
     else
     {
         [self retrieveDataFromParse];
-
     }
-    
-   
- 
 }
 
 -(void)retrieveDataFromParse
@@ -92,7 +90,7 @@
                 NSLog(@"ObjectID is %@", objectID);
             }
             if (![objects count]==0) {
-                                   [self performSegueWithIdentifier:@"afterlogin" sender:self];
+                [self performSegueWithIdentifier:@"afterlogin" sender:self];
                 NSLog(@"Successfully retrieved: %@", objects);
                 NSLog(@"%@",_userDataObjectVC.fname);
             }
@@ -131,20 +129,18 @@
         [defaults removeObjectForKey:@"username"];
         [defaults removeObjectForKey:@"password"];
         NSLog(@"Remember me on");
-
-
     }
 }
 
-
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+   
     if ([[segue identifier] isEqualToString:@"afterlogin"])
     {
         UITabBarController * tabbar = segue.destinationViewController;
         
         // passing data to userprofile tabbar
-        UINavigationController * navControllerPL = (UINavigationController *)[[tabbar viewControllers]objectAtIndex:1];
+       UINavigationController * navControllerPL = (UINavigationController *)[[tabbar viewControllers]objectAtIndex:1];
          PostListViewController * postList = (PostListViewController *)[[navControllerPL viewControllers]objectAtIndex:0];
         postList.userDataObjPL = self.userDataObjectVC;
 
@@ -153,75 +149,32 @@
         UINavigationController * navControllerUP = (UINavigationController *)[[tabbar viewControllers]objectAtIndex:3];
         UserProfileViewController * user = (UserProfileViewController *)[[navControllerUP viewControllers]objectAtIndex:0];
         user.userDataObjectUP = self.userDataObjectVC;
-        NSLog(@"%@  %@",user.userDataObjectUP.fname, self.userDataObjectVC.fname);
+       NSLog(@"entered login screen");
+    }
+    else if([segue.identifier isEqualToString:@"register"]){
+        self.modalPresentationStyle = UIModalPresentationFullScreen;
+        self.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        NSLog(@"entered signup screen");
     }
 }
 
 
 #pragma mark UITextField Delegate Methods
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     return YES;
 }
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
-    if ([textField isEqual:self.txtLoginUserName]) {
-        BOOL status = [self validateEmailWithString:self.txtLoginUserName.text];
-        if (!status)
-        {
-            [self displayAlertView:@"Enter Valied Email-ID"];
-            return NO;
-        }
-    }
-       return YES;
-}
-
-
-
 #pragma mark Custom Methods
-
-- (BOOL)validateEmailWithString:(NSString*)email
-{
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    return [emailTest evaluateWithObject:email];
-}
 
 -(void)displayAlertView:(NSString *)message
 {
-    UIAlertController *alertCont =[UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
+   UIAlertController *alertCont =[UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
     [alertCont addAction:okAction];
-    [self presentViewController:alertCont animated:YES completion:nil];
-    
+    [self.navigationController presentViewController:alertCont animated:YES completion:nil];
 }
 
 @end
 
-
-
-// NSString * username = self.txtLoginUserName.text;
-// NSString * password = self.txtLoginPassword.text;
-
-/*
- [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *  user, NSError *  error)
- {
- if (user)
- {           NSLog(@"Successfully logged in");
- [self retrieveDataFromParse];
- 
- //[self performSegueWithIdentifier:@"Login" sender:self];
- 
- }
- else
- {
- [self displayAlertView:@"Please Enter Valid Username and Password"];
- self.txtLoginUserName.text = @"";
- self.txtLoginPassword.text =@"";
- NSLog(@"Cannot login");
- 
- }
- }];*/

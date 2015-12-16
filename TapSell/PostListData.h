@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface PostListData : NSObject
+@property(nonatomic,strong)NSString * postID;
 @property(nonatomic,strong)NSString * title;
 @property(nonatomic,strong)NSString * location;
 @property(nonatomic,strong)NSString * price;

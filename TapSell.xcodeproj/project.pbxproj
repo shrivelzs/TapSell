@@ -243,10 +243,10 @@
 			children = (
 				E2E8D5931C1FA41200CD2ED2 /* PostListViewController.h */,
 				E2E8D5941C1FA41200CD2ED2 /* PostListViewController.m */,
-				E23621031C1F9F2F001DDCD0 /* PostViewController.h */,
-				E23621041C1F9F2F001DDCD0 /* PostViewController.m */,
 				E2E4207E1C2079910017B416 /* PostDetailsViewController.h */,
 				E2E4207F1C2079910017B416 /* PostDetailsViewController.m */,
+				E23621031C1F9F2F001DDCD0 /* PostViewController.h */,
+				E23621041C1F9F2F001DDCD0 /* PostViewController.m */,
 			);
 			name = Post;
 			sourceTree = "<group>";

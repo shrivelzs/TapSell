@@ -20,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self ShowProductDetail];
     // Do any additional setup after loading the view.
 }
 
@@ -29,9 +30,9 @@
 }
 -(void)ShowProductDetail
 {
-    _lblProdPrice.text = self.postListDataObjPD.price;
+    _lblProdPrice.text = [NSString stringWithFormat:@"$  %@",self.postListDataObjPD.price];
     _lblProdTitle.text = self.postListDataObjPD.title;
-    _txtViewProdDes.text = self.postListDataObjPD.productDescription;
+    _txtViewProdDes.text = [NSString stringWithFormat:@"%@ ", self.postListDataObjPD.productDescription];
 }
 /*
 #pragma mark - Navigation

@@ -8,6 +8,7 @@
 
 #import "RegisterViewController.h"
 #import <Parse.h>
+#import "ViewController.h"
 @interface RegisterViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *txtFname;
 @property (weak, nonatomic) IBOutlet UITextField *txtLname;
@@ -28,13 +29,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
     [self.txtFname becomeFirstResponder];
-    self.btnRegister.enabled =FALSE;
+    self.btnRegister.enabled =false;
    
     // Do any additional setup after loading the view.
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -64,13 +63,12 @@
             UIAlertController *alcont =[UIAlertController alertControllerWithTitle:@"Congrats!" message:@"You are successfully registered" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
               {
-                                           // dismiss screen and go back to first screen
-                                           [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                  [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+
                }];
             
             [alcont addAction:okButton];
             [self presentViewController:alcont animated:YES completion:nil];
-     
             NSLog(@"Object Uploaded!");
             
         }
@@ -99,8 +97,6 @@
     [textField resignFirstResponder];
     return YES;
 }
-
-
 
 #pragma mark Validation
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField
@@ -184,7 +180,6 @@
 - (BOOL)validateEmailWithString:(NSString*)email
 
 {
-    
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
     
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
@@ -196,54 +191,18 @@
 -(void)displayAlertView:(NSString *)message
 
 {
-    
     UIAlertController *alertCont =[UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
     
     [alertCont addAction:okAction];
-    
     [self presentViewController:alertCont animated:YES completion:nil];
-    
-    
-    
+
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 @end
 
 
 
 
-
-
-
-/*
- // make user name and password
- PFUser * user = [PFUser user];
- user.username = self.txtEmailID.text;
- user.password = self.txtPassword.text;
- [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
- if (!error)
- {
- */
-
-
-/*  }
- else
- {
- //Something bad has occurred
- [self displayAlertView:@"Pleast try again"];
- NSLog(@"Cannot set username and password");
- }
- }];
- */
 

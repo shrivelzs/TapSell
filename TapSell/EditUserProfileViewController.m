@@ -29,6 +29,9 @@
     [super viewDidLoad];
     [self imageViewDisplay];
     [self retrieveUserDataFromUserProfile];
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+    
+
     // Do any additional setup after loading the view.
 }
 
@@ -117,7 +120,6 @@
     picker.delegate = self;
     picker.allowsEditing = self;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
     [self presentViewController:picker animated:YES completion:nil];
 
 }

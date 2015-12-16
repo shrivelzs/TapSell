@@ -45,13 +45,15 @@
             for (PFObject * object in objects)
             {
                 // retreive data
+                NSString * postID = [object objectId];
                 NSString * title = [object objectForKey:@"ProductTitle"];
                 NSString * location = [object objectForKey:@"Location"];
                 NSString * price = [object objectForKey:@"ProductPrice"];
-                NSString * productDescription = [object objectForKey:@"Address"];
+                NSString * productDescription = [object objectForKey:@"Discription"];
                 NSString * userID = [object objectForKey:@"UserID"];
                 
                 PostListData * postListData = [[PostListData alloc]init];
+                postListData.postID = postID;
                 postListData.title =title;
                 postListData.location = location;
                 postListData.price = price;
