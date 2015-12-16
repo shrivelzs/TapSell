@@ -77,8 +77,6 @@
             [self displayAlertView:errorString];
         }
     }];
-
-    
 }
 
 
@@ -86,7 +84,6 @@
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
-
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.array_PostList.count;
@@ -99,10 +96,8 @@
     cell.lblProductTitle.text =postLoistData.title;
     cell.lblProductLocation.text = postLoistData.location;
     cell.lblProductPrice.text = [NSString stringWithFormat:@"$ %@",postLoistData.price];
-    
     return cell;
 }
-
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {

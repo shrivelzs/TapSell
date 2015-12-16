@@ -10,13 +10,14 @@
 #import "EditUserProfileViewController.h"
 #import "UserData.h"
 #import <Parse.h>
+#import "ViewController.h"
 @interface UserProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
 @property (weak, nonatomic) IBOutlet UILabel *lblLocation;
 @property (weak, nonatomic) IBOutlet UILabel *lblPhone;
 @property (weak, nonatomic) IBOutlet UILabel *lblEmailID;
-
+@property(strong,nonatomic)UserData * userDataObjUP;
 @end
 
 @implementation UserProfileViewController
@@ -43,10 +44,9 @@
 }
 -(void)retrieveUserProfile
 {
-    /*
+    
     PFQuery * query =[PFQuery queryWithClassName:@"User"];
     [query whereKey:@"EmailID" equalTo:self.userDataObjectUP.emailID];
-    
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
         {
@@ -63,21 +63,24 @@
                 NSString * state = [object objectForKey:@"State"];
                 NSString * zipcode = [object objectForKey:@"Zipcode"];
                 NSString * phone = [object objectForKey:@"Phone"];
-                //UIImage * userprofile = [object objectForKey:@"UserProfileImage"];
+                PFFile *pictureFile = [object objectForKey:@"UserProfileImage"];
+                [pictureFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                    if (!error){
+                        _userDataObjUP.userProfileImage = data;
+                    }}];
+
                 
                 
-                _userDataObjectUP.objectID = objectID;
-                _userDataObjectUP.fname = firstName;
-                _userDataObjectUP.lname = lastname;
-                _userDataObjectUP.emailID = emailID;
-                _userDataObjectUP.address = address;
-                _userDataObjectUP.aptNo = aptNo;
-                _userDataObjectUP.city = city;
-                _userDataObjectUP.state = state;
-                _userDataObjectUP.zipcode =zipcode;
-                _userDataObjectUP.phone = phone;
-                //_userDataObjectUP.userProfileImage = userprofile;
-                
+                _userDataObjUP.objectID = objectID;
+                _userDataObjUP.fname = firstName;
+                _userDataObjUP.lname = lastname;
+                _userDataObjUP.emailID = emailID;
+                _userDataObjUP.address = address;
+                _userDataObjUP.aptNo = aptNo;
+                _userDataObjUP.city = city;
+                _userDataObjUP.state = state;
+                _userDataObjUP.zipcode =zipcode;
+                _userDataObjUP.phone = phone;
             }
             if (![objects count]==0) {
                 [self performSegueWithIdentifier:@"afterlogin" sender:self];
@@ -94,14 +97,14 @@
             NSLog(@"Error: %@", errorString);
             [self displayAlertView:errorString];
         }
-    }];*/
+    }];
 
-   // _userProfileImageView.image = self.userDataObjectUP.userProfileImage;
-    _lblName.text = [NSString stringWithFormat:@"%@  %@",self.userDataObjectUP.fname,self.userDataObjectUP.lname];
+    [self.userProfileImageView setImage:[UIImage imageWithData:self.userDataObjUP.userProfileImage]];
+    _lblName.text = [NSString stringWithFormat:@"%@  %@",self.userDataObjUP.fname,self.userDataObjUP.lname];
 
-    _lblLocation.text = self.userDataObjectUP.city;
-    _lblPhone.text=self.userDataObjectUP.phone;
-    _lblEmailID.text = self.userDataObjectUP.emailID;
+    _lblLocation.text = self.userDataObjUP.city;
+    _lblPhone.text=self.userDataObjUP.phone;
+    _lblEmailID.text = self.userDataObjUP.emailID;
     
     
 }
@@ -110,7 +113,7 @@
     if ([segue.identifier isEqualToString:@"edit"])
     {
         EditUserProfileViewController * edit =  [segue destinationViewController];
-        edit.userDataObjEUP = self.userDataObjectUP;
+        edit.userDataObjEUP = self.userDataObjUP;
         
         NSLog(@"%@   %@", edit.userDataObjEUP.fname, self.userDataObjectUP.fname);
     }
@@ -122,7 +125,7 @@
     UIAlertController *alertCont =[UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
     [alertCont addAction:okAction];
-    [self presentViewController:alertCont animated:YES completion:nil];
+    [self.navigationController presentViewController:alertCont animated:YES completion:nil];
 }
 
 /*

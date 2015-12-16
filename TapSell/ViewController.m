@@ -12,7 +12,7 @@
 #import "UserProfileViewController.h"
 #import "PostListViewController.h"
 #import "RegisterViewController.h"
-@interface ViewController ()<UITextFieldDelegate>
+@interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *txtLoginUserName;
 @property (weak, nonatomic) IBOutlet UITextField *txtLoginPassword;
 @property(nonatomic,strong)UserData * userDataObjectVC;
@@ -38,9 +38,7 @@
  
     if ([self.txtLoginPassword.text isEqualToString:@""]||[self.txtLoginUserName.text isEqualToString:@""])
     {
-        
         [self displayAlertView:@"Please enter username and password"];
-
     }
     else
     {
@@ -56,48 +54,46 @@
     PFQuery * query =[PFQuery queryWithClassName:@"User"];
     [query whereKey:@"EmailID" equalTo:username];
     [query whereKey:@"Password" equalTo:password];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error)
+    [query findObjectsInBackgroundWithBlock:^( NSArray * objects, NSError *error) {
+        if (objects)
         {
-            for (PFObject * object in objects)
-            {
+          
+                for (PFObject * object in objects)
+                {
                 // retreive data
                 NSString * objectID = [object objectId];
-                NSString * firstName = [object objectForKey:@"UserFirstName"];
-                NSString * lastname = [object objectForKey:@"UserLastName"];
+//                NSString * firstName = [object objectForKey:@"UserFirstName"];
+//                NSString * lastname = [object objectForKey:@"UserLastName"];
                 NSString * emailID = [object objectForKey:@"EmailID"];
-                NSString * address = [object objectForKey:@"Address"];
-                NSString * aptNo = [object objectForKey:@"AptNo"];
-                NSString * city = [object objectForKey:@"City"];
-                NSString * state = [object objectForKey:@"State"];
-                NSString * zipcode = [object objectForKey:@"Zipcode"];
-                NSString * phone = [object objectForKey:@"Phone"];
-                //UIImage * userprofile = [object objectForKey:@"UserProfileImage"];
-               
+//                NSString * address = [object objectForKey:@"Address"];
+//                NSString * aptNo = [object objectForKey:@"AptNo"];
+//                NSString * city = [object objectForKey:@"City"];
+//                NSString * state = [object objectForKey:@"State"];
+//                NSString * zipcode = [object objectForKey:@"Zipcode"];
+//                NSString * phone = [object objectForKey:@"Phone"];
+                PFFile *pictureFile = [object objectForKey:@"UserProfileImage"];
+                    [pictureFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                        if (!error){
+                            _userDataObjectVC.userProfileImage = data;
+                        }}];
                 _userDataObjectVC.objectID = objectID;
-                _userDataObjectVC.fname = firstName;
-                _userDataObjectVC.lname = lastname;
+//                _userDataObjectVC.fname = firstName;
+//                _userDataObjectVC.lname = lastname;
                 _userDataObjectVC.emailID = emailID;
-                _userDataObjectVC.address = address;
-                _userDataObjectVC.aptNo = aptNo;
-                _userDataObjectVC.city = city;
-                _userDataObjectVC.state = state;
-                _userDataObjectVC.zipcode =zipcode;
-                _userDataObjectVC.phone = phone;
-                //_userDataObjectVC.userProfileImage = userprofile;
+//                _userDataObjectVC.address = address;
+//                _userDataObjectVC.aptNo = aptNo;
+//                _userDataObjectVC.city = city;
+//                _userDataObjectVC.state = state;
+//                _userDataObjectVC.zipcode =zipcode;
+//                _userDataObjectVC.phone = phone;
                 
+                NSLog(@"%@", self.userDataObjectVC.userProfileImage);
                 NSLog(@"ObjectID is %@", objectID);
-            }
-            if (![objects count]==0) {
+                }
                 [self performSegueWithIdentifier:@"afterlogin" sender:self];
                 NSLog(@"Successfully retrieved: %@", objects);
                 NSLog(@"%@",_userDataObjectVC.fname);
-            }
-            else
-            {
-                [self displayAlertView:@"Please enter valid emailID and password"];
-            }
+
         }
         else
         {
@@ -131,7 +127,6 @@
         NSLog(@"Remember me on");
     }
 }
-
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
    
@@ -157,15 +152,11 @@
         NSLog(@"entered signup screen");
     }
 }
-
-
-#pragma mark UITextField Delegate Methods
-
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [_txtLoginPassword resignFirstResponder];
+    [_txtLoginUserName resignFirstResponder];
 }
+
 #pragma mark Custom Methods
 
 -(void)displayAlertView:(NSString *)message

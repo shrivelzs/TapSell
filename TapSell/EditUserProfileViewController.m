@@ -41,7 +41,7 @@
 }
 -(void)retrieveUserDataFromUserProfile
 {
-    //self.editUserProfileImageView.image = self.userDataObjEUP.userProfileImage;
+    [self.editUserProfileImageView setImage:[UIImage imageWithData:self.userDataObjEUP.userProfileImage]];
     self.txtEditFname.text = self.userDataObjEUP.fname;
     self.txtEditLname.text = self.userDataObjEUP.lname;
     self.txtEdtiAddress.text = self.userDataObjEUP.address;
@@ -56,7 +56,7 @@
 - (IBAction)btnSave:(id)sender {
     
     PFObject *point = [PFObject objectWithoutDataWithClassName:@"User" objectId:self.objectID];
-   // NSData *imageData = UIImagePNGRepresentation(self.editUserProfileImageView.image);
+    //NSData *imageData = UIImagePNGRepresentation(self.editUserProfileImageView.image);
     //PFFile *file = [PFFile fileWithData:imageData];
     
     // Set a new value on quantity
@@ -131,49 +131,61 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark Validation
--(BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
-       // check phone number 10 digits
-    if ([textField isEqual:self.txtEditPhone])
-    {
-        if (self.txtEditPhone.text.length<10) {
-            [self displayAlertView:@"Enter 10 digit phone number"];
-            return NO;
-        }
-    }
-    return YES;
+//dismiss keyboard
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [_txtEditCity resignFirstResponder];
+    [_txtEditFname resignFirstResponder];
+    [_txtEditLname resignFirstResponder];
+    [_txtEditPhone resignFirstResponder];
+    [_txtEditZipcode resignFirstResponder];
+    [_txtEdtiAddress resignFirstResponder];
+    [_txtEdtiApt resignFirstResponder];
+    [_txtEdtiState resignFirstResponder];
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    if ([textField isEqual:self.txtEditPhone])
-    {
-        // Prevent crashing undo bug – see note below.
-        if(range.length + range.location > textField.text.length)
-        {
-            return NO;
-        }
-        
-        NSUInteger newLength = [textField.text length] + [string length] - range.length;
-        return newLength <= 10;
-    }
-    
-    // no more five digits for zipcode
-    if ([textField isEqual:self.txtEditZipcode])
-    {
-        NSUInteger newLength = [textField.text length] + [string length] - range.length;
-        return newLength <= 5;
-    }
-    
-    if ([textField isEqual:self.txtEdtiState])
-    {
-        NSUInteger newLength = [textField.text length] + [string length] - range.length;
-        
-        return newLength <= 2;
-    }
-    return YES;
-}
+//#pragma mark Validation
+//-(BOOL)textFieldShouldEndEditing:(UITextField *)textField
+//{
+//       // check phone number 10 digits
+//    if ([textField isEqual:self.txtEditPhone])
+//    {
+//        if (self.txtEditPhone.text.length<10) {
+//            [self displayAlertView:@"Enter 10 digit phone number"];
+//            return NO;
+//        }
+//    }
+//    return YES;
+//}
+//
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+//{
+//    if ([textField isEqual:self.txtEditPhone])
+//    {
+//        // Prevent crashing undo bug – see note below.
+//        if(range.length + range.location > textField.text.length)
+//        {
+//            return NO;
+//        }
+//        
+//        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+//        return newLength <= 10;
+//    }
+//    
+//    // no more five digits for zipcode
+//    if ([textField isEqual:self.txtEditZipcode])
+//    {
+//        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+//        return newLength <= 5;
+//    }
+//    
+//    if ([textField isEqual:self.txtEdtiState])
+//    {
+//        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+//        
+//        return newLength <= 2;
+//    }
+//    return YES;
+//}
 
 -(void)displayAlertView:(NSString *)message
 

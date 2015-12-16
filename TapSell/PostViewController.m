@@ -82,9 +82,7 @@
     picker.allowsEditing = self;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     picker.modalPresentationStyle = UIModalPresentationCurrentContext;
-    
     [self presentViewController:picker animated:YES completion:nil];
-    
 }
 - (IBAction)btnAction_TakePhoto:(id)sender {
     
@@ -92,7 +90,6 @@
     picker.delegate = self;
     picker.allowsEditing = self;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
     [self presentViewController:picker animated:YES completion:nil];
     
 }
@@ -102,16 +99,15 @@
     self.postImageView.image = chooseimage;
     UIImageWriteToSavedPhotosAlbum(chooseimage, nil, nil, nil);
     [picker dismissViewControllerAnimated:YES completion:nil];
+
 }
-
-
 #pragma mark UITextField Delegate Methods
 
 //dismiss keyboard
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [_txtDiscription resignFirstResponder];
+    [_txtPrice resignFirstResponder];
+    [_txtTitle resignFirstResponder];
 }
 
 
@@ -137,8 +133,6 @@
         }
         
     }
-
-    
     
     if ([textField isEqual:self.txtDiscription])
     {

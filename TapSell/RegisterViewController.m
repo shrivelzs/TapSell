@@ -68,7 +68,7 @@
                }];
             
             [alcont addAction:okButton];
-            [self presentViewController:alcont animated:YES completion:nil];
+            [self.navigationController presentViewController:alcont animated:YES completion:nil];
             NSLog(@"Object Uploaded!");
             
         }
@@ -84,18 +84,22 @@
    
 }
 - (IBAction)btnAction_Cancel:(id)sender {
-    
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    
-
 }
 #pragma mark UITextField Delegate Methods
 
 //dismiss keyboard
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [_txtFname resignFirstResponder];
+    [_txtLname resignFirstResponder];
+    [_txtEmailID resignFirstResponder];
+    [_txtAddress resignFirstResponder];
+    [_txtApt resignFirstResponder];
+    [_txtCity resignFirstResponder];
+    [_txtState resignFirstResponder];
+    [_txtZipcode resignFirstResponder];
+    [_txtPhone resignFirstResponder];
+    [_txtPassword resignFirstResponder];
 }
 
 #pragma mark Validation
