@@ -28,39 +28,112 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self imageViewDisplay];
-    [self retrieveUserDataFromUserProfile];
-    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
-    
-
-    // Do any additional setup after loading the view.
+    [self reloadUserProfile];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)retrieveUserDataFromUserProfile
+-(void)reloadUserProfile
 {
-    [self.editUserProfileImageView setImage:[UIImage imageWithData:self.userDataObjEUP.userProfileImage]];
-    self.txtEditFname.text = self.userDataObjEUP.fname;
-    self.txtEditLname.text = self.userDataObjEUP.lname;
-    self.txtEdtiAddress.text = self.userDataObjEUP.address;
-    self.txtEdtiApt.text = self.userDataObjEUP.aptNo;
-    self.txtEditCity.text = self.userDataObjEUP.city;
-    self.txtEdtiState.text = self.userDataObjEUP.state;
-    self.txtEditZipcode.text = self.userDataObjEUP.zipcode;
-    self.txtEditPhone.text = self.userDataObjEUP.phone;
-    self.objectID = self.userDataObjEUP.objectID;
-    NSLog(@"%@",self.userDataObjEUP.objectID);
+    NSString*username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString*password = [[NSUserDefaults standardUserDefaults]objectForKey:@"password"];
+    NSLog(@"Username is %@", username);
+    NSLog(@"Password is %@", password);
+    PFQuery * query = [PFQuery queryWithClassName:@"User"];
+    [query whereKey:@"EmailID" equalTo:username];
+    [query whereKey:@"Password" equalTo:password];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *  objects, NSError *  error) {
+        if (!error) {
+            for (PFObject * object in objects)
+            {
+                // retreive data
+                // NSString * objectID = [object objectId];
+                NSString * firstName = [object objectForKey:@"UserFirstName"];
+                NSString * lastname = [object objectForKey:@"UserLastName"];
+                NSString * address = [object objectForKey:@"Address"];
+                NSString * aptNo = [object objectForKey:@"AptNo"];
+                NSString * city = [object objectForKey:@"City"];
+                NSString * state = [object objectForKey:@"State"];
+                NSString * zipcode = [object objectForKey:@"Zipcode"];
+                NSString * phone = [object objectForKey:@"Phone"];
+                PFFile *pictureFile = [object objectForKey:@"UserProfileImage"];
+                [pictureFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                    if (!error){
+                        [self.editUserProfileImageView setImage:[UIImage imageWithData:data]];
+                        }}];
+                
+                self.txtEditFname.text = firstName;
+                self.txtEditLname.text = lastname;
+                self.txtEdtiAddress.text = address;
+                self.txtEdtiApt.text = aptNo;
+                self.txtEditCity.text = city;
+                self.txtEdtiState.text = state;
+                self.txtEditZipcode.text = zipcode;
+                self.txtEditPhone.text = phone;
+            }
+        }
+        else
+            NSLog(@"Canno load data");
+    }];
 }
 - (IBAction)btnSave:(id)sender {
-    
-    PFObject *point = [PFObject objectWithoutDataWithClassName:@"User" objectId:self.objectID];
-    //NSData *imageData = UIImagePNGRepresentation(self.editUserProfileImageView.image);
-    //PFFile *file = [PFFile fileWithData:imageData];
+    if (_editUserProfileImageView.image == nil) {
+        [self displayAlert:@"Please upload image"];
+           }
+    else if ([_txtEditCity.text isEqualToString:@" "])
+    {
+         [self displayAlert:@"Please enter city"];
+    }
+    else if ([_txtEditFname.text isEqualToString:@" "])
+    {
+        [self displayAlert:@"Please enter first name"];
+    }
+
+    else if ([_txtEditLname.text isEqualToString:@" "])
+    {
+        [self displayAlert:@"Please enter last name"];
+    }
+
+    else if ([_txtEditPhone.text isEqualToString:@" "])
+    {
+        [self displayAlert:@"Please enter phone number"];
+    }
+
+    else if ([_txtEditZipcode.text isEqualToString:@" "])
+    {
+        [self displayAlert:@"Please enter zipcode"];
+    }
+
+    else if ([_txtEdtiAddress.text isEqualToString:@" "])
+    {
+        [self displayAlert:@"Please enter address"];
+    }
+
+    else if ([_txtEdtiApt.text isEqualToString:@" "])
+    {
+        [self displayAlert:@"Please enter aprtment number"];
+    }
+    else if ([_txtEdtiState.text isEqualToString:@" "])
+    {
+        [self displayAlert:@"Please enter state"];
+    }
+    else
+    {
+        [self saveData];
+    }
+}
+
+-(void)saveData
+{
+    NSString * objectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"objectID"];
+    PFObject *point = [PFObject objectWithoutDataWithClassName:@"User" objectId:objectID];
+    NSData *imageData = UIImagePNGRepresentation(self.editUserProfileImageView.image);
+    PFFile *file = [PFFile fileWithData:imageData];
     
     // Set a new value on quantity
-    //[point setObject:file forKey:@"UserProfileImage"];
+    [point setObject:file forKey:@"UserProfileImage"];
     [point setObject:self.txtEditFname.text forKey:@"UserFirstName"];
     [point setObject: self.txtEditLname.text forKey:@"UserLastName"];
     [point setObject:self.txtEdtiAddress.text forKey:@"Address"];
@@ -80,14 +153,13 @@
             
             [alcont addAction:okButton];
             [self presentViewController:alcont animated:YES completion:nil];
-
+            
         }
         else
         {
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
             NSLog(@"Error: %@", errorString);
             NSLog(@"Cannot update data");
-            [self displayAlertView:errorString];
         }
     }];
 
@@ -100,7 +172,6 @@
     self.editUserProfileImageView.layer.masksToBounds =YES;
     self.editUserProfileImageView.layer.borderWidth = 8.0f;
     self.editUserProfileImageView.layer.borderColor = [UIColor colorWithRed:0.168f green:0.200f blue: 0.219f alpha:0.3f].CGColor;
-    
 }
 
 #pragma mark UserProfilePhoto
@@ -121,7 +192,6 @@
     picker.allowsEditing = self;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     [self presentViewController:picker animated:YES completion:nil];
-
 }
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
@@ -143,57 +213,43 @@
     [_txtEdtiState resignFirstResponder];
 }
 
-//#pragma mark Validation
-//-(BOOL)textFieldShouldEndEditing:(UITextField *)textField
-//{
-//       // check phone number 10 digits
-//    if ([textField isEqual:self.txtEditPhone])
-//    {
-//        if (self.txtEditPhone.text.length<10) {
-//            [self displayAlertView:@"Enter 10 digit phone number"];
-//            return NO;
-//        }
-//    }
-//    return YES;
-//}
-//
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-//{
-//    if ([textField isEqual:self.txtEditPhone])
-//    {
-//        // Prevent crashing undo bug – see note below.
-//        if(range.length + range.location > textField.text.length)
-//        {
-//            return NO;
-//        }
-//        
-//        NSUInteger newLength = [textField.text length] + [string length] - range.length;
-//        return newLength <= 10;
-//    }
-//    
-//    // no more five digits for zipcode
-//    if ([textField isEqual:self.txtEditZipcode])
-//    {
-//        NSUInteger newLength = [textField.text length] + [string length] - range.length;
-//        return newLength <= 5;
-//    }
-//    
-//    if ([textField isEqual:self.txtEdtiState])
-//    {
-//        NSUInteger newLength = [textField.text length] + [string length] - range.length;
-//        
-//        return newLength <= 2;
-//    }
-//    return YES;
-//}
-
--(void)displayAlertView:(NSString *)message
-
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    UIAlertController *alertCont =[UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-    [alertCont addAction:okAction];
-    [self presentViewController:alertCont animated:YES completion:nil];
+    if ([textField isEqual:self.txtEditPhone])
+    {
+        // Prevent crashing undo bug – see note below.
+        if(range.length + range.location > textField.text.length)
+        {
+            return NO;
+        }
+        
+        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        return newLength <= 10;
+    }
+    
+    // no more five digits for zipcode
+    if ([textField isEqual:self.txtEditZipcode])
+    {
+        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        return newLength <= 5;
+    }
+    
+    if ([textField isEqual:self.txtEdtiState])
+    {
+        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        
+        return newLength <= 2;
+    }
+    return YES;
 }
 
+-(void)displayAlert:(NSString *)message
+{
+    UIAlertController * alcont = [UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+    
+    [alcont addAction:ok];
+    [self presentViewController:alcont animated:YES completion:nil];
+    
+}
 @end

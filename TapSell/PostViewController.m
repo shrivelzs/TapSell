@@ -22,30 +22,42 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.txtTitle becomeFirstResponder];
-
-    // Do any additional setup after loading the view.
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 - (IBAction)SavePost:(id)sender {
+    if ([_txtDiscription.text isEqualToString:@""]||[_txtPrice.text isEqualToString:@""]||[_txtTitle.text isEqualToString:@""]) {
+        UIAlertController * alcont = [UIAlertController alertControllerWithTitle:@"Alert" message:@"Please enter details" preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+        
+        [alcont addAction:ok];
+        [self presentViewController:alcont animated:YES completion:nil];
+    }
+    else if (_postImageView.image == nil) {
+        UIAlertController * alcont = [UIAlertController alertControllerWithTitle:@"Alert" message:@"Please upload image" preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+        
+        [alcont addAction:ok];
+        [self presentViewController:alcont animated:YES completion:nil];
+    }
+    else
+        [self saveData];
+}
+
+-(void)saveData
+{
     PFObject * addPost = [PFObject objectWithClassName:@"PostList"];
-    
     //add data to parse
-    // NSData *imageData = UIImagePNGRepresentation(self.editUserProfileImageView.image);
-    //PFFile *file = [PFFile fileWithData:imageData];
-    
+    NSData *imageData = UIImagePNGRepresentation(self.postImageView.image);
+    PFFile *file = [PFFile fileWithData:imageData];
     // Set a new value on quantity
-    //[point setObject:file forKey:@"ProductImage"];
+    [addPost setObject:file forKey:@"ProductImage"];
     [addPost setObject:self.txtTitle.text forKey:@"ProductTitle"];
     [addPost setObject:self.txtPrice.text forKey:@"ProductPrice"];
     [addPost setObject:self.txtDiscription.text forKey:@"Discription"];
     [addPost setObject:self.userDataObjAP.objectID forKey:@"UserID"];
     [addPost setObject:self.userDataObjAP.city forKey:@"Location"];
-   
-    
     // save data back to parse
     [addPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         
@@ -67,11 +79,18 @@
         }
         else
         {
-            [self displayAlertView:@"Pleast try again"];
-            NSString *errorString = [[error userInfo] objectForKey:@"error"];
-            NSLog(@"Error: %@", errorString);
+            UIAlertController *alcont =[UIAlertController alertControllerWithTitle:@"Alert!" message:@"Please try again" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                       {
+                                           [self.navigationController popToRootViewControllerAnimated:YES];
+                                           
+                                       }];
+            
+            [alcont addAction:okButton];
+            [self presentViewController:alcont animated:YES completion:nil];
         }
     }];
+
 }
 
 #pragma mark Camera
@@ -109,61 +128,5 @@
     [_txtPrice resignFirstResponder];
     [_txtTitle resignFirstResponder];
 }
-
-
-
-#pragma mark Validation
--(BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
-    
-    if ([textField isEqual:self.txtTitle])
-    {
-        if ([self.txtTitle.text isEqualToString:@" "]) {
-            [self displayAlertView:@"Please enter title"];
-            return NO;
-        }
-
-    }
-    
-    if ([textField isEqual:self.txtPrice])
-    {
-        if ([self.txtPrice.text isEqualToString:@" "]) {
-            [self displayAlertView:@"Please enter price"];
-            return NO;
-        }
-        
-    }
-    
-    if ([textField isEqual:self.txtDiscription])
-    {
-        if ([self.txtPrice.text isEqualToString:@" "]) {
-            [self displayAlertView:@"Please enter description"];
-            return NO;
-        }
-    }
-    
-    
-    return YES;
-}
-
--(void)displayAlertView:(NSString *)message
-{
-    UIAlertController *alertCont =[UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-    [alertCont addAction:okAction];
-    [self presentViewController:alertCont animated:YES completion:nil];
-    
-}
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

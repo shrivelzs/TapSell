@@ -7,7 +7,6 @@
 //
 
 #import "UserData.h"
-
 @implementation UserData
 
 @end

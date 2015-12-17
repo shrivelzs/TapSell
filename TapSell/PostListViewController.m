@@ -35,8 +35,9 @@
 
 -(void)loadData
 {
+    NSString * objectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"objectID"];
     PFQuery * query =[PFQuery queryWithClassName:@"PostList"];
-    [query whereKey:@"UserID" equalTo:self.userDataObjPL.objectID];
+    [query whereKey:@"UserID" equalTo:objectID];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
@@ -45,14 +46,19 @@
             for (PFObject * object in objects)
             {
                 // retreive data
+                PostListData * postListData = [[PostListData alloc]init];
                 NSString * postID = [object objectId];
                 NSString * title = [object objectForKey:@"ProductTitle"];
                 NSString * location = [object objectForKey:@"Location"];
                 NSString * price = [object objectForKey:@"ProductPrice"];
                 NSString * productDescription = [object objectForKey:@"Discription"];
                 NSString * userID = [object objectForKey:@"UserID"];
-                
-                PostListData * postListData = [[PostListData alloc]init];
+                PFFile *pictureFile = [object objectForKey:@"UserProfileImage"];
+                [pictureFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                    if (!error){
+                        postListData.productImage = data;
+                    }}];
+               
                 postListData.postID = postID;
                 postListData.title =title;
                 postListData.location = location;
@@ -61,15 +67,8 @@
                 postListData.userID = userID;
                 [self.array_PostList addObject:postListData];
             }
-            if (![objects count]==0) {
-            NSLog(@"Successfully retrieved: %@", objects);
-                [self.tableViewPostList reloadData];
-                          }
-            else
-            {
-                [self displayAlertView:@"Please enter valid emailID and password"];
+            [self.tableViewPostList reloadData];
             }
-        }
         else
         {
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
@@ -93,6 +92,7 @@
     CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"postListCell"];
     PostListData * postLoistData = [[PostListData alloc]init];
     postLoistData = [self.array_PostList objectAtIndex:indexPath.row];
+    [cell.imageViewProduct setImage:[UIImage imageWithData:self.postListDataPL.productImage]];
     cell.lblProductTitle.text =postLoistData.title;
     cell.lblProductLocation.text = postLoistData.location;
     cell.lblProductPrice.text = [NSString stringWithFormat:@"$ %@",postLoistData.price];

@@ -182,8 +182,7 @@
 				A2CDF2D11C161CD200DABB2F /* ViewController.m */,
 				E2E8D5981C1FA44100CD2ED2 /* Search */,
 				E2E8D5971C1FA42A00CD2ED2 /* Post */,
-				E2C9652B1C162B0000F23209 /* MapViewController.h */,
-				E2C9652C1C162B0000F23209 /* MapViewController.m */,
+				E2EA5DBE1C22007B00F9464E /* MAP */,
 				E228775F1C19D36E0079F729 /* UserProfile */,
 				A2CDF2D31C161CD200DABB2F /* Main.storyboard */,
 				A2CDF2D61C161CD200DABB2F /* Assets.xcassets */,
@@ -262,6 +261,15 @@
 				FB40AF201C17778A00927359 /* CategoryViewController.m */,
 			);
 			name = Search;
+			sourceTree = "<group>";
+		};
+		E2EA5DBE1C22007B00F9464E /* MAP */ = {
+			isa = PBXGroup;
+			children = (
+				E2C9652B1C162B0000F23209 /* MapViewController.h */,
+				E2C9652C1C162B0000F23209 /* MapViewController.m */,
+			);
+			name = MAP;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

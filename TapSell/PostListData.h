@@ -15,4 +15,5 @@
 @property(nonatomic,strong)NSString * price;
 @property(nonatomic,strong)NSString * productDescription;
 @property(nonatomic,strong)NSString * userID;
+@property(nonatomic,strong)NSData * productImage;
 @end

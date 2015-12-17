@@ -24,14 +24,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self imageViewDisplay];
-    [self retrieveUserProfile];
-    
-    // Do any additional setup after loading the view.
+    [self reloadUserProfile];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 -(void)imageViewDisplay
 {
@@ -39,29 +36,48 @@
     self.userProfileImageView.clipsToBounds = YES;
     self.userProfileImageView.layer.masksToBounds = self.userProfileImageView.layer.borderWidth = 8.0f;
     self.userProfileImageView.layer.borderColor = [UIColor colorWithRed:0.168f green:0.200f blue: 0.219f alpha:0.3f].CGColor;
-
 }
--(void)retrieveUserProfile
-{    [self.userProfileImageView setImage:[UIImage imageWithData:self.userDataObjectUP.userProfileImage]];
-    _lblName.text = [NSString stringWithFormat:@"%@  %@",self.userDataObjectUP.fname,self.userDataObjectUP.lname];
-
-    _lblLocation.text = self.userDataObjectUP.city;
-    _lblPhone.text=self.userDataObjectUP.phone;
-    _lblEmailID.text = self.userDataObjectUP.emailID;
-    
-    
-}
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+-(void)reloadUserProfile
 {
-    if ([segue.identifier isEqualToString:@"edit"])
-    {
-        EditUserProfileViewController * edit =  [segue destinationViewController];
-        edit.userDataObjEUP = self.userDataObjectUP;
-        
-        NSLog(@"%@   %@", edit.userDataObjEUP.fname, self.userDataObjectUP.fname);
-    }
-    
+    NSString*username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    NSString*password = [[NSUserDefaults standardUserDefaults]objectForKey:@"password"];
+    PFQuery * query = [PFQuery queryWithClassName:@"User"];
+    [query whereKey:@"EmailID" equalTo:username];
+    [query whereKey:@"Password" equalTo:password];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *  objects, NSError *  error) {
+        if (!error) {
+            self.userDataObjectUP = [[UserData alloc]init];
+            for (PFObject * object in objects)
+            {
+                // retreive data
+               // NSString * objectID = [object objectId];
+                NSString * firstName = [object objectForKey:@"UserFirstName"];
+                NSString * lastname = [object objectForKey:@"UserLastName"];
+                NSString * emailID = [object objectForKey:@"EmailID"];
+                //NSString * address = [object objectForKey:@"Address"];
+                //NSString * aptNo = [object objectForKey:@"AptNo"];
+                NSString * city = [object objectForKey:@"City"];
+                //NSString * state = [object objectForKey:@"State"];
+                //NSString * zipcode = [object objectForKey:@"Zipcode"];
+                NSString * phone = [object objectForKey:@"Phone"];
+                PFFile *pictureFile = [object objectForKey:@"UserProfileImage"];
+                [pictureFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                    if (!error){
+                        [self.userProfileImageView setImage:[UIImage imageWithData:data]];
+                        _userDataObjectUP.userProfileImage = data;
+                    }}];
+                
+                _lblName.text = [NSString stringWithFormat:@"%@  %@",firstName,lastname];
+                _lblLocation.text = city;
+                _lblPhone.text=phone;
+                _lblEmailID.text = emailID;
+            }
+        }
+        else
+            NSLog(@"Canno load data");
+    }];
 }
+
 -(void)displayAlertView:(NSString *)message
 
 {
@@ -70,15 +86,5 @@
     [alertCont addAction:okAction];
     [self.navigationController presentViewController:alertCont animated:YES completion:nil];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

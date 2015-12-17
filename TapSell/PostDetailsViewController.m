@@ -30,6 +30,8 @@
 }
 -(void)ShowProductDetail
 {
+    [self.imageViewProduct setImage:[UIImage imageWithData:self.postListDataObjPD.productImage]];
+
     _lblProdPrice.text = [NSString stringWithFormat:@"$  %@",self.postListDataObjPD.price];
     _lblProdTitle.text = self.postListDataObjPD.title;
     _txtViewProdDes.text = [NSString stringWithFormat:@"%@ ", self.postListDataObjPD.productDescription];
