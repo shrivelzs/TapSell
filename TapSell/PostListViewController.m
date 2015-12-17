@@ -22,7 +22,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadData];
-   
     // Do any additional setup after loading the view.
 }
 
@@ -30,8 +29,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 -(void)loadData
 {
@@ -53,12 +50,11 @@
                 NSString * price = [object objectForKey:@"ProductPrice"];
                 NSString * productDescription = [object objectForKey:@"Discription"];
                 NSString * userID = [object objectForKey:@"UserID"];
-                PFFile *pictureFile = [object objectForKey:@"UserProfileImage"];
+                PFFile *pictureFile = [object objectForKey:@"ProductImage"];
                 [pictureFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                     if (!error){
                         postListData.productImage = data;
                     }}];
-               
                 postListData.postID = postID;
                 postListData.title =title;
                 postListData.location = location;
@@ -67,17 +63,18 @@
                 postListData.userID = userID;
                 [self.array_PostList addObject:postListData];
             }
-            [self.tableViewPostList reloadData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableViewPostList reloadData];
+            });
+
             }
         else
         {
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
             NSLog(@"Error: %@", errorString);
-            [self displayAlertView:errorString];
         }
     }];
-}
-
+   }
 
 #pragma mark TableView Method
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -90,18 +87,29 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     // Dequeue the cell.
     CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"postListCell"];
-    PostListData * postLoistData = [[PostListData alloc]init];
-    postLoistData = [self.array_PostList objectAtIndex:indexPath.row];
-    [cell.imageViewProduct setImage:[UIImage imageWithData:self.postListDataPL.productImage]];
-    cell.lblProductTitle.text =postLoistData.title;
-    cell.lblProductLocation.text = postLoistData.location;
-    cell.lblProductPrice.text = [NSString stringWithFormat:@"$ %@",postLoistData.price];
+    PostListData * postListData = [[PostListData alloc]init];
+    postListData = [self.array_PostList objectAtIndex:indexPath.row];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [cell.imageViewProduct setImage:[UIImage imageWithData:postListData.productImage]];
+
+    });
+    cell.lblProductTitle.text =postListData.title;
+    cell.lblProductLocation.text = postListData.location;
+    cell.lblProductPrice.text = [NSString stringWithFormat:@"$ %@",postListData.price];
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //add code here for when you hit delete
+        PFObject * delete = [PFObject objectWithoutDataWithClassName:@"PostList" objectId:self.postListDataPL.postID];
+        [delete deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *  error) {
+            if (succeeded) {
+                NSLog(@"Delete completed");
+            }
+            else
+                 NSLog(@"Delete incompleted");
+        }];
     }
 }
 
@@ -131,16 +139,5 @@
         postDetail.postListDataObjPD = postdata;
     }
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

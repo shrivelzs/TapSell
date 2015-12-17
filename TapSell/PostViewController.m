@@ -98,16 +98,16 @@
 - (IBAction)btnAction_UploadProductImage:(id)sender{
     UIImagePickerController *picker =[[UIImagePickerController alloc]init];
     picker.delegate = self;
-    picker.allowsEditing = self;
+    picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     picker.modalPresentationStyle = UIModalPresentationCurrentContext;
-    [self presentViewController:picker animated:YES completion:nil];
+    [self.tabBarController presentViewController:picker animated:YES completion:nil];
 }
 - (IBAction)btnAction_TakePhoto:(id)sender {
     
     UIImagePickerController *picker =[[UIImagePickerController alloc]init];
     picker.delegate = self;
-    picker.allowsEditing = self;
+    picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     [self presentViewController:picker animated:YES completion:nil];
     

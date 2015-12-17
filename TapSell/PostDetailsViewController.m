@@ -31,19 +31,9 @@
 -(void)ShowProductDetail
 {
     [self.imageViewProduct setImage:[UIImage imageWithData:self.postListDataObjPD.productImage]];
-
     _lblProdPrice.text = [NSString stringWithFormat:@"$  %@",self.postListDataObjPD.price];
     _lblProdTitle.text = self.postListDataObjPD.title;
     _txtViewProdDes.text = [NSString stringWithFormat:@"%@ ", self.postListDataObjPD.productDescription];
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -119,14 +119,14 @@
    
     if ([[segue identifier] isEqualToString:@"afterlogin"])
     {
-//        UITabBarController * tabbar = segue.destinationViewController;
-//        
-//        // passing data to userprofile tabbar
-//       UINavigationController * navControllerPL = (UINavigationController *)[[tabbar viewControllers]objectAtIndex:1];
-//         PostListViewController * postList = (PostListViewController *)[[navControllerPL viewControllers]objectAtIndex:0];
-//        postList.userDataObjPL = self.userDataObjectVC;
-//
-//        
+        UITabBarController * tabbar = segue.destinationViewController;
+        
+        // passing data to PostList tabbar
+       UINavigationController * navControllerPL = (UINavigationController *)[[tabbar viewControllers]objectAtIndex:1];
+         PostListViewController * postList = (PostListViewController *)[[navControllerPL viewControllers]objectAtIndex:0];
+        postList.userDataObjPL = self.userDataObjectVC;
+
+        
 //        // passing data to userprofile tabbar
 //        UINavigationController * navControllerUP = (UINavigationController *)[[tabbar viewControllers]objectAtIndex:3];
 //        UserProfileViewController * user = (UserProfileViewController *)[[navControllerUP viewControllers]objectAtIndex:0];
