@@ -175,16 +175,15 @@
 }
 
 #pragma mark UserProfilePhoto
-- (IBAction)btnAction_UploadProfileImage:(id)sender{
-    UIImagePickerController *picker =[[UIImagePickerController alloc]init];
+- (IBAction)btnAction_UploadUserProfileImage:(id)sender {
+    UIImagePickerController * picker = [[UIImagePickerController alloc]init];
     picker.delegate = self;
     picker.allowsEditing = self;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     picker.modalPresentationStyle = UIModalPresentationCurrentContext;
-    
     [self presentViewController:picker animated:YES completion:nil];
-
 }
+
 - (IBAction)btnAction_TakePhoto:(id)sender {
     
     UIImagePickerController *picker =[[UIImagePickerController alloc]init];
@@ -201,7 +200,7 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-//dismiss keyboard
+#pragma mark Dismiss keyboard
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [_txtEditCity resignFirstResponder];
     [_txtEditFname resignFirstResponder];
@@ -213,6 +212,7 @@
     [_txtEdtiState resignFirstResponder];
 }
 
+#pragma mark TextField delegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     if ([textField isEqual:self.txtEditPhone])
