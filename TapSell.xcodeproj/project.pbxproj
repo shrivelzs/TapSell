@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0EEA9F31E6B589F606C6FC4D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA3CE671293737A6E6B367B /* libPods.a */; };
+		A288233D1C275465007C40F1 /* JPSThumbnailAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A28823381C275465007C40F1 /* JPSThumbnailAnnotation.m */; };
+		A288233E1C275465007C40F1 /* JPSThumbnailAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A288233A1C275465007C40F1 /* JPSThumbnailAnnotationView.m */; };
+		A288233F1C275465007C40F1 /* JPSThumnail.m in Sources */ = {isa = PBXBuildFile; fileRef = A288233C1C275465007C40F1 /* JPSThumnail.m */; };
 		A2CDF2CC1C161CD200DABB2F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CDF2CB1C161CD200DABB2F /* main.m */; };
 		A2CDF2CF1C161CD200DABB2F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CDF2CE1C161CD200DABB2F /* AppDelegate.m */; };
 		A2CDF2D21C161CD200DABB2F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CDF2D11C161CD200DABB2F /* ViewController.m */; };
@@ -54,6 +57,12 @@
 /* Begin PBXFileReference section */
 		5E846C619823B7D094066A61 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7EA3CE671293737A6E6B367B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A28823371C275465007C40F1 /* JPSThumbnailAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPSThumbnailAnnotation.h; sourceTree = "<group>"; };
+		A28823381C275465007C40F1 /* JPSThumbnailAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPSThumbnailAnnotation.m; sourceTree = "<group>"; };
+		A28823391C275465007C40F1 /* JPSThumbnailAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPSThumbnailAnnotationView.h; sourceTree = "<group>"; };
+		A288233A1C275465007C40F1 /* JPSThumbnailAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPSThumbnailAnnotationView.m; sourceTree = "<group>"; };
+		A288233B1C275465007C40F1 /* JPSThumbnail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPSThumbnail.h; sourceTree = "<group>"; };
+		A288233C1C275465007C40F1 /* JPSThumnail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPSThumnail.m; sourceTree = "<group>"; };
 		A2CDF2C71C161CD200DABB2F /* TapSell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapSell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2CDF2CB1C161CD200DABB2F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A2CDF2CD1C161CD200DABB2F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -266,6 +275,12 @@
 		E2EA5DBE1C22007B00F9464E /* MAP */ = {
 			isa = PBXGroup;
 			children = (
+				A28823371C275465007C40F1 /* JPSThumbnailAnnotation.h */,
+				A28823381C275465007C40F1 /* JPSThumbnailAnnotation.m */,
+				A28823391C275465007C40F1 /* JPSThumbnailAnnotationView.h */,
+				A288233A1C275465007C40F1 /* JPSThumbnailAnnotationView.m */,
+				A288233B1C275465007C40F1 /* JPSThumbnail.h */,
+				A288233C1C275465007C40F1 /* JPSThumnail.m */,
 				E2C9652B1C162B0000F23209 /* MapViewController.h */,
 				E2C9652C1C162B0000F23209 /* MapViewController.m */,
 			);
@@ -466,10 +481,13 @@
 				E2A6F6211C17BCD500D92CFB /* UserData.m in Sources */,
 				E2E8D5A11C1FB4AA00CD2ED2 /* PostListData.m in Sources */,
 				E2ABCDE21C18C37B00CC538F /* UserProfileViewController.m in Sources */,
+				A288233D1C275465007C40F1 /* JPSThumbnailAnnotation.m in Sources */,
 				E2E8D5951C1FA41200CD2ED2 /* PostListViewController.m in Sources */,
 				A2CDF2CC1C161CD200DABB2F /* main.m in Sources */,
 				FB40AF211C17778A00927359 /* CategoryViewController.m in Sources */,
+				A288233F1C275465007C40F1 /* JPSThumnail.m in Sources */,
 				E23621051C1F9F2F001DDCD0 /* PostViewController.m in Sources */,
+				A288233E1C275465007C40F1 /* JPSThumbnailAnnotationView.m in Sources */,
 				FB40AF1E1C17777B00927359 /* SearchViewController.m in Sources */,
 				E2C9652D1C162B0000F23209 /* MapViewController.m in Sources */,
 				E228775E1C19397F0079F729 /* EditUserProfileViewController.m in Sources */,
