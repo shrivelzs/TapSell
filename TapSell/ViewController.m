@@ -84,6 +84,24 @@
                 NSString * zipcode = [object objectForKey:@"Zipcode"];
                 NSString * phone = [object objectForKey:@"Phone"];
                     
+
+                //User login to make [PFUser currentUser] not be nil
+                [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * _Nullable user, NSError * _Nullable error) {
+                    if (user) {
+                        // Do stuff after successful login.
+                        NSLog(@"successfly logined");
+                    } else {
+                        // The login failed. Check error to see why.
+                        NSLog(@"error:%@",error);
+                    }
+
+                }];
+
+
+                    
+                    
+                    
+                    
                 _userDataObjectVC.objectID =objectID;
                 _userDataObjectVC.fname=firstName;
                 _userDataObjectVC.lname=lastname;

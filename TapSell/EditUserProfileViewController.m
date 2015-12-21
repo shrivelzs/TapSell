@@ -124,6 +124,8 @@
     {
         [self saveData];
     }
+    
+    
 }
 
 -(void)saveData
@@ -143,6 +145,11 @@
     [point setObject: self.txtEdtiState.text forKey:@"State"];
     [point setObject: self.txtEditZipcode.text forKey:@"Zipcode"];
     [point setObject: self.txtEditPhone.text forKey:@"Phone"];
+    
+    
+   
+    
+    
     [point saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (!error) {
             UIAlertController *alcont =[UIAlertController alertControllerWithTitle:@"Completed!" message:@"User profile has been updated" preferredStyle:UIAlertControllerStyleAlert];
@@ -254,4 +261,32 @@
     [self presentViewController:alcont animated:YES completion:nil];
     
 }
+
+- (IBAction)updateLocation:(id)sender {
+    
+    NSString * objectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"objectID"];
+    PFObject *point = [PFObject objectWithoutDataWithClassName:@"User" objectId:objectID];
+    [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
+        if (!error) {
+            NSLog(@"User is currently at %f, %f", geoPoint.latitude, geoPoint.longitude);
+            
+            [[PFUser currentUser] setObject:geoPoint forKey:@"currentLocation"];
+            NSLog(@"User is %@", [PFUser currentUser]);
+            [[PFUser currentUser] saveInBackground];
+            
+            
+            
+        }
+        else
+        {
+             NSLog(@"chucuole");
+        }
+    }];
+    
+    
+}
+
+
+
+
 @end

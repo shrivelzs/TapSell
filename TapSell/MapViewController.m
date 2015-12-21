@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 @interface MapViewController ()<MKMapViewDelegate,CLLocationManagerDelegate>
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+
 
 @end
 
@@ -19,8 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-    self.mapView.delegate = self;
-   
+    
     // Do any additional setup after loading the view.
 }
 

@@ -81,6 +81,28 @@
         }
         
     }];
+    
+    //PFUser
+        PFUser *user = [PFUser user];
+        user.username = self.txtEmailID.text;
+        user.password = self.txtPassword.text;
+        user.email = self.txtEmailID.text;
+        
+        // other fields can be set just like with PFObject
+        //user[@"phone"] = @"415-392-0202";
+        
+        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (!error) {   // Hooray! Let them use the app now.
+                NSLog(@"SSSSSccessfly signUP");
+            } else {   NSString *errorString = [error userInfo][@"error"];   // Show the errorString somewhere and let the user try again.
+                NSLog(@"ERROR:%@",errorString);
+            }
+        }];
+    
+
+    
+    
+    
    
 }
 - (IBAction)btnAction_Cancel:(id)sender {
