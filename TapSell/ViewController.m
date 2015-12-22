@@ -89,12 +89,6 @@
                 [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * _Nullable user, NSError * _Nullable error) {
                     
                 }];
-
-
-                    
-                    
-                    
-                    
                 _userDataObjectVC.objectID =objectID;
                 _userDataObjectVC.fname=firstName;
                 _userDataObjectVC.lname=lastname;

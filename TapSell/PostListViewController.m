@@ -29,13 +29,17 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (IBAction)refreshAction:(id)sender {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self loadData];
+    });
+}
 -(void)loadData
 {
     NSString * objectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"objectID"];
     PFQuery * query =[PFQuery queryWithClassName:@"PostList"];
     [query whereKey:@"UserID" equalTo:objectID];
-    
+    [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
         {
@@ -56,6 +60,7 @@
                         postListData.productImage = data;
                     }}];
                 postListData.postID = postID;
+                [[NSUserDefaults standardUserDefaults] setObject:postID forKey:@"postID"];
                 postListData.title =title;
                 postListData.location = location;
                 postListData.price = price;
@@ -102,7 +107,8 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        PFObject * delete = [PFObject objectWithoutDataWithClassName:@"PostList" objectId:self.postListDataPL.postID];
+        NSString * postID = [[NSUserDefaults standardUserDefaults]objectForKey:@"postID"];
+        PFObject * delete = [PFObject objectWithoutDataWithClassName:@"PostList" objectId:postID];
         [delete deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *  error) {
             if (succeeded) {
                 NSLog(@"Delete completed");
@@ -114,7 +120,7 @@
 }
 
 
-#pragma mark Alsert method
+#pragma mark Alert method
 -(void)displayAlertView:(NSString *)message
 {
     UIAlertController *alertCont =[UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
