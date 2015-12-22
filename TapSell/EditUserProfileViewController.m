@@ -29,7 +29,7 @@
     [super viewDidLoad];
     [self imageViewDisplay];
     [self reloadUserProfile];
-   
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,7 +63,7 @@
                 [pictureFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                     if (!error){
                         [self.editUserProfileImageView setImage:[UIImage imageWithData:data]];
-                        }}];
+                    }}];
                 
                 self.txtEditFname.text = firstName;
                 self.txtEditLname.text = lastname;
@@ -82,36 +82,36 @@
 - (IBAction)btnSave:(id)sender {
     if (_editUserProfileImageView.image == nil) {
         [self displayAlert:@"Please upload image"];
-           }
+    }
     else if ([_txtEditCity.text isEqualToString:@" "])
     {
-         [self displayAlert:@"Please enter city"];
+        [self displayAlert:@"Please enter city"];
     }
     else if ([_txtEditFname.text isEqualToString:@" "])
     {
         [self displayAlert:@"Please enter first name"];
     }
-
+    
     else if ([_txtEditLname.text isEqualToString:@" "])
     {
         [self displayAlert:@"Please enter last name"];
     }
-
+    
     else if ([_txtEditPhone.text isEqualToString:@" "])
     {
         [self displayAlert:@"Please enter phone number"];
     }
-
+    
     else if ([_txtEditZipcode.text isEqualToString:@" "])
     {
         [self displayAlert:@"Please enter zipcode"];
     }
-
+    
     else if ([_txtEdtiAddress.text isEqualToString:@" "])
     {
         [self displayAlert:@"Please enter address"];
     }
-
+    
     else if ([_txtEdtiApt.text isEqualToString:@" "])
     {
         [self displayAlert:@"Please enter aprtment number"];
@@ -132,6 +132,8 @@
 {
     NSString * objectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"objectID"];
     PFObject *point = [PFObject objectWithoutDataWithClassName:@"User" objectId:objectID];
+    NSLog(@"USID1:%@",objectID);
+    
     NSData *imageData = UIImagePNGRepresentation(self.editUserProfileImageView.image);
     PFFile *file = [PFFile fileWithData:imageData];
     
@@ -145,9 +147,12 @@
     [point setObject: self.txtEdtiState.text forKey:@"State"];
     [point setObject: self.txtEditZipcode.text forKey:@"Zipcode"];
     [point setObject: self.txtEditPhone.text forKey:@"Phone"];
+    [point setObject: self.userLocation forKey:@"currentLocation"];
+    
+    //     NSLog(@"userLLLLNNNNew:%@",self.userLocation);
+    //
     
     
-   
     
     
     [point saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -170,10 +175,10 @@
             NSLog(@"Cannot update data");
         }
     }];
-
+    
 }
 
- -(void)imageViewDisplay
+-(void)imageViewDisplay
 {
     self.editUserProfileImageView.layer.cornerRadius = self.editUserProfileImageView.frame.size.width/2;
     self.editUserProfileImageView.clipsToBounds = YES;
@@ -264,8 +269,6 @@
 
 - (IBAction)updateLocation:(id)sender {
     
-    NSString * objectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"objectID"];
-    PFObject *point = [PFObject objectWithoutDataWithClassName:@"User" objectId:objectID];
     [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
         if (!error) {
             NSLog(@"User is currently at %f, %f", geoPoint.latitude, geoPoint.longitude);
@@ -274,12 +277,33 @@
             NSLog(@"User is %@", [PFUser currentUser]);
             [[PFUser currentUser] saveInBackground];
             
+            self.userLocation = geoPoint;
+            NSLog(@"GEO:%@",geoPoint);
+            NSLog(@"userLLLL111111:%@",self.userLocation);
+            //UIAlert
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Completed!"
+                                                                           message:@"Your Location has been updated! Please press Save button to continue"
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
             
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction * action) {}];
+            
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
             
         }
         else
         {
-             NSLog(@"chucuole");
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Failed!"
+                                                                           message:@"Your locatio cannot be update now."
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction * action) {}];
+            
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
+            
         }
     }];
     
