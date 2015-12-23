@@ -1129,11 +1129,25 @@
                     <view key="view" contentMode="scaleToFill" id="SQ6-mr-k2Z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rpu-er-50O">
+                                <rect key="frame" x="0.0" y="28" width="320" height="496"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rpu-er-50O" firstAttribute="leading" secondItem="SQ6-mr-k2Z" secondAttribute="leading" id="1BQ-5L-TeY"/>
+                            <constraint firstItem="rpu-er-50O" firstAttribute="bottom" secondItem="jNn-vM-7MB" secondAttribute="top" id="C4q-NI-3IM"/>
+                            <constraint firstAttribute="trailing" secondItem="rpu-er-50O" secondAttribute="trailing" id="jaQ-89-qRJ"/>
+                            <constraint firstItem="rpu-er-50O" firstAttribute="top" secondItem="44I-Bp-xbD" secondAttribute="bottom" constant="8" symbolic="YES" id="zgj-AK-rrD"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="icon-maps-active" id="Ddc-Zk-6iA" userLabel="Map"/>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mapView" destination="rpu-er-50O" id="MGP-r4-knw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zu7-BH-ICZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
