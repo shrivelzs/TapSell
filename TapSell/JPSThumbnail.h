@@ -19,5 +19,6 @@ typedef void (^ActionBlock)();
 @property (nonatomic, copy) NSString *subtitle;
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 @property (nonatomic, copy) ActionBlock disclosureBlock;
+@property(nonatomic,strong)NSString*objectID;
 
 @end

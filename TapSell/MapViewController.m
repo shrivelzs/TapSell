@@ -10,6 +10,7 @@
 #import "JPSThumbnailAnnotation.h"
 #import "UserData.h"
 #import <Parse/Parse.h>
+#import "UserDetailViewController.h"
 
 @interface MapViewController ()<MKMapViewDelegate,CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -20,19 +21,11 @@
 @implementation MapViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    //    MKMapView *mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
-    //    mapView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
     self.mapView.delegate = self;
-    
-    //[self.view addSubview:mapView];
-    
-    // Annotations
-    //    [mapView addAnnotations:[self annotations]];
-    
-    //[self RetriveData];
-    [self MyMethod];
+    [self Annotation];
     
 }
 
@@ -50,7 +43,7 @@
  }
  */
 
--(void)MyMethod{
+-(void)Annotation{
     PFQuery * query =[PFQuery queryWithClassName:@"User"];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -63,13 +56,12 @@
                 // NSString * objectID = [object objectId];
                 NSString * firstName = [object objectForKey:@"UserFirstName"];
                 NSString * lastname = [object objectForKey:@"UserLastName"];
+                NSString * name = [[firstName stringByAppendingString:@" "]stringByAppendingString:lastname];
                 NSString * email = [object objectForKey:@"EmailID"];
-                NSString * address = [object objectForKey:@"Address"];
-                NSString * aptNo = [object objectForKey:@"AptNo"];
-                NSString * city = [object objectForKey:@"City"];
-                NSString * state = [object objectForKey:@"State"];
-                NSString * zipcode = [object objectForKey:@"Zipcode"];
-                NSString * phone = [object objectForKey:@"Phone"];
+                
+                NSString * UserID = object.objectId;
+                //NSLog(@"name:%@, userid:%@",name,UserID);
+                
                 PFGeoPoint * point = [object objectForKey:@"currentLocation"];
                 
                 CLLocation *loc = [[CLLocation alloc] initWithLatitude:point.latitude longitude:point.longitude];
@@ -86,7 +78,7 @@
                         
                         
                         
-                        [self.mapView addAnnotations:[self objectWithImageName:userImage title:firstName subtitle:email coordinate:coordinate]];
+                        [self.mapView addAnnotations:[self objectWithImageName:userImage title:name subtitle:email coordinate:coordinate userID:UserID]];
                         
                         
                         
@@ -124,38 +116,24 @@
 }
 
 
-- (NSArray *)annotations {
-    //    // Empire State Building
-    //    JPSThumbnail *empire = [[JPSThumbnail alloc] init];
-    //    empire.image = [UIImage imageNamed:@"empire.jpg"];
-    //    empire.title = @"Empire State Building";
-    //    empire.subtitle = @"NYC Landmark";
-    //    empire.coordinate = CLLocationCoordinate2DMake(40.75f, -73.99f);
-    //    empire.disclosureBlock = ^{ NSLog(@"selected Empire"); };
-    //    //add a gesture
-    //
-    //
-    //
-    //
-    //
-    //
-    //    return @[[JPSThumbnailAnnotation annotationWithThumbnail:empire]];
-    return [self objectWithImageName:[UIImage imageNamed:@"empire.jpg"] title:@"Empire State Building" subtitle:@"NYC Landmark" coordinate:CLLocationCoordinate2DMake(40.75f, -73.99f)];
-    
-}
+
 #pragma mark - MethodforAnnotation
 
-- (NSArray *)objectWithImageName:(UIImage *)image title:(NSString *)title subtitle:(NSString *)subTitle coordinate:(CLLocationCoordinate2D)coordinate
+- (NSArray *)objectWithImageName:(UIImage *)image title:(NSString *)title subtitle:(NSString *)subTitle coordinate:(CLLocationCoordinate2D)coordinate userID:(NSString *)userID
 {
     JPSThumbnail *newObj = [[JPSThumbnail alloc] init];
     newObj.image = image;
     newObj.title = title;
     //self.UeserfName = title;
     newObj.subtitle = subTitle;
+    newObj.objectID = userID;
+    
     
     newObj.coordinate = coordinate;
     newObj.disclosureBlock = ^{
         [self performSegueWithIdentifier:@"PushData" sender:self];
+        NSLog(@"tap button:%@",userID);
+        
         
         
     };
@@ -196,93 +174,28 @@
     return nil;
 }
 
+
+
+
+
+
 #pragma mark Segue
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"PushData"])
     {
-        //        DetailViewController *obj_VC = [segue destinationViewController];
-        //        UserData *obj_Info = [UserData new];
-        //
-        //        obj_Info.emailID = self.UeserEmail;
-        //        obj_Info.fname =self.UeserfName;
-        //        obj_Info.fname =self.UeserlName;
-        //        //        obj_CardInfo.cvvNumber = self.textf_CVV.text;
-        //        //        obj_CardInfo.expiryDate = self.textf_ExpiryDate.text;
-        //        //
-        //        obj_VC.Userinfo = obj_Info;
+        UserDetailViewController *obj_VC = [segue destinationViewController];
+        //UserData *obj_Info = [UserData new];
+        
+//        obj_Info.emailID = 
+//        obj_Info.fname =self.UeserfName;
+//        obj_Info.fname =self.UeserlName;
+//        //        obj_CardInfo.cvvNumber = self.textf_CVV.text;
+//        //        obj_CardInfo.expiryDate = self.textf_ExpiryDate.text;
+//        //
+//        obj_VC.Userinfo = obj_Info;
     }
-}
-
-#pragma mark ParseData
-
--(void)RetriveData
-
-{
-    
-    
-    
-    PFQuery * query =[PFQuery queryWithClassName:@"User"];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        
-        if (!error)
-            
-        {
-            
-            for (PFObject * object in objects)
-                
-            {
-                
-                // retreive data
-                NSString * fName = [object objectForKey:@"UserFirstName"];
-                
-                NSString * lName = [object objectForKey:@"UserLastName"];
-                NSString * Title = [[fName stringByAppendingString:@" "]stringByAppendingString:lName];
-                NSLog(@"%@",Title);
-                
-                
-                //                NSString * title = [object objectForKey:@"ProductTitle"];
-                //
-                //                NSString * location = [object objectForKey:@"Location"];
-                //
-                //                NSString * price = [object objectForKey:@"ProductPrice"];
-                //
-                //                NSString * productDescription = [object objectForKey:@"Discription"];
-                //
-                //                NSString * userID = [object objectForKey:@"UserID"];
-                //
-                //
-                //
-                //                PostListData * SearchPostList = [[PostListData alloc]init];
-                //
-                //                SearchPostList.title =title;
-                //
-                //                SearchPostList.location = location;
-                //
-                //                SearchPostList.price = price;
-                //
-                //                SearchPostList.productDescription = productDescription;
-                //
-                //                SearchPostList.userID = userID;
-                //
-                //                [self.array_SeachData addObject:SearchPostList];
-                
-            }
-            
-            if (![objects count]==0) {
-                
-                NSLog(@"Successfully retrieved: %@", objects);
-                
-                //[self.SearchTableViewList reloadData];
-                
-            }
-            
-        }
-        
-    }];
-    
 }
 
 

@@ -20,4 +20,5 @@
 @property(nonatomic,strong)NSString*zipcode;
 @property(nonatomic,strong)NSString*phone;
 @property(nonatomic,strong)NSData * userProfileImage;
+
 @end
