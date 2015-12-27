@@ -185,7 +185,7 @@
 {
     if ([segue.identifier isEqualToString:@"PushData"])
     {
-        UserDetailViewController *obj_VC = [segue destinationViewController];
+        //UserDetailViewController *obj_VC = [segue destinationViewController];
         //UserData *obj_Info = [UserData new];
         
 //        obj_Info.emailID = 

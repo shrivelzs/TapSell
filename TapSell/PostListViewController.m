@@ -30,8 +30,12 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)refreshAction:(id)sender {
+//    [self loadData];
+//    [self.tableViewPostList reloadData];
+
     dispatch_async(dispatch_get_main_queue(), ^{
         [self loadData];
+        //[self.tableViewPostList reloadData];
     });
 }
 -(void)loadData
@@ -60,7 +64,6 @@
                         postListData.productImage = data;
                     }}];
                 postListData.postID = postID;
-                [[NSUserDefaults standardUserDefaults] setObject:postID forKey:@"postID"];
                 postListData.title =title;
                 postListData.location = location;
                 postListData.price = price;
@@ -94,10 +97,15 @@
     CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"postListCell"];
     PostListData * postListData = [[PostListData alloc]init];
     postListData = [self.array_PostList objectAtIndex:indexPath.row];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [cell.imageViewProduct setImage:[UIImage imageWithData:postListData.productImage]];
+    // make image load faster
+    dispatch_queue_t que = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+    dispatch_async(que, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [cell.imageViewProduct setImage:[UIImage imageWithData:postListData.productImage]];
+            
+        });
 
-    });
+       });
     cell.lblProductTitle.text =postListData.title;
     cell.lblProductLocation.text = postListData.location;
     cell.lblProductPrice.text = [NSString stringWithFormat:@"$ %@",postListData.price];
@@ -106,17 +114,21 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSString * postID = [[NSUserDefaults standardUserDefaults]objectForKey:@"postID"];
-        PFObject * delete = [PFObject objectWithoutDataWithClassName:@"PostList" objectId:postID];
-        [delete deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *  error) {
-            if (succeeded) {
-                NSLog(@"Delete completed");
-            }
-            else
-                 NSLog(@"Delete incompleted");
-        }];
-    }
+        if (editingStyle == UITableViewCellEditingStyleDelete) {
+            NSLog(@"Delete cell click");
+            PostListData * posListData = [[PostListData alloc]init];
+            posListData = [self.array_PostList objectAtIndex:indexPath.row];
+            PFObject * delete = [PFObject objectWithoutDataWithClassName:@"PostList" objectId:posListData.postID];
+            [delete deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *  error) {
+                if (succeeded) {
+                    NSLog(@"Delete completed");
+                    [self loadData];
+                    [self.tableViewPostList reloadData];
+                }
+                else
+                    NSLog(@"Delete incompleted");
+            }];
+        }
 }
 
 
