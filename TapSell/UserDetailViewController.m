@@ -17,7 +17,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
     // Do any additional setup after loading the view.
+    NSString *Username = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserNum"];
+    self.UserName.text = Username;
+    NSLog(@"ID:%@",Username);
 }
 
 - (void)didReceiveMemoryWarning {

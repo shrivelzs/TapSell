@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 
+
 @end
 
 @implementation MapViewController
@@ -126,13 +127,17 @@
     newObj.title = title;
     //self.UeserfName = title;
     newObj.subtitle = subTitle;
-    newObj.objectID = userID;
+    //newObj.objectID = userID;
+    
     
     
     newObj.coordinate = coordinate;
     newObj.disclosureBlock = ^{
         [self performSegueWithIdentifier:@"PushData" sender:self];
         NSLog(@"tap button:%@",userID);
+        [[NSUserDefaults standardUserDefaults] setObject:userID forKey:@"UserNum"];
+
+        
         
         
         
@@ -185,8 +190,13 @@
 {
     if ([segue.identifier isEqualToString:@"PushData"])
     {
-        //UserDetailViewController *obj_VC = [segue destinationViewController];
-        //UserData *obj_Info = [UserData new];
+        UserDetailViewController *obj_VC = [segue destinationViewController];
+        UserData *obj_Info = [UserData new];
+        obj_Info.objectID = self.UserID;
+        NSLog(@"self.UserID:%@",self.UserID);
+        obj_VC.Userinfo = obj_Info;
+        NSLog(@"obj_Info.objectID:%@",obj_Info.objectID);
+        
         
 //        obj_Info.emailID = 
 //        obj_Info.fname =self.UeserfName;
