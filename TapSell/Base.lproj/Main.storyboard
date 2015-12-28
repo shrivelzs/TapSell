@@ -1205,7 +1205,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="460"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="postListCell" rowHeight="76" id="fBl-Ft-y7Q" userLabel="PostListCell" customClass="CustomCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="postListCell" rowHeight="76" id="fBl-Ft-y7Q" userLabel="PostListCell" customClass="ItemCustomTableViewCell">
                                         <rect key="frame" x="0.0" y="92" width="320" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fBl-Ft-y7Q" id="SAb-ku-Ipb">
@@ -1282,6 +1282,12 @@
                                                 <constraint firstItem="U27-fR-dbC" firstAttribute="top" secondItem="SAb-ku-Ipb" secondAttribute="topMargin" constant="5" id="mc7-rg-6hQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageViewProduct" destination="ElP-4Z-Xj0" id="vmS-TW-8Zf"/>
+                                            <outlet property="lblProductLocation" destination="u3Q-Ia-jPQ" id="YbO-fD-mZY"/>
+                                            <outlet property="lblProductPrice" destination="xcb-51-m8f" id="NeM-OB-lNS"/>
+                                            <outlet property="lblProductTitle" destination="U27-fR-dbC" id="zxu-iK-L2D"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
