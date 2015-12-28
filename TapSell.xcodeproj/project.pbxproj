@@ -20,6 +20,7 @@
 		A2CDF2DA1C161CD200DABB2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2CDF2D81C161CD200DABB2F /* LaunchScreen.storyboard */; };
 		A2CDF2E51C161CD200DABB2F /* TapSellTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CDF2E41C161CD200DABB2F /* TapSellTests.m */; };
 		A2CDF2F01C161CD200DABB2F /* TapSellUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CDF2EF1C161CD200DABB2F /* TapSellUITests.m */; };
+		A2D00E7E1C30CAB8000F90F4 /* UserItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D00E7D1C30CAB8000F90F4 /* UserItemsViewController.m */; };
 		E228775E1C19397F0079F729 /* EditUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E228775D1C19397F0079F729 /* EditUserProfileViewController.m */; };
 		E23621051C1F9F2F001DDCD0 /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E23621041C1F9F2F001DDCD0 /* PostViewController.m */; };
 		E2A6F6211C17BCD500D92CFB /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A6F6201C17BCD500D92CFB /* UserData.m */; };
@@ -82,6 +83,8 @@
 		A2CDF2EB1C161CD200DABB2F /* TapSellUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TapSellUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2CDF2EF1C161CD200DABB2F /* TapSellUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TapSellUITests.m; sourceTree = "<group>"; };
 		A2CDF2F11C161CD200DABB2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A2D00E7C1C30CAB8000F90F4 /* UserItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserItemsViewController.h; sourceTree = "<group>"; };
+		A2D00E7D1C30CAB8000F90F4 /* UserItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserItemsViewController.m; sourceTree = "<group>"; };
 		D7DBB7AF83919FB890D54B65 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		E228775C1C19397F0079F729 /* EditUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditUserProfileViewController.h; sourceTree = "<group>"; };
 		E228775D1C19397F0079F729 /* EditUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditUserProfileViewController.m; sourceTree = "<group>"; };
@@ -288,6 +291,8 @@
 				E2C9652C1C162B0000F23209 /* MapViewController.m */,
 				A28823401C2BD7C3007C40F1 /* UserDetailViewController.h */,
 				A28823411C2BD7C3007C40F1 /* UserDetailViewController.m */,
+				A2D00E7C1C30CAB8000F90F4 /* UserItemsViewController.h */,
+				A2D00E7D1C30CAB8000F90F4 /* UserItemsViewController.m */,
 			);
 			name = MAP;
 			sourceTree = "<group>";
@@ -491,6 +496,7 @@
 				A2CDF2CC1C161CD200DABB2F /* main.m in Sources */,
 				FB40AF211C17778A00927359 /* CategoryViewController.m in Sources */,
 				A288233F1C275465007C40F1 /* JPSThumnail.m in Sources */,
+				A2D00E7E1C30CAB8000F90F4 /* UserItemsViewController.m in Sources */,
 				E23621051C1F9F2F001DDCD0 /* PostViewController.m in Sources */,
 				A288233E1C275465007C40F1 /* JPSThumbnailAnnotationView.m in Sources */,
 				FB40AF1E1C17777B00927359 /* SearchViewController.m in Sources */,

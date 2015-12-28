@@ -1141,7 +1141,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAi-Zh-X1U">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAi-Zh-X1U">
                                 <rect key="frame" x="70" y="356" width="180" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="88n-Ow-elw"/>
@@ -1150,7 +1150,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySN-yC-nyx">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySN-yC-nyx">
                                 <rect key="frame" x="70" y="389" width="180" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="PyQ-4T-ZRf"/>
@@ -1182,11 +1182,31 @@
                         <outlet property="UserEmail" destination="ySN-yC-nyx" id="grY-Gl-lkk"/>
                         <outlet property="UserName" destination="pAi-Zh-X1U" id="ZmO-5O-yra"/>
                         <outlet property="UserPortrait" destination="7sE-iZ-5He" id="SPK-xy-QxI"/>
+                        <segue destination="Yqy-Kq-xo6" kind="push" identifier="ItemsSelling" id="A8M-Il-zaJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1i5-Lq-DgM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3974" y="836"/>
+        </scene>
+        <!--User Items View Controller-->
+        <scene sceneID="BTh-tL-wxl">
+            <objects>
+                <viewController id="Yqy-Kq-xo6" customClass="UserItemsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="coR-kH-8iE"/>
+                        <viewControllerLayoutGuide type="bottom" id="lwH-4g-DGp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bUW-Wm-YvN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="oO0-Dt-SMD"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="416-5U-bJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4447" y="836"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="tyC-fN-b9b">

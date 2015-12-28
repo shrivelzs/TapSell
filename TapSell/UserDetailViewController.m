@@ -23,16 +23,8 @@
     [self imageViewDisplay];
     [self reloadUserProfile];
     
-    
-    
-    
-    
-    
-    // Do any additional setup after loading the view.
-//    NSString *Username = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserNum"];
-//    self.UserName.text = Username;
-//    NSLog(@"ID:%@",Username);
-    
+    UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"Items Selling" style:UIBarButtonItemStylePlain target:self action:@selector(toUserItemsSelling)];
+    self.navigationItem.rightBarButtonItem = anotherButton;
     
     
 }
@@ -41,6 +33,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)toUserItemsSelling{
+    [self performSegueWithIdentifier:@"ItemsSelling" sender:self];
+    
+}
+
+
 
 -(void)imageViewDisplay
 {
