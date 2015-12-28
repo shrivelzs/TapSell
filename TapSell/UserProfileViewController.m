@@ -8,7 +8,6 @@
 
 #import "UserProfileViewController.h"
 #import "EditUserProfileViewController.h"
-#import "UserData.h"
 #import <Parse.h>
 #import "ViewController.h"
 @interface UserProfileViewController ()

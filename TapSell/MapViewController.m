@@ -184,29 +184,29 @@
 
 
 
-#pragma mark Segue
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"PushData"])
-    {
-        UserDetailViewController *obj_VC = [segue destinationViewController];
-        UserData *obj_Info = [UserData new];
-        obj_Info.objectID = self.UserID;
-        NSLog(@"self.UserID:%@",self.UserID);
-        obj_VC.Userinfo = obj_Info;
-        NSLog(@"obj_Info.objectID:%@",obj_Info.objectID);
-        
-        
-//        obj_Info.emailID = 
-//        obj_Info.fname =self.UeserfName;
-//        obj_Info.fname =self.UeserlName;
-//        //        obj_CardInfo.cvvNumber = self.textf_CVV.text;
-//        //        obj_CardInfo.expiryDate = self.textf_ExpiryDate.text;
-//        //
-//        obj_VC.Userinfo = obj_Info;
-    }
-}
+
+//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ([segue.identifier isEqualToString:@"PushData"])
+//    {
+//        UserDetailViewController *obj_VC = [segue destinationViewController];
+////        UserData *obj_Info = [UserData new];
+////        obj_Info.objectID = self.UserID;
+////        NSLog(@"self.UserID:%@",self.UserID);
+////        obj_VC.Userinfo = obj_Info;
+////        NSLog(@"obj_Info.objectID:%@",obj_Info.objectID);
+//        
+//        
+////        obj_Info.emailID = 
+////        obj_Info.fname =self.UeserfName;
+////        obj_Info.fname =self.UeserlName;
+////        //        obj_CardInfo.cvvNumber = self.textf_CVV.text;
+////        //        obj_CardInfo.expiryDate = self.textf_ExpiryDate.text;
+////        //
+////        obj_VC.Userinfo = obj_Info;
+//    }
+//}
 
 
 
