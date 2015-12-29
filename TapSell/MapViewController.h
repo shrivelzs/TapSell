@@ -7,7 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "UserData.h"
 
 @interface MapViewController : ViewController
-@property (strong, nonatomic) NSString *UserID;
+//@property (strong, nonatomic) NSString *UserID;
+@property(strong,nonatomic)UserData * userDataMapVCObj;
 @end

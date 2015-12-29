@@ -7,7 +7,7 @@
 //
 
 #import "UserDetailViewController.h"
-//#import "UserData.h"
+#import "UserItemsViewController.h"
 #import <Parse.h>
 
 @interface UserDetailViewController ()
@@ -19,12 +19,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    //[[self navigationController] setNavigationBarHidden:NO animated:YES];
     [self imageViewDisplay];
     [self reloadUserProfile];
+    _userDataUserDetailVCObj=[[UserData alloc]init];
     
-    UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"Items Selling" style:UIBarButtonItemStylePlain target:self action:@selector(toUserItemsSelling)];
-    self.navigationItem.rightBarButtonItem = anotherButton;
+//    UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"Items Selling" style:UIBarButtonItemStylePlain target:self action:@selector(toUserItemsSelling)];
+//    self.navigationItem.rightBarButtonItem = anotherButton;
     
     
 }
@@ -33,11 +34,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)toUserItemsSelling{
-    [self performSegueWithIdentifier:@"ItemsSelling" sender:self];
-    
-}
-
+//-(void)toUserItemsSelling{
+//    [self performSegueWithIdentifier:@"ItemsSelling" sender:self];
+//    
+//}
+//
 
 
 -(void)imageViewDisplay
@@ -58,46 +59,56 @@
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *  objects, NSError *  error) {
         if (!error) {
-            //self.userDataObjectUP = [[UserData alloc]init];
             for (PFObject * object in objects)
             {
                 // retreive data
-                // NSString * objectID = [object objectId];
+                NSString * objectID = [object objectId];
+                
+                NSLog(@"Here is user ID %@ in UserDetailViewController", objectID);
                 NSString * firstName = [object objectForKey:@"UserFirstName"];
                 NSString * lastname = [object objectForKey:@"UserLastName"];
                 NSString * emailID = [object objectForKey:@"EmailID"];
-                //NSString * address = [object objectForKey:@"Address"];
-                //NSString * aptNo = [object objectForKey:@"AptNo"];
-                //NSString * city = [object objectForKey:@"City"];
-                //NSString * state = [object objectForKey:@"State"];
-                //NSString * zipcode = [object objectForKey:@"Zipcode"];
-                //NSString * phone = [object objectForKey:@"Phone"];
                 PFFile *pictureFile = [object objectForKey:@"UserProfileImage"];
                 [pictureFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                     if (!error){
                         [self.UserPortrait setImage:[UIImage imageWithData:data]];
                         //_userDataObjectUP.userProfileImage = data;
                     }}];
+                
+                _userDataUserDetailVCObj.objectID = objectID;
                 self.UserName.text = [NSString stringWithFormat:@"%@  %@",firstName,lastname];
                 self.UserEmail.text = emailID;
-                
             }
         }
         else
             NSLog(@"Canno load data");
     }];
 }
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)btnAction_PostList:(id)sender {
+    if ([self.userDataUserDetailVCObj.objectID isEqualToString:@""]) {
+    UIAlertController * alcont = [UIAlertController alertControllerWithTitle:@"Alert" message:@"No post for the user" preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction * ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        } ];
+        [alcont addAction:ok];
+        [self presentViewController:alcont animated:YES completion:nil];
+    }
+    else{
+    [self performSegueWithIdentifier:@"ItemsSelling" sender:self];
+    }
 }
-*/
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"ItemsSelling"])
+    {
+        UserItemsViewController * userItemObj = [[UserItemsViewController alloc]init];
+        userItemObj = [segue destinationViewController];
+        
+        userItemObj.userDataUserItemObj = self.userDataUserDetailVCObj;
+        NSLog(@"User ID userDataUserItemObj %@  User ID userDataUserDetailVCObj %@", userItemObj.userDataUserItemObj.objectID, self.userDataUserDetailVCObj.objectID);
+    }
+}
 
 @end
+

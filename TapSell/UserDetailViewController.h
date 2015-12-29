@@ -7,14 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "UserData.h"
-//#import "MapViewController.h"
+#import "UserData.h"
+#import "MapViewController.h"
 
 @interface UserDetailViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *UserPortrait;
 @property (weak, nonatomic) IBOutlet UILabel *UserName;
 @property (weak, nonatomic) IBOutlet UILabel *UserEmail;
-
-
-
+@property (strong,nonatomic)UserData * userDataUserDetailVCObj;
 @end

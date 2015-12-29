@@ -30,13 +30,10 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)refreshAction:(id)sender {
-//    [self loadData];
-//    [self.tableViewPostList reloadData];
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [self loadData];
-        //[self.tableViewPostList reloadData];
-    });
+            });
 }
 -(void)loadData
 {

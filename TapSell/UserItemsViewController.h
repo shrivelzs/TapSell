@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "UserData.h"
+#import "PostListData.h"
 @interface UserItemsViewController : UIViewController
-
+@property(nonatomic,strong)UserData*userDataUserItemObj;
+@property(nonatomic,strong)PostListData * postListDataUserItemObj;
 @end
