@@ -19,17 +19,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //[[self navigationController] setNavigationBarHidden:NO animated:YES];
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
     [self imageViewDisplay];
     [self reloadUserProfile];
     _userDataUserDetailVCObj=[[UserData alloc]init];
     
-//    UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"Items Selling" style:UIBarButtonItemStylePlain target:self action:@selector(toUserItemsSelling)];
-//    self.navigationItem.rightBarButtonItem = anotherButton;
-    
     
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
