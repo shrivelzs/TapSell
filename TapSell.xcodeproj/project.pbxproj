@@ -22,6 +22,15 @@
 		A2CDF2F01C161CD200DABB2F /* TapSellUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CDF2EF1C161CD200DABB2F /* TapSellUITests.m */; };
 		A2D00E7E1C30CAB8000F90F4 /* UserItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D00E7D1C30CAB8000F90F4 /* UserItemsViewController.m */; };
 		A2D00E811C3187BB000F90F4 /* ItemCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2D00E801C3187BB000F90F4 /* ItemCustomTableViewCell.m */; };
+		E21C14A61C339B6300AEAB89 /* logo180.png in Resources */ = {isa = PBXBuildFile; fileRef = E21C14A21C339B6300AEAB89 /* logo180.png */; };
+		E21C14A71C339B6300AEAB89 /* logo80.png in Resources */ = {isa = PBXBuildFile; fileRef = E21C14A31C339B6300AEAB89 /* logo80.png */; };
+		E21C14A81C339B6300AEAB89 /* logo120.png in Resources */ = {isa = PBXBuildFile; fileRef = E21C14A41C339B6300AEAB89 /* logo120.png */; };
+		E21C14A91C339B6300AEAB89 /* logo58.png in Resources */ = {isa = PBXBuildFile; fileRef = E21C14A51C339B6300AEAB89 /* logo58.png */; };
+		E21C14AD1C339E2600AEAB89 /* logo76.png in Resources */ = {isa = PBXBuildFile; fileRef = E21C14AA1C339E2600AEAB89 /* logo76.png */; };
+		E21C14AE1C339E2600AEAB89 /* logo60.png in Resources */ = {isa = PBXBuildFile; fileRef = E21C14AB1C339E2600AEAB89 /* logo60.png */; };
+		E21C14AF1C339E2600AEAB89 /* logo84.png in Resources */ = {isa = PBXBuildFile; fileRef = E21C14AC1C339E2600AEAB89 /* logo84.png */; };
+		E21C14B11C339F9100AEAB89 /* shopping-cart.png in Resources */ = {isa = PBXBuildFile; fileRef = E21C14B01C339F9000AEAB89 /* shopping-cart.png */; };
+		E21C14B31C33A38600AEAB89 /* logo2.png in Resources */ = {isa = PBXBuildFile; fileRef = E21C14B21C33A38600AEAB89 /* logo2.png */; };
 		E228775E1C19397F0079F729 /* EditUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E228775D1C19397F0079F729 /* EditUserProfileViewController.m */; };
 		E23621051C1F9F2F001DDCD0 /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E23621041C1F9F2F001DDCD0 /* PostViewController.m */; };
 		E2A6F6211C17BCD500D92CFB /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A6F6201C17BCD500D92CFB /* UserData.m */; };
@@ -90,6 +99,15 @@
 		A2D00E7F1C3187BB000F90F4 /* ItemCustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemCustomTableViewCell.h; sourceTree = "<group>"; };
 		A2D00E801C3187BB000F90F4 /* ItemCustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemCustomTableViewCell.m; sourceTree = "<group>"; };
 		D7DBB7AF83919FB890D54B65 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		E21C14A21C339B6300AEAB89 /* logo180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo180.png; sourceTree = "<group>"; };
+		E21C14A31C339B6300AEAB89 /* logo80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo80.png; sourceTree = "<group>"; };
+		E21C14A41C339B6300AEAB89 /* logo120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo120.png; sourceTree = "<group>"; };
+		E21C14A51C339B6300AEAB89 /* logo58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo58.png; sourceTree = "<group>"; };
+		E21C14AA1C339E2600AEAB89 /* logo76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo76.png; sourceTree = "<group>"; };
+		E21C14AB1C339E2600AEAB89 /* logo60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo60.png; sourceTree = "<group>"; };
+		E21C14AC1C339E2600AEAB89 /* logo84.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo84.png; sourceTree = "<group>"; };
+		E21C14B01C339F9000AEAB89 /* shopping-cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shopping-cart.png"; sourceTree = "<group>"; };
+		E21C14B21C33A38600AEAB89 /* logo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo2.png; sourceTree = "<group>"; };
 		E228775C1C19397F0079F729 /* EditUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditUserProfileViewController.h; sourceTree = "<group>"; };
 		E228775D1C19397F0079F729 /* EditUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditUserProfileViewController.m; sourceTree = "<group>"; };
 		E23621031C1F9F2F001DDCD0 /* PostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostViewController.h; sourceTree = "<group>"; };
@@ -225,7 +243,10 @@
 		A2CDF2CA1C161CD200DABB2F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E21C14A11C339B2300AEAB89 /* Logo */,
 				E2C965731C17344C00F23209 /* Logo1.png */,
+				E21C14B21C33A38600AEAB89 /* logo2.png */,
+				E21C14B01C339F9000AEAB89 /* shopping-cart.png */,
 				A2CDF2CB1C161CD200DABB2F /* main.m */,
 			);
 			name = "Supporting Files";
@@ -247,6 +268,20 @@
 				A2CDF2F11C161CD200DABB2F /* Info.plist */,
 			);
 			path = TapSellUITests;
+			sourceTree = "<group>";
+		};
+		E21C14A11C339B2300AEAB89 /* Logo */ = {
+			isa = PBXGroup;
+			children = (
+				E21C14AA1C339E2600AEAB89 /* logo76.png */,
+				E21C14AB1C339E2600AEAB89 /* logo60.png */,
+				E21C14AC1C339E2600AEAB89 /* logo84.png */,
+				E21C14A21C339B6300AEAB89 /* logo180.png */,
+				E21C14A31C339B6300AEAB89 /* logo80.png */,
+				E21C14A41C339B6300AEAB89 /* logo120.png */,
+				E21C14A51C339B6300AEAB89 /* logo58.png */,
+			);
+			name = Logo;
 			sourceTree = "<group>";
 		};
 		E228775F1C19D36E0079F729 /* UserProfile */ = {
@@ -416,10 +451,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E21C14A71C339B6300AEAB89 /* logo80.png in Resources */,
 				A2CDF2DA1C161CD200DABB2F /* LaunchScreen.storyboard in Resources */,
+				E21C14AE1C339E2600AEAB89 /* logo60.png in Resources */,
+				E21C14AD1C339E2600AEAB89 /* logo76.png in Resources */,
+				E21C14A81C339B6300AEAB89 /* logo120.png in Resources */,
+				E21C14A91C339B6300AEAB89 /* logo58.png in Resources */,
+				E21C14A61C339B6300AEAB89 /* logo180.png in Resources */,
+				E21C14B31C33A38600AEAB89 /* logo2.png in Resources */,
+				E21C14AF1C339E2600AEAB89 /* logo84.png in Resources */,
 				A2CDF2D71C161CD200DABB2F /* Assets.xcassets in Resources */,
 				A2CDF2D51C161CD200DABB2F /* Main.storyboard in Resources */,
 				E2C965741C17344C00F23209 /* Logo1.png in Resources */,
+				E21C14B11C339F9100AEAB89 /* shopping-cart.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

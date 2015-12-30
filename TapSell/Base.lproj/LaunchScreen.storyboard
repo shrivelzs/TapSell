@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,14 +15,40 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo2.png" translatesAutoresizingMaskIntoConstraints="NO" id="3LK-iE-fRc">
+                                <rect key="frame" x="50" y="314" width="242" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="68" id="pfb-0h-qra"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shopping-cart.png" translatesAutoresizingMaskIntoConstraints="NO" id="19r-co-i6c">
+                                <rect key="frame" x="68" y="141" width="185" height="143"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="143" id="3kH-0X-nx9"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.54901960780000003" green="1" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="19r-co-i6c" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="121" id="1fn-pA-QSt"/>
+                            <constraint firstItem="19r-co-i6c" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="52" id="BuA-9R-hNc"/>
+                            <constraint firstItem="3LK-iE-fRc" firstAttribute="top" secondItem="19r-co-i6c" secondAttribute="bottom" constant="30" id="Erq-yM-MGK"/>
+                            <constraint firstItem="3LK-iE-fRc" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="50" id="b42-6q-i5J"/>
+                            <constraint firstItem="19r-co-i6c" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="c1F-Py-wJX"/>
+                            <constraint firstAttribute="trailing" secondItem="3LK-iE-fRc" secondAttribute="trailing" constant="28" id="hNa-7s-XTw"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="-64" y="276"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo2.png" width="400" height="200"/>
+        <image name="shopping-cart.png" width="265" height="265"/>
+    </resources>
 </document>
