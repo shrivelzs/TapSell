@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblProdTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lblProdPrice;
 @property (weak, nonatomic) IBOutlet UITextView *txtViewProdDes;
-
 @end
 
 @implementation PostDetailsViewController

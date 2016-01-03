@@ -2,12 +2,16 @@
 //  SearchViewController.h
 //  TapSell
 //
-//  Created by Siming Yuan on 12/8/15.
-//  Copyright © 2015 Shu Zhang. All rights reserved.
+//  Created by Thanapat Tangsittiprasert on 1/2/16.
+//  Copyright © 2016 Shu Zhang. All rights reserved.
 //
 
+#import "ViewController.h"
 #import <UIKit/UIKit.h>
+#import "PostListData.h"
+#import "UserData.h"
 
-@interface SearchViewController : UIViewController
-
+@interface SearchViewController : ViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UISearchResultsUpdating>
+@property(nonatomic,strong)PostListData *PostDataObjSV;
+@property(nonatomic,strong)UserData * userDataObjSV;
 @end

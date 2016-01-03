@@ -30,10 +30,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)refreshAction:(id)sender {
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self loadData];
-            });
+    [self.tableViewPostList performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 }
 -(void)loadData
 {
@@ -99,9 +96,7 @@
     dispatch_async(que, ^{
         dispatch_async(dispatch_get_main_queue(), ^{
             [cell.imageViewProduct setImage:[UIImage imageWithData:postListData.productImage]];
-            
         });
-
        });
     cell.lblProductTitle.text =postListData.title;
     cell.lblProductLocation.text = postListData.location;
