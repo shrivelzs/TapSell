@@ -76,6 +76,9 @@
             NSLog(@"Canno load data");
     }];
 }
+- (IBAction)btnAction_Log_out:(id)sender {
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:[[NSBundle mainBundle] bundleIdentifier]];
+     [self dismissViewControllerAnimated:YES completion:nil];}
 
 -(void)displayAlertView:(NSString *)message
 

@@ -233,7 +233,7 @@
                     <navigationItem key="navigationItem" title="Post Details" id="TPC-GF-0j5">
                         <barButtonItem key="backBarButtonItem" title="Go back" id="ldo-c8-DHW"/>
                         <barButtonItem key="rightBarButtonItem" image="icon-profile" id="xVv-KK-OVb">
-                            <color key="tintColor" red="0.12719540197744209" green="0.66222774621212122" blue="0.62535803091661768" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.15297742583145713" green="0.61987824228782384" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="O8P-Ws-4Kl" kind="push" identifier="userDetails" id="3Vc-sr-Nax"/>
                             </connections>
@@ -689,7 +689,11 @@
                         <color key="backgroundColor" red="0.65490196078431373" green="1" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="User Profile" id="c74-fj-FKT">
-                        <barButtonItem key="backBarButtonItem" title="Go Back" id="YtF-X9-OqL"/>
+                        <barButtonItem key="leftBarButtonItem" title="Log out" id="eFe-7t-ZI0">
+                            <connections>
+                                <action selector="btnAction_Log_out:" destination="GdI-kh-3SM" id="g6D-iP-hS1"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="web-Qv-e8n">
                             <connections>
                                 <segue destination="FbZ-8m-L9n" kind="push" identifier="edit" id="wzM-j2-6SI"/>

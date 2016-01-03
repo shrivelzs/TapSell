@@ -36,9 +36,6 @@
     
     // Do any additional setup after loading the view.
 }
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return 3; //I used the 44, the height of SearchBar
-//}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -46,7 +43,9 @@
 
 -(void)RetriveData
 {
-    
+    MBProgressHUD * ac = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    ac.labelText=@"Loading";
+    ac.mode = MBProgressHUDModeAnnularDeterminate;
     PFQuery * query =[PFQuery queryWithClassName:@"PostList"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
@@ -116,11 +115,9 @@
     cell.lblProductTitle.text = SearchListData.title;
     cell.lblProductLocation.text = SearchListData.location;
     cell.lblProductPrice.text = [NSString stringWithFormat:@"$ %@",SearchListData.price];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
             [cell.imageViewProduct setImage:[UIImage imageWithData:SearchListData.productImage]];
-            //[MBProgressHUD hideHUDForView:self.view animated:YES];
             
         });
         

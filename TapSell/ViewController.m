@@ -12,6 +12,7 @@
 #import "UserProfileViewController.h"
 #import "PostListViewController.h"
 #import "RegisterViewController.h"
+#import "MBProgressHUD.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *txtLoginUserName;
 @property (weak, nonatomic) IBOutlet UITextField *txtLoginPassword;
@@ -23,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.txtLoginUserName becomeFirstResponder];
+    _txtLoginPassword.text =@"";
+    _txtLoginUserName.text =@"";
     _userDataObjectVC = [[UserData alloc]init];
 }
 
@@ -41,6 +44,11 @@
     }
     else
     {
+        MBProgressHUD * ac = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        ac.labelText=@"Retrieving";
+        ac.detailsLabelText = @"User Data";
+        ac.mode = MBProgressHUDModeAnnularDeterminate;
+
         [self retrieveDataFromParse];
     }
 }
@@ -107,6 +115,8 @@
                 NSLog(@"ObjectID is %@", objectID);
                 }
             NSLog(@"Successfully retrieved: %@", objects);
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+
             [self performSegueWithIdentifier:@"afterlogin" sender:self];
             }
             
