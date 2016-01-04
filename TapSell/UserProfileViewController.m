@@ -40,9 +40,14 @@
 {
     NSString*username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     NSString*password = [[NSUserDefaults standardUserDefaults]objectForKey:@"password"];
+//    NSString * objectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"objectID"];
     PFQuery * query = [PFQuery queryWithClassName:@"User"];
+//    [query whereKey:@"objectID" equalTo:objectID];
     [query whereKey:@"EmailID" equalTo:username];
     [query whereKey:@"Password" equalTo:password];
+//        [query whereKey:@"EmailID" equalTo:_userDataObjectUP.emailID];
+//        [query whereKey:@"Password" equalTo:_userDataObjectUP.password];
+
     [query findObjectsInBackgroundWithBlock:^(NSArray *  objects, NSError *  error) {
         if (!error) {
             self.userDataObjectUP = [[UserData alloc]init];

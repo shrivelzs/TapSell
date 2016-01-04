@@ -16,6 +16,7 @@
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *txtLoginUserName;
 @property (weak, nonatomic) IBOutlet UITextField *txtLoginPassword;
+@property (weak, nonatomic) IBOutlet UISwitch *rememberMe;
 @property(nonatomic,strong)UserData * userDataObjectVC;
 @end
 
@@ -24,9 +25,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.txtLoginUserName becomeFirstResponder];
-    _txtLoginPassword.text =@"";
-    _txtLoginUserName.text =@"";
     _userDataObjectVC = [[UserData alloc]init];
+    _rememberMe.transform = CGAffineTransformMakeScale(0.75, 0.75);
+   
+//    [self rememberMe:self];
+   
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,6 +74,8 @@
                 UIAlertAction * ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     _txtLoginPassword.text =@"";
                     _txtLoginUserName.text =@"";
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+
                 } ];
                 [alcont addAction:ok];
                 [self presentViewController:alcont animated:YES completion:nil];
@@ -83,29 +88,16 @@
                 {
                 // retreive data
                 NSString * objectID = [object objectId];
-                NSString * firstName = [object objectForKey:@"UserFirstName"];
-                NSString * lastname = [object objectForKey:@"UserLastName"];
-                NSString * address = [object objectForKey:@"Address"];
-                NSString * aptNo = [object objectForKey:@"AptNo"];
-                NSString * city = [object objectForKey:@"City"];
-                NSString * state = [object objectForKey:@"State"];
-                NSString * zipcode = [object objectForKey:@"Zipcode"];
-                NSString * phone = [object objectForKey:@"Phone"];
-                    
+                    NSString * emailID = [object objectForKey:@"EmailID"];
+                    NSString * pass = [object objectForKey:@"Password"];
 
                 //User login to make [PFUser currentUser] not be nil
                 [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * _Nullable user, NSError * _Nullable error) {
                     
                 }];
                 _userDataObjectVC.objectID =objectID;
-                _userDataObjectVC.fname=firstName;
-                _userDataObjectVC.lname=lastname;
-                _userDataObjectVC.address=address;
-                _userDataObjectVC.aptNo = aptNo;
-                _userDataObjectVC.city = city;
-                _userDataObjectVC.state = state;
-                _userDataObjectVC.zipcode = zipcode;
-                _userDataObjectVC.phone = phone;
+                _userDataObjectVC.emailID =emailID;
+                _userDataObjectVC.password =pass;
                     
                 [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
                 [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"password"];
@@ -129,6 +121,25 @@
     }];
 
 }
+//- (void)rememberMe:(id)sender {
+//    if (_rememberMe.on != YES) {
+//        NSLog(@"Switch is OFF!!");
+//        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"username"];
+//        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"password"];
+//        _txtLoginPassword.text =@"";
+//        _txtLoginUserName.text =@"";
+//    }
+//    else {
+//        NSLog(@"Switch is ON!!");
+//        [[NSUserDefaults standardUserDefaults] setObject:_txtLoginUserName.text forKey:@"username"];
+//        [[NSUserDefaults standardUserDefaults] setObject:_txtLoginPassword.text forKey:@"password"];
+//        [[NSUserDefaults standardUserDefaults]synchronize];
+//        _txtLoginUserName.text =[[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+//        _txtLoginPassword.text =[[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+//    }
+//
+//}
+//
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
    
@@ -142,10 +153,10 @@
         postList.userDataObjPL = self.userDataObjectVC;
 
         
-//        // passing data to userprofile tabbar
-//        UINavigationController * navControllerUP = (UINavigationController *)[[tabbar viewControllers]objectAtIndex:3];
-//        UserProfileViewController * user = (UserProfileViewController *)[[navControllerUP viewControllers]objectAtIndex:0];
-//        user.userDataObjectUP = self.userDataObjectVC;
+        // passing data to userprofile tabbar
+        UINavigationController * navControllerUP = (UINavigationController *)[[tabbar viewControllers]objectAtIndex:3];
+        UserProfileViewController * user = (UserProfileViewController *)[[navControllerUP viewControllers]objectAtIndex:0];
+        user.userDataObjectUP = self.userDataObjectVC;
        NSLog(@"entered login screen");
     }
     else if([segue.identifier isEqualToString:@"register"]){

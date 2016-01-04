@@ -19,6 +19,7 @@
 @property(nonatomic,strong)NSString*state;
 @property(nonatomic,strong)NSString*zipcode;
 @property(nonatomic,strong)NSString*phone;
+@property(nonatomic,strong)NSString*password;
 @property(nonatomic,strong)NSData * userProfileImage;
 
 @end
