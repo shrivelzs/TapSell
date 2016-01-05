@@ -401,30 +401,15 @@
                                     <segue destination="Iss-1O-DzC" kind="modal" id="sjs-qA-tK1"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember me ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cs7-1C-LCq">
-                                <rect key="frame" x="119" y="267" width="97" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" red="0.15297742580000001" green="0.61987824229999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UHd-GP-1H3">
-                                <rect key="frame" x="61" y="262" width="51" height="31"/>
-                                <color key="onTintColor" red="0.40000000000000002" green="0.88235294119999996" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
-                            </switch>
                         </subviews>
                         <color key="backgroundColor" red="0.74949749283923861" green="1" blue="0.97907700281143939" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="cs7-1C-LCq" firstAttribute="leading" secondItem="UHd-GP-1H3" secondAttribute="trailing" constant="9" id="8Fc-S7-w7Y"/>
-                            <constraint firstItem="cs7-1C-LCq" firstAttribute="top" secondItem="kKq-2t-e9B" secondAttribute="bottom" constant="24" id="JbW-TX-9PT"/>
                             <constraint firstItem="yKh-dA-iHP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="36" id="KHi-hP-ASz"/>
                             <constraint firstItem="yd9-tn-nMp" firstAttribute="top" secondItem="kKq-2t-e9B" secondAttribute="bottom" constant="75" id="OSP-rz-61q"/>
                             <constraint firstAttribute="trailing" secondItem="Uhz-VY-acX" secondAttribute="trailing" constant="40" id="OdW-Yi-Cr1"/>
                             <constraint firstItem="Olb-W5-Cpz" firstAttribute="top" secondItem="yd9-tn-nMp" secondAttribute="bottom" constant="6" id="PV0-9V-frp"/>
-                            <constraint firstItem="UHd-GP-1H3" firstAttribute="top" secondItem="kKq-2t-e9B" secondAttribute="bottom" constant="19" id="QKm-IW-9WG"/>
-                            <constraint firstItem="cs7-1C-LCq" firstAttribute="centerY" secondItem="UHd-GP-1H3" secondAttribute="centerY" id="SMe-PL-5C7"/>
                             <constraint firstItem="Olb-W5-Cpz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="4" id="T2Y-nL-TL5"/>
                             <constraint firstItem="yd9-tn-nMp" firstAttribute="leading" secondItem="MZE-ar-Gd3" secondAttribute="leading" id="TLm-WJ-rdf"/>
-                            <constraint firstItem="UHd-GP-1H3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="45" id="UtM-so-09o"/>
                             <constraint firstItem="MZE-ar-Gd3" firstAttribute="trailing" secondItem="yd9-tn-nMp" secondAttribute="trailing" id="ZUY-Yh-YF1"/>
                             <constraint firstItem="Uhz-VY-acX" firstAttribute="top" secondItem="yKh-dA-iHP" secondAttribute="bottom" constant="10" id="cCP-dV-WrH"/>
                             <constraint firstItem="yd9-tn-nMp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="74" id="e1f-aW-HNQ"/>
@@ -432,7 +417,6 @@
                             <constraint firstAttribute="trailing" secondItem="yKh-dA-iHP" secondAttribute="trailing" constant="54" id="hJ1-ls-lQF"/>
                             <constraint firstAttribute="trailing" secondItem="kKq-2t-e9B" secondAttribute="trailing" constant="40" id="iXV-Cn-Ods"/>
                             <constraint firstItem="Uhz-VY-acX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="41" id="jWi-vj-3Xf"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="cs7-1C-LCq" secondAttribute="trailing" constant="88" id="jd2-of-AQU"/>
                             <constraint firstItem="kKq-2t-e9B" firstAttribute="top" secondItem="Uhz-VY-acX" secondAttribute="bottom" constant="18" id="lLY-bb-tcR"/>
                             <constraint firstItem="MZE-ar-Gd3" firstAttribute="top" secondItem="Olb-W5-Cpz" secondAttribute="bottom" constant="8" symbolic="YES" id="ly8-jj-IWf"/>
                             <constraint firstItem="yd9-tn-nMp" firstAttribute="centerX" secondItem="kKq-2t-e9B" secondAttribute="centerX" id="nnZ-kX-hW0"/>
@@ -442,7 +426,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="jw5-f5-AqB"/>
                     <connections>
-                        <outlet property="rememberMe" destination="UHd-GP-1H3" id="ogJ-Ht-GBg"/>
                         <outlet property="txtLoginPassword" destination="kKq-2t-e9B" id="PvH-Wk-LZz"/>
                         <outlet property="txtLoginUserName" destination="Uhz-VY-acX" id="FmH-qY-BJz"/>
                         <segue destination="IF1-pm-k1o" kind="modal" identifier="afterlogin" id="uvE-RT-7jb"/>

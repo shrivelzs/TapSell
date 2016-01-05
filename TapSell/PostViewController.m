@@ -8,6 +8,7 @@
 
 #import "PostViewController.h"
 #import "PostListViewController.h"
+#import "MBProgressHUD.h"
 #import <Parse.h>
 @interface PostViewController ()<UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *postImageView;
@@ -54,6 +55,10 @@
 
 -(void)saveData
 {
+    MBProgressHUD * ac = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    ac.labelText=@"Saving";
+    ac.mode = MBProgressHUDModeAnnularDeterminate;
+
     PFObject * addPost = [PFObject objectWithClassName:@"PostList"];
     //add data to parse
     NSData *imageData = UIImagePNGRepresentation(self.postImageView.image);
@@ -71,12 +76,12 @@
         
         if (succeeded)
         {
-            
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+
             UIAlertController *alcont =[UIAlertController alertControllerWithTitle:@"Congrats!" message:@"You are successfully created new post" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
                                        {
-                                           [self.navigationController popToRootViewControllerAnimated:YES];
-                                           
+                                        [self.navigationController popToRootViewControllerAnimated:YES];
                                        }];
             
             [alcont addAction:okButton];

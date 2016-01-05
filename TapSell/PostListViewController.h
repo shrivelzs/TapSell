@@ -12,4 +12,5 @@
 @interface PostListViewController : ViewController
 @property(nonatomic,strong)UserData * userDataObjPL;
 @property(nonatomic,strong)PostListData * postListDataPL;
+-(void)loadData;
 @end

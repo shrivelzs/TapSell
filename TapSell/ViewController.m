@@ -47,11 +47,17 @@
     }
     else
     {
-        MBProgressHUD * ac = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        ac.labelText=@"Retrieving";
-        ac.detailsLabelText = @"User Data";
-        ac.mode = MBProgressHUDModeAnnularDeterminate;
-
+        MBProgressHUD * HUD = [[MBProgressHUD alloc] initWithView:self.view];
+        //[self.navigationController.view addSubview:HUD];
+        
+        // Set determinate mode
+        HUD.mode = MBProgressHUDModeAnnularDeterminate;
+        
+        [HUD.delegate self ];
+        HUD.labelText = @"Retrieving";
+        HUD.detailsLabelText = @"User's Data";
+        
+        [HUD showWhileExecuting:@selector(retrieveDataFromParse) onTarget:self withObject:nil animated:YES];
         [self retrieveDataFromParse];
     }
 }
@@ -114,7 +120,6 @@
                 NSLog(@"ObjectID is %@", objectID);
                 }
             NSLog(@"Successfully retrieved: %@", objects);
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
 
             [self performSegueWithIdentifier:@"afterlogin" sender:self];
             }
@@ -128,25 +133,6 @@
     }];
 
 }
-//- (void)rememberMe:(id)sender {
-//    if (_rememberMe.on != YES) {
-//        NSLog(@"Switch is OFF!!");
-//        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"username"];
-//        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"password"];
-//        _txtLoginPassword.text =@"";
-//        _txtLoginUserName.text =@"";
-//    }
-//    else {
-//        NSLog(@"Switch is ON!!");
-//        [[NSUserDefaults standardUserDefaults] setObject:_txtLoginUserName.text forKey:@"username"];
-//        [[NSUserDefaults standardUserDefaults] setObject:_txtLoginPassword.text forKey:@"password"];
-//        [[NSUserDefaults standardUserDefaults]synchronize];
-//        _txtLoginUserName.text =[[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-//        _txtLoginPassword.text =[[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
-//    }
-//
-//}
-//
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
    

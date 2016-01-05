@@ -29,23 +29,29 @@
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     self.array_SeachData = [[NSMutableArray alloc]init];
     self.searchResult = [[NSMutableArray alloc]init];
+   
     _searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     _searchController.dimsBackgroundDuringPresentation = false;
     _searchController.searchResultsUpdater = self;
     self.searchTableView.tableHeaderView = self.searchController.searchBar;
+    MBProgressHUD * HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
     
+    // Set determinate mode
+    HUD.mode = MBProgressHUDModeAnnularDeterminate;
+    
+    [HUD.delegate self];
+    HUD.labelText = @"Loading";
+    
+    [HUD showWhileExecuting:@selector(RetriveData) onTarget:self withObject:nil animated:YES];
     // Do any additional setup after loading the view.
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 -(void)RetriveData
 {
-    MBProgressHUD * ac = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    ac.labelText=@"Loading";
-    ac.mode = MBProgressHUDModeAnnularDeterminate;
     PFQuery * query =[PFQuery queryWithClassName:@"PostList"];
     [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -123,7 +129,7 @@
         });
         
     });
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    //[MBProgressHUD hideHUDForView:self.view animated:YES];
     
     return cell;
 }
