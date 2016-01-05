@@ -22,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.txtTitle becomeFirstResponder];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -43,6 +44,12 @@
     }
     else
         [self saveData];
+    NSLog(@"This is txtTitle file %@", _txtTitle.text);
+    NSLog(@"This is txtPrice file %@", _txtPrice.text);
+    NSLog(@"This is txtDiscription file %@", _txtDiscription.text);
+    NSLog(@"This is userDataObjAP.objectID file %@", _userDataObjAP.objectID);
+    NSLog(@"This is userDataObjAP.city file %@", _userDataObjAP.city);
+
 }
 
 -(void)saveData
@@ -58,7 +65,8 @@
     [addPost setObject:self.txtDiscription.text forKey:@"Discription"];
     [addPost setObject:self.userDataObjAP.objectID forKey:@"UserID"];
     [addPost setObject:self.userDataObjAP.city forKey:@"Location"];
-    // save data back to parse
+    
+       // save data back to parse
     [addPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         
         if (succeeded)

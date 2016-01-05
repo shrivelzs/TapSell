@@ -88,17 +88,24 @@
                 {
                 // retreive data
                 NSString * objectID = [object objectId];
-                    NSString * emailID = [object objectForKey:@"EmailID"];
-                    NSString * pass = [object objectForKey:@"Password"];
+                NSString * firstName = [object objectForKey:@"UserFirstName"];
+                NSString * lastname = [object objectForKey:@"UserLastName"];
+                NSString * address = [object objectForKey:@"Address"];
+                NSString * aptNo = [object objectForKey:@"AptNo"];
+                NSString * city = [object objectForKey:@"City"];
+                NSString * state = [object objectForKey:@"State"];
+                NSString * zipcode = [object objectForKey:@"Zipcode"];
+                NSString * phone = [object objectForKey:@"Phone"];
 
-                //User login to make [PFUser currentUser] not be nil
-                [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * _Nullable user, NSError * _Nullable error) {
-                    
-                }];
-                _userDataObjectVC.objectID =objectID;
-                _userDataObjectVC.emailID =emailID;
-                _userDataObjectVC.password =pass;
-                    
+                    _userDataObjectVC.objectID =objectID;
+                    _userDataObjectVC.fname=firstName;
+                    _userDataObjectVC.lname=lastname;
+                    _userDataObjectVC.address=address;
+                    _userDataObjectVC.aptNo = aptNo;
+                    _userDataObjectVC.city = city;
+                    _userDataObjectVC.state = state;
+                    _userDataObjectVC.zipcode = zipcode;
+                    _userDataObjectVC.phone = phone;
                 [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
                 [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"password"];
                 [[NSUserDefaults standardUserDefaults] setObject:objectID forKey:@"objectID"];

@@ -30,8 +30,8 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)refreshAction:(id)sender {
-    [self.tableViewPostList performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-}
+    [self loadData];
+    }
 -(void)loadData
 {
     NSString * objectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"objectID"];
@@ -65,9 +65,8 @@
                 postListData.userID = userID;
                 [self.array_PostList addObject:postListData];
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
+           
                 [self.tableViewPostList reloadData];
-            });
 
             }
         else
@@ -96,6 +95,7 @@
     dispatch_async(que, ^{
         dispatch_async(dispatch_get_main_queue(), ^{
             [cell.imageViewProduct setImage:[UIImage imageWithData:postListData.productImage]];
+            [cell.imageViewProduct setNeedsDisplay];
         });
        });
     cell.lblProductTitle.text =postListData.title;
@@ -140,6 +140,10 @@
     if ([segue.identifier isEqualToString:@"addPost"]) {
         PostViewController * addPost = [segue destinationViewController];
         addPost.userDataObjAP = self.userDataObjPL;
+        
+        NSLog(@"Here is object ID before segue addPost %@", addPost.userDataObjAP.objectID);
+        NSLog(@"Here is city before segue addPost %@", addPost.userDataObjAP.city);
+
     }
     if ([segue.identifier isEqualToString:@"postDetails"]) {
         PostDetailsViewController * postDetail = [segue destinationViewController];
