@@ -26,9 +26,7 @@
     [super viewDidLoad];
     [self.txtLoginUserName becomeFirstResponder];
     _userDataObjectVC = [[UserData alloc]init];
-    _rememberMe.transform = CGAffineTransformMakeScale(0.75, 0.75);
-   
-//    [self rememberMe:self];
+       
    
 }
 
@@ -48,9 +46,6 @@
     else
     {
         MBProgressHUD * HUD = [[MBProgressHUD alloc] initWithView:self.view];
-        //[self.navigationController.view addSubview:HUD];
-        
-        // Set determinate mode
         HUD.mode = MBProgressHUDModeAnnularDeterminate;
         
         [HUD.delegate self ];

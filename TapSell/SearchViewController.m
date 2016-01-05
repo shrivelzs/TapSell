@@ -25,18 +25,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self RetriveData];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
     self.array_SeachData = [[NSMutableArray alloc]init];
     self.searchResult = [[NSMutableArray alloc]init];
-   
+    
     _searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     _searchController.dimsBackgroundDuringPresentation = false;
     _searchController.searchResultsUpdater = self;
-    self.searchTableView.tableHeaderView = self.searchController.searchBar;
+    self.searchController.hidesNavigationBarDuringPresentation = false;
+    self.navigationItem.titleView = self.searchController.searchBar;
+    
     MBProgressHUD * HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
-    
     // Set determinate mode
     HUD.mode = MBProgressHUDModeAnnularDeterminate;
     
@@ -50,6 +49,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 -(void)RetriveData
 {
     PFQuery * query =[PFQuery queryWithClassName:@"PostList"];
