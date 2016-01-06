@@ -55,9 +55,18 @@
 
 -(void)saveData
 {
-    MBProgressHUD * ac = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    ac.labelText=@"Saving";
-    ac.mode = MBProgressHUDModeAnnularDeterminate;
+    MBProgressHUD* HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    
+    HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+    
+    HUD.mode = MBProgressHUDModeCustomView;
+    
+    [HUD.delegate self ];
+    HUD.labelText = @"Completed";
+    
+    [HUD show:YES];
+
 
     PFObject * addPost = [PFObject objectWithClassName:@"PostList"];
     //add data to parse
@@ -75,19 +84,23 @@
     [addPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         
         if (succeeded)
-        {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        {    [HUD hide:YES afterDelay:2];
+             [self.navigationController popToRootViewControllerAnimated:YES];
 
-            UIAlertController *alcont =[UIAlertController alertControllerWithTitle:@"Congrats!" message:@"You are successfully created new post" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
-                                       {
-                                        [self.navigationController popToRootViewControllerAnimated:YES];
-                                       }];
+
             
-            [alcont addAction:okButton];
-            [self presentViewController:alcont animated:YES completion:nil];
-            
-            NSLog(@"Object Uploaded!");
+//            [MBProgressHUD hideHUDForView:self.view animated:YES];
+//
+//            UIAlertController *alcont =[UIAlertController alertControllerWithTitle:@"Congrats!" message:@"You are successfully created new post" preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+//                                       {
+//                                        [self.navigationController popToRootViewControllerAnimated:YES];
+//                                       }];
+//            
+//            [alcont addAction:okButton];
+//            [self presentViewController:alcont animated:YES completion:nil];
+//            
+        NSLog(@"Object Uploaded!");
             
         }
         else

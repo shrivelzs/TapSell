@@ -12,6 +12,8 @@
 #import "PostViewController.h"
 #import "PostListData.h"
 #import "PostDetailsViewController.h"
+#import "MBProgressHUD.h"
+
 @interface PostListViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableViewPostList;
 @property(nonatomic,strong)NSMutableArray * array_PostList;
@@ -22,11 +24,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadData];
-//     _refreshControl = [[UIRefreshControl alloc]init];
-//    [self.tableViewPostList addSubview:_refreshControl];
-//    [_refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
+    MBProgressHUD * HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:HUD];
+    [HUD.delegate self ];
     
+    [HUD showWhileExecuting:@selector(loadData) onTarget:self withObject:nil animated:YES];
     // Do any additional setup after loading the view.
 }
 
@@ -34,13 +36,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-//- (void)refreshTable {
-//   
-//    [_refreshControl endRefreshing];
-//    [self loadData];}
+
 - (IBAction)refreshAction:(id)sender {
    
-    [self loadData];
+  
+    MBProgressHUD * HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.navigationController.view addSubview:HUD];
+    [HUD.delegate self ];
+    
+    [HUD showWhileExecuting:@selector(loadData) onTarget:self withObject:nil animated:YES];
         }
 
 -(void)loadData
@@ -80,6 +84,7 @@
                 [self.tableViewPostList reloadData];
             
             
+            
             }
         else
         {
@@ -104,18 +109,14 @@
     postListData = [self.array_PostList objectAtIndex:indexPath.row];
     // make image load faster
 
-//    dispatch_queue_t que = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-//    dispatch_async(que, ^{
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [cell.imageViewProduct setImage:[UIImage imageWithData:postListData.productImage]];
-//
-//        });
-//       });
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_queue_t que = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+    dispatch_async(que, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             [cell.imageViewProduct setImage:[UIImage imageWithData:postListData.productImage]];
 
         });
-    cell.lblProductTitle.text =postListData.title;
+       });
+       cell.lblProductTitle.text =postListData.title;
     cell.lblProductLocation.text = postListData.location;
     cell.lblProductPrice.text = [NSString stringWithFormat:@"$ %@",postListData.price];
     
@@ -131,8 +132,11 @@
             [delete deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *  error) {
                 if (succeeded) {
                     NSLog(@"Delete completed");
-                    [self viewDidLoad];
-                }
+                    MBProgressHUD * HUD = [[MBProgressHUD alloc] initWithView:self.view];
+                    [self.navigationController.view addSubview:HUD];
+                    [HUD.delegate self ];
+                    
+                    [HUD showWhileExecuting:@selector(loadData) onTarget:self withObject:nil animated:YES];                }
                 else
                     NSLog(@"Delete incompleted");
             }];

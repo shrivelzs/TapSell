@@ -40,8 +40,6 @@
 {
     NSString*username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     NSString*password = [[NSUserDefaults standardUserDefaults]objectForKey:@"password"];
-    NSLog(@"Username is %@", username);
-    NSLog(@"Password is %@", password);
     PFQuery * query = [PFQuery queryWithClassName:@"User"];
     [query whereKey:@"EmailID" equalTo:username];
     [query whereKey:@"Password" equalTo:password];
@@ -132,7 +130,6 @@
 {
     NSString * objectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"objectID"];
     PFObject *point = [PFObject objectWithoutDataWithClassName:@"User" objectId:objectID];
-    NSLog(@"USID1:%@",objectID);
     
     NSData *imageData = UIImagePNGRepresentation(self.editUserProfileImageView.image);
     PFFile *file = [PFFile fileWithData:imageData];
@@ -148,10 +145,6 @@
     [point setObject: self.txtEditZipcode.text forKey:@"Zipcode"];
     [point setObject: self.txtEditPhone.text forKey:@"Phone"];
     [point setObject: self.userLocation forKey:@"currentLocation"];
-    
-    //     NSLog(@"userLLLLNNNNew:%@",self.userLocation);
-    //
-    
     
     
     

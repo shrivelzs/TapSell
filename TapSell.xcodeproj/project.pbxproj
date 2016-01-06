@@ -37,6 +37,7 @@
 		E21C14DB1C38E1D500AEAB89 /* SearchUserDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E21C14DA1C38E1D500AEAB89 /* SearchUserDetailsViewController.m */; };
 		E228775E1C19397F0079F729 /* EditUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E228775D1C19397F0079F729 /* EditUserProfileViewController.m */; };
 		E23621051C1F9F2F001DDCD0 /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E23621041C1F9F2F001DDCD0 /* PostViewController.m */; };
+		E26362161C3C918000D7D622 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = E26362151C3C918000D7D622 /* 37x-Checkmark.png */; };
 		E2A6F6211C17BCD500D92CFB /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A6F6201C17BCD500D92CFB /* UserData.m */; };
 		E2ABCDE21C18C37B00CC538F /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2ABCDE11C18C37B00CC538F /* UserProfileViewController.m */; };
 		E2C965281C162ADA00F23209 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C965271C162ADA00F23209 /* MapKit.framework */; };
@@ -121,6 +122,7 @@
 		E228775D1C19397F0079F729 /* EditUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditUserProfileViewController.m; sourceTree = "<group>"; };
 		E23621031C1F9F2F001DDCD0 /* PostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostViewController.h; sourceTree = "<group>"; };
 		E23621041C1F9F2F001DDCD0 /* PostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostViewController.m; sourceTree = "<group>"; };
+		E26362151C3C918000D7D622 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		E2A6F61F1C17BCD500D92CFB /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
 		E2A6F6201C17BCD500D92CFB /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
 		E2ABCDE01C18C37B00CC538F /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileViewController.h; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 		A2CDF2CA1C161CD200DABB2F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E26362151C3C918000D7D622 /* 37x-Checkmark.png */,
 				E21C14A11C339B2300AEAB89 /* Logo */,
 				E2C965731C17344C00F23209 /* Logo1.png */,
 				E21C14B21C33A38600AEAB89 /* logo2.png */,
@@ -458,6 +461,7 @@
 			files = (
 				A2CDF2DA1C161CD200DABB2F /* LaunchScreen.storyboard in Resources */,
 				E21C14BF1C360B1600AEAB89 /* placeholder.png in Resources */,
+				E26362161C3C918000D7D622 /* 37x-Checkmark.png in Resources */,
 				E21C14B31C33A38600AEAB89 /* logo2.png in Resources */,
 				E21C14BB1C33B10C00AEAB89 /* AppIcon180.png in Resources */,
 				E21C14B91C33B10C00AEAB89 /* AppIcon80.png in Resources */,

@@ -53,7 +53,7 @@
         HUD.detailsLabelText = @"User's Data";
         
         [HUD showWhileExecuting:@selector(retrieveDataFromParse) onTarget:self withObject:nil animated:YES];
-        [self retrieveDataFromParse];
+        //[self retrieveDataFromParse];
     }
 }
 
